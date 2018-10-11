@@ -17,19 +17,21 @@ namespace Compilador
         {
             this.gramatica = gramatica;
             this.entrada = entrada;
+            ConstruccionMatriz();
+            RellenaMatriz();
         }
 
         public string[,] ConstruccionMatriz()
         {
-            matriz = new String[entrada.Length + 1, entrada.Length];
+            matriz = new string[entrada.Length +1, entrada.Length];
 
             for (int x = 0; x < matriz.GetLength(0); x++)
             {
                 for (int y = 0; y < matriz.GetLength(1); y++)
                 {
-                    matriz[x, y] = "7";
+                    matriz[x, y] = "a";
                 }
-                ;
+
             }
             int indice = matriz.GetLength(1);
             for (int x = matriz.GetLength(0) - 1; x >= 0; x--)
@@ -37,28 +39,16 @@ namespace Compilador
                 //int indice = matriz.GetLength(1)-1;
                 for (int y = 0 + indice; y < matriz.GetLength(1); y++)
                 {
-                    matriz[x, y] = "@";
+                    matriz[x, y] = " ";
                 }
                 indice -= 1;
             }
 
-            for (int x = 0; x < matriz.GetLength(0); x++)
-            {
-
-                for (int y = 0; y < matriz.GetLength(1); y++)
-                {
-                    Console.Write(matriz[x, y] + " ");
-                }
-                Console.WriteLine();
-
-            }
-
             for(int i = 0; i < entrada.Length; i++)
             {
-                matriz[matriz.GetLength(0) - 1, i] = BuscarProduccion(entrada[i].ToString());
+                matriz[matriz.GetLength(0) - 1, i] = entrada[i].ToString();
+                matriz[matriz.GetLength(0) - 2, i] = BuscarProduccion(entrada[i].ToString());
             }
-
-            Console.ReadKey();
 
             return matriz;
         }
@@ -69,18 +59,25 @@ namespace Compilador
             
             List<Produccion> producciones = gramatica.GetProducciones();
 
-            
             for (int i = 0; i < producciones.Count; i++)
             {
-                if (cadena.Equals(producciones[i].GetLadoDerecho()))
+                for (int j = 0; j < cadena.Length; j++)
                 {
-                    camino += producciones[i].GetLadoIzquierdo() + ",";
+                    for (int k = 0; k < producciones[i].GetLadoDerecho().Length; k++)
+                    {
+                        if (cadena[j].Equals(producciones[i].GetLadoDerecho()[k]))
+                        {
+                            camino += producciones[i].GetLadoIzquierdo() + ",";
+                            break;
+                        }
+                    }
                 }
+                
             }
 
-            if (camino[camino.Length - 1].Equals(','))
+            if (camino.Length - 1 >= 0 && camino[camino.Length - 1].Equals(','))
             {
-                camino.Remove(camino.Length - 1, 1);
+                camino = camino.Substring(0, camino.Length - 1);
             }
 
             return camino;
@@ -104,7 +101,6 @@ namespace Compilador
             resultados.Add(resultado);
 
             return resultados;
-            
         }
 
         public List<String> MostrarCasilla(int x, int y)
@@ -243,9 +239,44 @@ namespace Compilador
             return listaResultados;
         }
 
+        public string[,] RellenaMatriz()
+        {
+            int j = 0;
+
+            List<string> listaComprobacion = new List<string>();
+
+            for (int x = matriz.GetLength(0) - 2; x >= 0; x--)
+            {
+                for (int y = 0; y < matriz.GetLength(1) - j; y++)
+                {
+                    string resultado = "";
+                    listaComprobacion = ObtenerPosibilidades(x, y);
+                    for (int i = 0; i < listaComprobacion.Count; i++)
+                    {
+                       resultado = BuscarProduccion(listaComprobacion[i]);
+                        if (!resultado.Equals(""))
+                        {
+                            matriz[x, y] = resultado;
+                        }
+                        else
+                        {
+                            matriz[x, y] = "";
+                        }
+                    }
+                }
+                j++;
+            }
+            return matriz;
+        }
+
         public void Analizar(string producciones)
         {
             //producciones = "S,A,C"        
         }
+
+        public string[,] GetMatriz()
+        {
+            return matriz;
+        }  
     }
 }

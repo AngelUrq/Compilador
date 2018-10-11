@@ -30,9 +30,6 @@ namespace Compilador
 
             Gramatica gramatica = new Gramatica("S", Archivo.LeerArchivo("../../Prueba.xqc"), terminales, noTerminales);
 
-
-
-
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(gramatica, "1+1");
         }
 
