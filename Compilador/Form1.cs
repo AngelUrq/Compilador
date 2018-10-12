@@ -26,7 +26,7 @@ namespace Compilador
 
             Gramatica gramatica = new Gramatica("S", Archivo.LeerArchivo("../../Prueba.xqc"), terminales, noTerminales);
 
-            AnalizadorSintactico analizador = new AnalizadorSintactico(gramatica, "1+1+1+1");
+            AnalizadorSintactico analizador = new AnalizadorSintactico(gramatica, "aabb");
 
             for (int x = 0; x < analizador.GetMatriz().GetLength(0); x++)
             {

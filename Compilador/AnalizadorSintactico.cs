@@ -10,7 +10,7 @@ namespace Compilador
     {
         private String entrada;
         private String[,] matriz;
-        
+
         private Gramatica gramatica;
 
         public AnalizadorSintactico(Gramatica gramatica, string entrada)
@@ -23,7 +23,7 @@ namespace Compilador
 
         public string[,] ConstruccionMatriz()
         {
-            matriz = new string[entrada.Length +1, entrada.Length];
+            matriz = new string[entrada.Length + 1, entrada.Length];
 
             for (int x = 0; x < matriz.GetLength(0); x++)
             {
@@ -44,7 +44,7 @@ namespace Compilador
                 indice -= 1;
             }
 
-            for(int i = 0; i < entrada.Length; i++)
+            for (int i = 0; i < entrada.Length; i++)
             {
                 matriz[matriz.GetLength(0) - 1, i] = entrada[i].ToString();
                 matriz[matriz.GetLength(0) - 2, i] = BuscarProduccion(entrada[i].ToString());
@@ -56,23 +56,16 @@ namespace Compilador
         public string BuscarProduccion(string cadena)
         {
             string camino = "";
-            
+
             List<Produccion> producciones = gramatica.GetProducciones();
 
             for (int i = 0; i < producciones.Count; i++)
             {
-                for (int j = 0; j < cadena.Length; j++)
+                if (producciones[i].GetLadoDerecho().Contains(cadena))
                 {
-                    for (int k = 0; k < producciones[i].GetLadoDerecho().Length; k++)
-                    {
-                        if (cadena[j].Equals(producciones[i].GetLadoDerecho()[k]))
-                        {
-                            camino += producciones[i].GetLadoIzquierdo() + ",";
-                            break;
-                        }
-                    }
+                    camino += producciones[i].GetLadoIzquierdo() + ",";
+                    break;
                 }
-                
             }
 
             if (camino.Length - 1 >= 0 && camino[camino.Length - 1].Equals(','))
@@ -93,7 +86,8 @@ namespace Compilador
 
             for (int i = 0; i < cad1.Length; i++)
             {
-                for (int j = 0; j < cad2.Length; j++) {
+                for (int j = 0; j < cad2.Length; j++)
+                {
                     resultado = cad1[i].ToString() + cad2[j].ToString();
                 }
             }
@@ -218,7 +212,7 @@ namespace Compilador
             List<string> listaResultados = new List<string>();
             List<string> listaAux = new List<string>();
 
-            for (int i = 0; i < listaOpciones.Count; i+=2)
+            for (int i = 0; i < listaOpciones.Count; i += 2)
             {
                 if (x <= matriz.GetLength(0) - 3)
                 {
@@ -227,10 +221,12 @@ namespace Compilador
                     {
                         listaResultados.Add(listaAux[j]);
                     }
-                } else if (x == matriz.GetLength(0) - 2)
+                }
+                else if (x == matriz.GetLength(0) - 2)
                 {
                     listaResultados = listaOpciones;
-                } else
+                }
+                else
                 {
                     Console.WriteLine("Error");
                 }
@@ -253,7 +249,7 @@ namespace Compilador
                     listaComprobacion = ObtenerPosibilidades(x, y);
                     for (int i = 0; i < listaComprobacion.Count; i++)
                     {
-                       resultado = BuscarProduccion(listaComprobacion[i]);
+                        resultado = BuscarProduccion(listaComprobacion[i]);
                         if (!resultado.Equals(""))
                         {
                             matriz[x, y] = resultado;
@@ -277,6 +273,6 @@ namespace Compilador
         public string[,] GetMatriz()
         {
             return matriz;
-        }  
+        }
     }
 }

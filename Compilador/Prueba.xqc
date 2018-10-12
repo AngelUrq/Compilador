@@ -1,4 +1,11 @@
-S,S+E
-S,S-E
-S,E
-E,1
+S,AB
+S,BB
+A,CC
+A,AB
+A,a
+B,BB
+B,CA
+B,b
+C,BA
+C,AA
+C,b
