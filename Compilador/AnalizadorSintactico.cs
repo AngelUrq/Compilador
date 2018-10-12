@@ -29,7 +29,7 @@ namespace Compilador
             {
                 for (int y = 0; y < matriz.GetLength(1); y++)
                 {
-                    matriz[x, y] = "a";
+                    matriz[x, y] = " ";
                 }
 
             }
@@ -236,6 +236,7 @@ namespace Compilador
         public string[,] RellenaMatriz()
         {
             int j = 0;
+            string resultadoProduccion = "";
 
             List<string> listaComprobacion = new List<string>();
 
@@ -243,19 +244,34 @@ namespace Compilador
             {
                 for (int y = 0; y < matriz.GetLength(1) - j; y++)
                 {
+
                     string resultado = "";
                     listaComprobacion = ObtenerPosibilidades(x, y);
                     for (int i = 0; i < listaComprobacion.Count; i++)
                     {
-                        resultado = BuscarProduccion(listaComprobacion[i]);
-                        if (!resultado.Equals(""))
+
+                        resultadoProduccion = BuscarProduccion(listaComprobacion[i]);
+
+                        if (resultado.Length > 0 && !resultado[resultado.Length - 1].Equals(','))
                         {
-                            matriz[x, y] = resultado;
+                            resultado += ",";
                         }
-                        else
+                        
+                        resultado += resultadoProduccion;
+                    }
+
+                    if (!resultado.Equals(""))
+                    {
+                        if (resultado[resultado.Length - 1].Equals(','))
                         {
-                            matriz[x, y] = "-";
+                            resultado = resultado.Substring(0, resultado.Length - 1);
                         }
+
+                        matriz[x, y] = BuscarRepetido(resultado);
+                    }
+                    else
+                    {
+                        matriz[x, y] = "-";
                     }
                 }
                 j++;
@@ -271,6 +287,29 @@ namespace Compilador
         public string[,] GetMatriz()
         {
             return matriz;
+        }
+        
+        public string BuscarRepetido(string palabra)
+        {
+        
+            string[] palabras = palabra.Split(',');
+            string palabraFinal = "";
+
+            for (int i = 0; i < palabras.Length; i++)
+            {
+                if (!palabraFinal.Contains(palabras[i]))
+                {
+                    palabraFinal += palabras[i] + ",";
+                }
+            }
+
+            if (palabraFinal[palabraFinal.Length - 1].Equals(','))
+            {
+                palabraFinal = palabraFinal.Substring(0, palabraFinal.Length - 1);
+            }
+
+            return palabraFinal;
+            
         }
     }
 }

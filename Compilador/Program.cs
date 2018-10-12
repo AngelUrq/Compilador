@@ -20,17 +20,6 @@ namespace Compilador
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            /*List<string> terminales = new List<string>();
-            List<string> noTerminales = new List<string>();
-
-            noTerminales.Add("S");
-            noTerminales.Add("E");
-
-            terminales.Add("1");
-
-            Gramatica gramatica = new Gramatica("S", Archivo.LeerArchivo("../../Prueba.xqc"), terminales, noTerminales);
-
-            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(gramatica, "1+1");*/
         }
 
 
