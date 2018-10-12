@@ -1,0 +1,27 @@
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe.config
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.pdb
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csprojResolveAssemblyReference.cache
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Form1.resources
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Properties.Resources.resources
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csproj.GenerateResource.Cache
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.exe
+c:\users\rodrigo\documents\visual studio 2015\Projects\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.pdb
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe.config
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.exe
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.pdb
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.pdb
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csprojResolveAssemblyReference.cache
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Form1.resources
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Properties.Resources.resources
+C:\Users\William Zambrana\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csproj.GenerateResource.Cache
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe.config
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.exe
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.pdb
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.exe
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\bin\Debug\AnalizadorLexicoXQcode.pdb
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csprojResolveAssemblyReference.cache
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Form1.resources
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.Properties.Resources.resources
+C:\Users\Rodrigo\Desktop\AnalizadorLexicoXQcode\AnalizadorLexicoXQcode\obj\Debug\AnalizadorLexicoXQcode.csproj.GenerateResource.Cache
