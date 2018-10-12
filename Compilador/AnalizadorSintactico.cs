@@ -64,7 +64,6 @@ namespace Compilador
                 if (producciones[i].GetLadoDerecho().Contains(cadena))
                 {
                     camino += producciones[i].GetLadoIzquierdo() + ",";
-                    break;
                 }
             }
 
@@ -89,10 +88,9 @@ namespace Compilador
                 for (int j = 0; j < cad2.Length; j++)
                 {
                     resultado = cad1[i].ToString() + cad2[j].ToString();
+                    resultados.Add(resultado);
                 }
             }
-
-            resultados.Add(resultado);
 
             return resultados;
         }
@@ -216,7 +214,7 @@ namespace Compilador
             {
                 if (x <= matriz.GetLength(0) - 3)
                 {
-                    listaAux = ProductoCartesiano(listaOpciones[i], listaOpciones[i + 1]);
+                    listaAux = ProductoCartesiano(listaOpciones[i], listaOpciones[i+1]);
                     for (int j = 0; j < listaAux.Count; j++)
                     {
                         listaResultados.Add(listaAux[j]);
@@ -256,7 +254,7 @@ namespace Compilador
                         }
                         else
                         {
-                            matriz[x, y] = "";
+                            matriz[x, y] = "-";
                         }
                     }
                 }
