@@ -15,6 +15,11 @@ namespace Compilador
         public Form1()
         {
             InitializeComponent();
+
+            Console.WriteLine("Iniciando compilador...");
+            Gramatica gramatica = new Gramatica("S", Archivo.LeerArchivo("../../Prueba.xqc"),null,null);
+            AnalizadorSintactico analizador = new AnalizadorSintactico(gramatica);
+            analizador.Analizar("aba");
         }
     }
 }

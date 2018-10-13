@@ -13,15 +13,35 @@ namespace Compilador
 
         private Gramatica gramatica;
 
-        public AnalizadorSintactico(Gramatica gramatica, string entrada)
+        public AnalizadorSintactico(Gramatica gramatica)
         {
             this.gramatica = gramatica;
-            this.entrada = entrada;
-            ConstruccionMatriz();
-            RellenaMatriz();
         }
 
-        public string[,] ConstruccionMatriz()
+        public void Analizar(string entrada)
+        {
+            this.entrada = entrada;
+
+            Console.WriteLine("Cadena: " + entrada);
+
+            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+            ConstruccionMatriz();
+            RellenaMatriz();
+
+            if (matriz[0,0].Contains(gramatica.GetSimboloInicial()))
+            {
+                Console.WriteLine("Cadena aceptada");
+            }
+            
+            watch.Stop();
+
+            Console.WriteLine("Se generó en " + watch.ElapsedMilliseconds + " ms.");
+
+            MostrarMatriz();
+        }
+
+        private string[,] ConstruccionMatriz()
         {
             matriz = new string[entrada.Length + 1, entrada.Length];
 
@@ -53,7 +73,7 @@ namespace Compilador
             return matriz;
         }
 
-        public string BuscarProduccion(string cadena)
+        private string BuscarProduccion(string cadena)
         {
             string camino = "";
 
@@ -76,7 +96,7 @@ namespace Compilador
 
         }
 
-        public List<string> ProductoCartesiano(string cadena1, string cadena2)
+        private List<string> ProductoCartesiano(string cadena1, string cadena2)
         {
             List<string> resultados = new List<string>();
             string resultado = "";
@@ -95,7 +115,7 @@ namespace Compilador
             return resultados;
         }
 
-        public List<String> MostrarCasilla(int x, int y)
+        private List<String> MostrarCasilla(int x, int y)
         {
             List<String> lista = new List<String>();
             String[,] datos = new String[2, 2];
@@ -123,7 +143,7 @@ namespace Compilador
 
         }
 
-        public List<String> MostrarDatos(int x1, int y)
+        private List<String> MostrarDatos(int x1, int y)
         {
             List<String> lista = new List<String>();
             List<String> posibilidades = new List<String>();
@@ -163,7 +183,7 @@ namespace Compilador
             return lista;
         }
 
-        public List<String> ObtenerCombinacionCadenas(int longitud, int y)
+        private List<String> ObtenerCombinacionCadenas(int longitud, int y)
         {
             int posicion = 1;
             String cadena = "";
@@ -204,7 +224,7 @@ namespace Compilador
             return lista;
         }
 
-        public List<string> ObtenerPosibilidades(int x, int y)
+        private List<string> ObtenerPosibilidades(int x, int y)
         {
             List<string> listaOpciones = MostrarCasilla(x, y);
             List<string> listaResultados = new List<string>();
@@ -214,7 +234,7 @@ namespace Compilador
             {
                 if (x <= matriz.GetLength(0) - 3)
                 {
-                    listaAux = ProductoCartesiano(listaOpciones[i], listaOpciones[i+1]);
+                    listaAux = ProductoCartesiano(listaOpciones[i], listaOpciones[i + 1]);
                     for (int j = 0; j < listaAux.Count; j++)
                     {
                         listaResultados.Add(listaAux[j]);
@@ -233,7 +253,7 @@ namespace Compilador
             return listaResultados;
         }
 
-        public string[,] RellenaMatriz()
+        private string[,] RellenaMatriz()
         {
             int j = 0;
             string resultadoProduccion = "";
@@ -256,7 +276,7 @@ namespace Compilador
                         {
                             resultado += ",";
                         }
-                        
+
                         resultado += resultadoProduccion;
                     }
 
@@ -279,19 +299,14 @@ namespace Compilador
             return matriz;
         }
 
-        public void Analizar(string producciones)
-        {
-            //producciones = "S,A,C"        
-        }
-
         public string[,] GetMatriz()
         {
             return matriz;
         }
-        
-        public string BuscarRepetido(string palabra)
+
+        private string BuscarRepetido(string palabra)
         {
-        
+
             string[] palabras = palabra.Split(',');
             string palabraFinal = "";
 
@@ -309,7 +324,20 @@ namespace Compilador
             }
 
             return palabraFinal;
-            
+
         }
+
+        public void MostrarMatriz()
+        {
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriz.GetLength(1); j++)
+                {
+                    Console.Write(matriz[i, j] + "||");
+                }
+                Console.WriteLine();
+            }
+        }
+
     }
 }
