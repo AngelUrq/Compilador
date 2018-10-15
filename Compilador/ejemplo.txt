@@ -1,0 +1,10 @@
+S,NP
+P,VN
+P,MV
+M,c
+N,c
+N,f
+N,p
+V,c
+V,f
+V,p

@@ -13,9 +13,12 @@ namespace Compilador
 
         private Gramatica gramatica;
 
+        private List<string> miLista;
+
         public AnalizadorSintactico(Gramatica gramatica)
         {
             this.gramatica = gramatica;
+            this.miLista = new List<string>();
         }
 
         public void Analizar(string entrada)
@@ -29,16 +32,81 @@ namespace Compilador
             ConstruccionMatriz();
             RellenaMatriz();
 
-            if (matriz[0,0].Contains(gramatica.GetSimboloInicial()))
+            try
             {
-                Console.WriteLine("Cadena aceptada");
+                if (matriz[0, 0].Contains(gramatica.GetSimboloInicial()))
+                {
+                    Console.WriteLine("Cadena aceptada");
+                }
+                else
+                {
+                    Console.WriteLine("Cadena no aceptada");
+                }
             }
+            catch
+            {
+                Console.WriteLine("Ocurrió una excepción");
+            }
+            
             
             watch.Stop();
 
             Console.WriteLine("Se generó en " + watch.ElapsedMilliseconds + " ms.");
+        }
 
-            MostrarMatriz();
+        private string[,] RellenaMatriz()
+        {
+            int j = 0;
+            string resultadoProduccion = "";
+
+            List<string> listaComprobacion = new List<string>();
+
+            for (int x = matriz.GetLength(0) - 2; x >= 0; x--)
+            {
+                for (int y = 0; y < matriz.GetLength(1) - j; y++)
+                {
+                    string resultado = "";
+                    listaComprobacion = ObtenerPosibilidades(x, y);
+
+                    for (int i = 0; i < listaComprobacion.Count; i++)
+                    {
+                        resultadoProduccion = BuscarProduccion(listaComprobacion[i]);
+
+                        string[] lista = resultadoProduccion.Split(',');
+                        for(int k = 0; k < lista.Length; k++)
+                        {
+                            if (lista[k].Equals("S") && x == 0)
+                            {
+                                int xed = 3;
+                            }
+                        }
+
+
+                        if (resultado.Length > 0 && !resultado[resultado.Length - 1].Equals(','))
+                        {
+                            resultado += ",";
+                        }
+
+                        resultado += resultadoProduccion;
+                    }
+
+                    if (!resultado.Equals(""))
+                    {
+                        if (resultado[resultado.Length - 1].Equals(','))
+                        {
+                            resultado = resultado.Substring(0, resultado.Length - 1);
+                        }
+
+                        matriz[x, y] = BuscarRepetido(resultado);
+                    }
+                    else
+                    {
+                        matriz[x, y] = "-";
+                    }
+                }
+                j++;
+            }
+            return matriz;
         }
 
         private string[,] ConstruccionMatriz()
@@ -56,7 +124,6 @@ namespace Compilador
             int indice = matriz.GetLength(1);
             for (int x = matriz.GetLength(0) - 1; x >= 0; x--)
             {
-                //int indice = matriz.GetLength(1)-1;
                 for (int y = 0 + indice; y < matriz.GetLength(1); y++)
                 {
                     matriz[x, y] = " ";
@@ -253,52 +320,6 @@ namespace Compilador
             return listaResultados;
         }
 
-        private string[,] RellenaMatriz()
-        {
-            int j = 0;
-            string resultadoProduccion = "";
-
-            List<string> listaComprobacion = new List<string>();
-
-            for (int x = matriz.GetLength(0) - 2; x >= 0; x--)
-            {
-                for (int y = 0; y < matriz.GetLength(1) - j; y++)
-                {
-
-                    string resultado = "";
-                    listaComprobacion = ObtenerPosibilidades(x, y);
-                    for (int i = 0; i < listaComprobacion.Count; i++)
-                    {
-
-                        resultadoProduccion = BuscarProduccion(listaComprobacion[i]);
-
-                        if (resultado.Length > 0 && !resultado[resultado.Length - 1].Equals(','))
-                        {
-                            resultado += ",";
-                        }
-
-                        resultado += resultadoProduccion;
-                    }
-
-                    if (!resultado.Equals(""))
-                    {
-                        if (resultado[resultado.Length - 1].Equals(','))
-                        {
-                            resultado = resultado.Substring(0, resultado.Length - 1);
-                        }
-
-                        matriz[x, y] = BuscarRepetido(resultado);
-                    }
-                    else
-                    {
-                        matriz[x, y] = "-";
-                    }
-                }
-                j++;
-            }
-            return matriz;
-        }
-
         public string[,] GetMatriz()
         {
             return matriz;
@@ -336,6 +357,14 @@ namespace Compilador
                     Console.Write(matriz[i, j] + "||");
                 }
                 Console.WriteLine();
+            }
+        }
+
+        public void MostrarProducciones()
+        {
+            for(int i = 0; i < gramatica.GetProducciones().Count; i++)
+            {
+                Console.WriteLine(gramatica.GetProducciones()[i].GetLadoIzquierdo() + " -> " + gramatica.GetProducciones()[i].GetLadoDerecho());
             }
         }
 
