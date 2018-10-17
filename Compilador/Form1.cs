@@ -29,15 +29,28 @@ namespace Compilador
             var resultado = abrir.ShowDialog();
             if (resultado == DialogResult.OK)
             {
+                dGV1.Columns.Add("Fila", "Fila");
+                dGV1.Columns.Add("Columna", "Columna");
                 dGV1.Columns.Add("codigo", "Codigo");
                 dGV1.Columns.Add("Tipo", "Tipo");
                 StreamReader leer = new StreamReader(abrir.FileName);
                 rTB_AL.Text = leer.ReadToEnd();
-                String ass = rTB_AL.Text;
-                al.Separar(ass);
+                String cadena1 = rTB_AL.Text;
+                al.Separar(cadena1);
+                int fi = 1;
+                int col = 1;
                 for (int i = 0; i<al.palabra.Count; i++)
                 {
-                    dGV1.Rows.Add(al.palabra[i],al.tipoda[i]);
+                    if (al.palabra[i].Equals("#$") && al.tipoda[i].Equals("Salto"))
+                    {
+                        fi++;
+                        col = 1;
+                    }
+                    else
+                    {
+                        dGV1.Rows.Add(fi, col, al.palabra[i], al.tipoda[i]);
+                        col++;
+                    }
                 }
                 leer.Close();
             }

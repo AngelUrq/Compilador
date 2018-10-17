@@ -35,6 +35,9 @@ namespace Compilador
             palabrares.Add("\"");
             palabrares.Add("Juice");
             palabrares.Add("juice");
+            palabrares.Add("Xgimme");
+            palabrares.Add("Xtrue");
+            palabrares.Add("Xfalse");
             oyf.Add(">");
             oyf.Add("<");
             delimitadores.Add("{");
@@ -59,8 +62,8 @@ namespace Compilador
 
             ciclo.Add("agane");
 
-            condicion.Add("XqcThonk");
-            condicion.Add("XqcWut");
+            condicion.Add("Xif");
+            condicion.Add("Xelse");
 
         }
 
@@ -71,11 +74,12 @@ namespace Compilador
             byte asabyte = 0;
             decimal asadec = 0;
             Listas();
+
             string aa = cadena.Replace("=", " = ").Replace("<", " < ").Replace(">", " > ").Replace("+", " + ").Replace("-", " - ")
                 .Replace(">  =", " >= ").Replace("<  =", " <= ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ").Replace(")", " ) ")
                 .Replace("{", " { ").Replace("}", " } ").Replace("++", " ++ ").Replace("--", " -- ").Replace("[", " [ ").Replace("]", " ] ")
-                .Replace(";", " ; ").Replace(",", " , ").Replace("\r\n", " ").Replace("\n", " ").Replace("\r", " ");
-            char[] delimiterChars = { ' ', '\n', '\r', '\t' };
+                .Replace(";", " ; ").Replace(",", " , ").Replace("\r\n", " ").Replace("\n", " #$ ").Replace("\r", " ");
+            char[] delimiterChars = { ' ', '\t' };
             string[] arr = aa.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string i in arr)
@@ -120,6 +124,18 @@ namespace Compilador
                 {
                     palabra.Add(i);
                     tipoda.Add("Cadena");
+                }
+                else
+                if (i.Equals("#$"))
+                {
+                    palabra.Add(i);
+                    tipoda.Add("Salto");
+                }
+                else
+                if (delimitadores.Contains(i))
+                {
+                    palabra.Add(i);
+                    tipoda.Add("Delimitador");
                 }
                 else
                 {

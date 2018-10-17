@@ -34,20 +34,20 @@
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.bEjecutar = new System.Windows.Forms.Button();
+            this.dGV1 = new System.Windows.Forms.DataGridView();
+            this.rTB_AL = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.rTB_AL = new System.Windows.Forms.RichTextBox();
-            this.dGV1 = new System.Windows.Forms.DataGridView();
-            this.bEjecutar = new System.Windows.Forms.Button();
             this.Editor.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV1)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV1)).BeginInit();
             this.SuspendLayout();
             // 
             // Editor
@@ -57,7 +57,7 @@
             this.Editor.Controls.Add(this.tabPage3);
             this.Editor.Controls.Add(this.tabPage4);
             this.Editor.Location = new System.Drawing.Point(1, 1);
-            this.Editor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Editor.Margin = new System.Windows.Forms.Padding(2);
             this.Editor.Name = "Editor";
             this.Editor.SelectedIndex = 0;
             this.Editor.Size = new System.Drawing.Size(973, 654);
@@ -69,9 +69,9 @@
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.richTextBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage1.Size = new System.Drawing.Size(965, 628);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Editor de código";
@@ -79,7 +79,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(816, 102);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 1;
@@ -89,7 +89,7 @@
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(602, 629);
             this.richTextBox1.TabIndex = 0;
@@ -102,13 +102,40 @@
             this.tabPage2.Controls.Add(this.rTB_AL);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(2);
             this.tabPage2.Size = new System.Drawing.Size(965, 628);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Analizador léxico";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // bEjecutar
+            // 
+            this.bEjecutar.Location = new System.Drawing.Point(625, 90);
+            this.bEjecutar.Name = "bEjecutar";
+            this.bEjecutar.Size = new System.Drawing.Size(178, 25);
+            this.bEjecutar.TabIndex = 3;
+            this.bEjecutar.Text = "Ejecutar";
+            this.bEjecutar.UseVisualStyleBackColor = true;
+            this.bEjecutar.Click += new System.EventHandler(this.bEjecutar_Click);
+            // 
+            // dGV1
+            // 
+            this.dGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV1.Location = new System.Drawing.Point(505, 128);
+            this.dGV1.Name = "dGV1";
+            this.dGV1.Size = new System.Drawing.Size(407, 446);
+            this.dGV1.TabIndex = 2;
+            this.dGV1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGV1_CellContentClick);
+            // 
+            // rTB_AL
+            // 
+            this.rTB_AL.Location = new System.Drawing.Point(36, 90);
+            this.rTB_AL.Name = "rTB_AL";
+            this.rTB_AL.Size = new System.Drawing.Size(448, 484);
+            this.rTB_AL.TabIndex = 1;
+            this.rTB_AL.Text = "";
             // 
             // label1
             // 
@@ -124,7 +151,7 @@
             // 
             this.tabPage3.Controls.Add(this.label2);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(965, 628);
             this.tabPage3.TabIndex = 2;
@@ -145,7 +172,7 @@
             // 
             this.tabPage4.Controls.Add(this.label3);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(965, 628);
             this.tabPage4.TabIndex = 3;
@@ -162,33 +189,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Analizador semántico";
             // 
-            // rTB_AL
-            // 
-            this.rTB_AL.Location = new System.Drawing.Point(36, 90);
-            this.rTB_AL.Name = "rTB_AL";
-            this.rTB_AL.Size = new System.Drawing.Size(448, 484);
-            this.rTB_AL.TabIndex = 1;
-            this.rTB_AL.Text = "";
-            // 
-            // dGV1
-            // 
-            this.dGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGV1.Location = new System.Drawing.Point(639, 199);
-            this.dGV1.Name = "dGV1";
-            this.dGV1.Size = new System.Drawing.Size(273, 276);
-            this.dGV1.TabIndex = 2;
-            this.dGV1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dGV1_CellContentClick);
-            // 
-            // bEjecutar
-            // 
-            this.bEjecutar.Location = new System.Drawing.Point(490, 90);
-            this.bEjecutar.Name = "bEjecutar";
-            this.bEjecutar.Size = new System.Drawing.Size(75, 23);
-            this.bEjecutar.TabIndex = 3;
-            this.bEjecutar.Text = "Ejecutar";
-            this.bEjecutar.UseVisualStyleBackColor = true;
-            this.bEjecutar.Click += new System.EventHandler(this.bEjecutar_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,7 +196,7 @@
             this.ClientSize = new System.Drawing.Size(969, 609);
             this.Controls.Add(this.Editor);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
@@ -206,11 +206,11 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dGV1)).EndInit();
             this.ResumeLayout(false);
 
         }
