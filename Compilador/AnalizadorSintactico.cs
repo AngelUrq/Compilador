@@ -15,43 +15,64 @@ namespace Compilador
 
         private List<string> miLista;
 
+        private List<string> entradas;
+        private List<string> informacionEntradas;
+
         public AnalizadorSintactico(Gramatica gramatica)
         {
             this.gramatica = gramatica;
             this.miLista = new List<string>();
+            entradas = new List<string>();
+            informacionEntradas = new List<string>();
+
+            entradas.Add("5 + 3");
+            entradas.Add("5 + + 3");
+            entradas.Add("8 / 8");
+            entradas.Add("8 / * 8");
+            entradas.Add("20000 / 1");
+
+            informacionEntradas.Add("1,2");
+            informacionEntradas.Add("2,5");
+            informacionEntradas.Add("3,2");
+            informacionEntradas.Add("5,6");
+            informacionEntradas.Add("4,3");
+
         }
 
-        public void Analizar(string entrada)
+        public void Analizar()
         {
-            this.entrada = entrada;
-
-            Console.WriteLine("Cadena: " + entrada);
-
-            System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
-
-            ConstruccionMatriz();
-            RellenaMatriz();
-
-            try
+            for (int i = 0; i < entradas.Count; i++)
             {
-                if (matriz[0, 0].Contains(gramatica.GetSimboloInicial()))
-                {
-                    Console.WriteLine("Cadena aceptada");
-                }
-                else
-                {
-                    Console.WriteLine("Cadena no aceptada");
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Ocurrió una excepción");
-            }
-            
-            
-            watch.Stop();
+                entrada = entradas[i];
+                Console.WriteLine("Cadena: " + entradas[i]);
 
-            Console.WriteLine("Se generó en " + watch.ElapsedMilliseconds + " ms.");
+                System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
+
+                ConstruccionMatriz();
+                RellenaMatriz();
+
+                try
+                {
+                    if (matriz[0, 0].Contains(gramatica.GetSimboloInicial()))
+                    {
+                        Console.WriteLine("Cadena aceptada");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Cadena no aceptada");
+                        BusquedaError(entradas[i], entradas, informacionEntradas);
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Ocurrió una excepción");
+                }
+
+
+                watch.Stop();
+
+                Console.WriteLine("Se generó en " + watch.ElapsedMilliseconds + " ms.");
+            }
         }
 
         private string[,] RellenaMatriz()
@@ -367,6 +388,59 @@ namespace Compilador
             {
                 Console.WriteLine(gramatica.GetProducciones()[i].GetLadoIzquierdo() + " -> " + gramatica.GetProducciones()[i].GetLadoDerecho());
             }
+        }
+
+        public void BusquedaError(string cadena, List<string> cadenas, List<String> informacionCadena)
+        {
+            List<string> filas = new List<string>();
+            List<string> columnas = new List<string>();
+            string posicionError = "";
+            string cadenaErronea = "";
+            bool cadenaEncontrada = false;
+            int indice = 0;
+
+            for (int i = 0; i < informacionCadena.Count; i++)
+            {
+                try
+                {
+                    string fila = informacionCadena[i].ToString().Substring(0, 1);
+                    string columna = informacionCadena[i].ToString().Substring(2, 1);
+
+                    filas.Add(fila);
+                    columnas.Add(columna);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
+            }
+
+            for (int j = 0; j < cadenas.Count; j++)
+            {
+                if (cadena.Equals(cadenas[j].ToString()))
+                {
+                    cadenaEncontrada = true;
+                    cadenaErronea = cadenas[j];
+                    indice = j;
+                }
+            }
+
+            if (cadenaEncontrada)
+            {
+                for (int k = 0; k < filas.Count; k++)
+                {
+                    for (int l = 0; l < columnas.Count; l++)
+                    {
+                        if (k == indice && l == indice)
+                        {
+                            posicionError = "fila: " + filas[k] + ", cerca a la columna: " + columnas[l];
+                        }
+                    }
+                }
+            }
+
+            Console.WriteLine("Error encontrado en la " + posicionError + ", en la palabra: " + cadenaErronea);
         }
 
     }

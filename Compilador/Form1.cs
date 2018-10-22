@@ -22,7 +22,7 @@ namespace Compilador
             AnalizadorSintactico analizador = new AnalizadorSintactico(gramatica);
             analizador.MostrarProducciones();
             Console.WriteLine("----------------------------------------");
-            analizador.Analizar("bbb");
+            analizador.Analizar();
             Console.WriteLine("----------------------------------------");
             analizador.MostrarMatriz();
         }
