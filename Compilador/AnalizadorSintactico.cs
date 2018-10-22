@@ -111,7 +111,8 @@ namespace Compilador
 
         private string[,] ConstruccionMatriz()
         {
-            matriz = new string[entrada.Length + 1, entrada.Length];
+			String[] en = entrada.Split(' ');
+            matriz = new string[en.Length + 1, en.Length];
 
             for (int x = 0; x < matriz.GetLength(0); x++)
             {
@@ -131,10 +132,10 @@ namespace Compilador
                 indice -= 1;
             }
 
-            for (int i = 0; i < entrada.Length; i++)
+            for (int i = 0; i < en.Length; i++)
             {
-                matriz[matriz.GetLength(0) - 1, i] = entrada[i].ToString();
-                matriz[matriz.GetLength(0) - 2, i] = BuscarProduccion(entrada[i].ToString());
+                matriz[matriz.GetLength(0) - 1, i] = en[i].ToString();
+                matriz[matriz.GetLength(0) - 2, i] = BuscarProduccion(en[i].ToString());
             }
 
             return matriz;
