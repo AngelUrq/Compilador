@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AL.cs" />
+    <Compile Include="Confi.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -42,6 +42,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
+            this.Fila = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Palabra = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editor.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -123,6 +127,11 @@
             // dGV1
             // 
             this.dGV1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Fila,
+            this.Columna,
+            this.Palabra,
+            this.Tipo});
             this.dGV1.Location = new System.Drawing.Point(505, 128);
             this.dGV1.Name = "dGV1";
             this.dGV1.Size = new System.Drawing.Size(407, 446);
@@ -189,6 +198,28 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Analizador semántico";
             // 
+            // Fila
+            // 
+            this.Fila.HeaderText = "F";
+            this.Fila.Name = "Fila";
+            this.Fila.Width = 50;
+            // 
+            // Columna
+            // 
+            this.Columna.HeaderText = "C";
+            this.Columna.Name = "Columna";
+            this.Columna.Width = 50;
+            // 
+            // Palabra
+            // 
+            this.Palabra.HeaderText = "Palabra";
+            this.Palabra.Name = "Palabra";
+            // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +261,10 @@
         private System.Windows.Forms.Button bEjecutar;
         private System.Windows.Forms.RichTextBox rTB_AL;
         public System.Windows.Forms.DataGridView dGV1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Fila;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Palabra;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
     }
 }
 

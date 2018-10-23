@@ -89,58 +89,55 @@ namespace Compilador
                     palabra.Add(i);
                     tipoda.Add("Ciclo");
                 }
-                else
-                if (tipo.Contains(i))
+                else if (tipo.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Tipo de Dato");
                 }
-                else
-                    if (palabrares.Contains(i))
+                else if (palabrares.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Palabra clave");
                 }
-                else
-                    if (oyf.Contains(i))
+                else if (oyf.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Operador o funcion");
                 }
-                else
-                    if (condicion.Contains(i))
+                else if (condicion.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Condicion");
                 }
-                else
-                if ((int.TryParse(i, out asa)) || (long.TryParse(i, out asalong)) || (byte.TryParse(i, out asabyte)) || (decimal.TryParse(i, out asadec)))
+                else if ((int.TryParse(i, out asa)) || (long.TryParse(i, out asalong)) || (byte.TryParse(i, out asabyte)) || (decimal.TryParse(i, out asadec)))
                 {
                     palabra.Add(i);
                     tipoda.Add("Numero");
                 }
-                else
-                if (i[0].Equals('\"') && i[i.Length - 1].Equals('\"'))
+                else if (i[0].Equals('\"') && i[i.Length - 1].Equals('\"'))
                 {
                     palabra.Add(i);
                     tipoda.Add("Cadena");
                 }
-                else
-                if (i.Equals("#$"))
+                else if (i.Equals("#$"))
                 {
                     palabra.Add(i);
                     tipoda.Add("Salto");
                 }
-                else
-                if (delimitadores.Contains(i))
+                else if (delimitadores.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Delimitador");
                 }
-                else
+                else if (i[0].ToString().Equals("x"))
                 {
                     palabra.Add(i);
                     tipoda.Add("Identificador");
+                }
+                else
+                {
+                    palabra.Add(i);
+                    tipoda.Add("Error");
                 }
             }
         }
