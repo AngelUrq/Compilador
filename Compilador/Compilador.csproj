@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="AnalizadorSintactico.cs" />
     <Compile Include="Archivo.cs" />
+    <Compile Include="ColoresInicio.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
