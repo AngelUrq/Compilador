@@ -108,7 +108,7 @@ namespace Compilador
             }
         }
 
-        public string asignarValorPalabra()
+        public string AsignarValorPalabra()
         {
             string valor = "";
             bool esToken = false;
@@ -125,8 +125,52 @@ namespace Compilador
                         if (palabrasSeparadas[i].Equals(palabrasReservadas[j]))
                         {
                             esPalabraReservada = true;
+                            valor = "Palabra reservada";
+                            break;
+                        }
+                        else
+                        {
+                            esPalabraReservada = false;
                         }
                     }
+                }
+                else if (!esPalabraReservada)
+                {
+                    esToken = true;
+                    for (int k = 0; k < tokens.Count; k++)
+                    {
+                        if (palabrasSeparadas[i].Equals(tokens[k]))
+                        {
+                            esToken = true;
+                            valor = "Palabra reservada";
+                            break;
+                        }
+                        else
+                        {
+                            esToken = false;
+                        }
+                    }
+                }
+                else if(!esToken)
+                {
+                    esTipoDeDato = true;
+                    for (int l = 0; l < tiposDeDatos.Count; l++)
+                    {
+                        if (palabrasSeparadas[i].Equals(tiposDeDatos[l]))
+                        {
+                            esTipoDeDato = true;
+                            valor = "Palabra reservada";
+                            break;
+                        }
+                        else
+                        {
+                            esTipoDeDato = false;
+                        }
+                    }
+                }
+                else
+                {
+
                 }
                 
             }
