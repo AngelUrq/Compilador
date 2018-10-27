@@ -28,3 +28,13 @@ C:\Users\Adriana Orellana\source\repos\Compilador\Compilador\obj\Debug\Compilado
 C:\Users\Adriana Orellana\source\repos\Compilador\Compilador\bin\Debug\Compilador.exe.config
 C:\Users\Adriana Orellana\source\repos\Compilador\Compilador\bin\Debug\Compilador.exe
 C:\Users\Adriana Orellana\source\repos\Compilador\Compilador\bin\Debug\Compilador.pdb
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\bin\Debug\Compilador.exe
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\bin\Debug\Compilador.pdb
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.Form1.resources
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.exe
+C:\Users\Pc\Source\Repos\Compilador2\Compilador\obj\Debug\Compilador.pdb
