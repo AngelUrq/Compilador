@@ -214,6 +214,7 @@ namespace Compilador
                 al.Separar(cadena1);
                 int fi = 1;
                 int col = 1;
+                string fil = "";
                 for (int i = 0; i < al.palabra.Count; i++)
                 {
                     if (al.palabra[i].Equals("#$") && al.tipoda[i].Equals("Salto"))
@@ -233,6 +234,11 @@ namespace Compilador
                         lista_palabras.Add(new Confi(al.palabra[i].ToString(), al.tipoda[i].ToString(), col, fi));
                     }
                 }
+                for(int i=1; i < fi; i++)
+                {
+                    fil = fil + i + "\n";
+                }
+                LineNumberLexTextBox.Text = fil;
                 leer.Close();
             }
         }
