@@ -12,7 +12,8 @@ namespace Compilador
         private List<string> tokens;
         private List<string> tiposDeDatos;
 
-        private List<string> palabrasSeparadas;
+        public List<string> palabrasSeparadas;
+        // public List<string> colores;
 
         public ColoresInicio()
         {
@@ -20,192 +21,178 @@ namespace Compilador
             tokens = new List<string>();
             tiposDeDatos = new List<string>();
             palabrasSeparadas = new List<string>();
+            //colores = new List<string>();
 
-            tokens.Add("=");
             tokens.Add("(");
             tokens.Add(")");
             tokens.Add("++");
             tokens.Add("--");
-            tokens.Add(">");
-            tokens.Add("<");
-            tokens.Add(">=");
-            tokens.Add("<=");
+            tokens.Add("bigger");
+            tokens.Add("lower");
+            tokens.Add("biggerOrEqual");
+            tokens.Add("lowerOrEqual");
             tokens.Add("{");
             tokens.Add("}");
             tokens.Add(";");
+            tokens.Add(":");
             tokens.Add(",");
+            tokens.Add("->");
+            tokens.Add("!");
 
-            palabrasReservadas.Add("Juice");
-            palabrasReservadas.Add("Xplus");
-            palabrasReservadas.Add("Xminus");
-            palabrasReservadas.Add("Xdivide");
-            palabrasReservadas.Add("Xpow");
-            palabrasReservadas.Add("Xswash");
+            palabrasReservadas.Add("juice");
             palabrasReservadas.Add("agane");
             palabrasReservadas.Add("xqcThonk");
             palabrasReservadas.Add("xqcWut");
+            palabrasReservadas.Add("give");
+            palabrasReservadas.Add("start");
+            palabrasReservadas.Add("xmain");
+            palabrasReservadas.Add("final");
 
-            tiposDeDatos.Add("Xint");
-            tiposDeDatos.Add("Xreal");
-            tiposDeDatos.Add("Xtring");
-            tiposDeDatos.Add("Xbool");
+            tiposDeDatos.Add("tint");
+            tiposDeDatos.Add("tfloat");
+            tiposDeDatos.Add("tchar");
+            tiposDeDatos.Add("tstring");
+            tiposDeDatos.Add("tbool");
+            tiposDeDatos.Add("void");
         }
 
         public void SepararParabras(string texto)
         {
             string palabra = "";
+            List<string> palabras = new List<string>();
 
             for (int i = 0; i < texto.Length; i++)
             {
-                if (texto[i].Equals(" ") || texto[i].Equals("\n"))
+                if (texto[i] == '}')
                 {
-                    palabrasSeparadas.Add(palabra);
+                    int a = 5;
+                }
+                if ((texto[i].ToString().Equals(" ") || texto[i].Equals('\n')) && !palabra.ToString().Equals(""))
+                {
+                    palabras.Add(palabra);
                     palabra = "";
                 }
-                else if (texto[i].Equals("{") || texto[i].Equals("}") || texto[i].Equals("(") || texto[i].Equals("="))
+                else if ((texto[i].ToString().Equals("{") || texto[i].ToString().Equals("}") || texto[i].ToString().Equals("(") || texto[i].ToString().Equals(")")))
                 {
-                    palabrasSeparadas.Add(palabra);
-                    palabrasSeparadas.Add(texto[i].ToString());
+                    palabras.Add(palabra);
+                    palabras.Add(texto[i].ToString());
                     palabra = "";
                 }
-                else if (texto[i].Equals(">") || texto[i].Equals("<"))
+                else if (texto[i].ToString().Equals("+") && !palabra.ToString().Equals(""))
                 {
-                    if (texto[i+1].Equals("="))
+                    if (texto[i + 1].ToString().Equals("+"))
                     {
-                        palabrasSeparadas.Add(palabra);
+                        palabras.Add(palabra);
                         string operador = texto[i].ToString() + texto[i + 1];
-                        palabrasSeparadas.Add(operador);
-                        i++;
-                        palabra = "";
-                    }
-                }
-                else if (texto[i].Equals("+"))
-                {
-                    if (texto[i + 1].Equals("+"))
-                    {
-                        palabrasSeparadas.Add(palabra);
-                        string operador = texto[i].ToString() + texto[i + 1];
-                        palabrasSeparadas.Add(operador);
+                        palabras.Add(operador);
                         palabra = "";
                         i++;
                     }
                 }
-                else if (texto[i].Equals("-"))
+                else if (texto[i].ToString().Equals("-") && !palabra.ToString().Equals(""))
                 {
-                    if (texto[i + 1].Equals("-"))
+                    if (texto[i + 1].ToString().Equals("-") || texto[i + 1].ToString().Equals(">"))
                     {
-                        palabrasSeparadas.Add(palabra);
+                        palabras.Add(palabra);
                         string operador = texto[i].ToString() + texto[i + 1];
-                        palabrasSeparadas.Add(operador);
+                        palabras.Add(operador);
                         palabra = "";
                         i++;
                     }
+                }
+                else if (texto[i].ToString().Equals(":") && !palabra.ToString().Equals(""))
+                {
+                    palabras.Add(palabra);
+                    string operador = texto[i].ToString();
+                    palabras.Add(operador);
+                    palabra = "";
+
+                }
+                else if (texto[i].ToString().Equals("!") && !palabra.ToString().Equals(""))
+                {
+                    palabras.Add(palabra);
+                    string operador = texto[i].ToString();
+                    palabras.Add(operador);
+                    palabra = "";
+
+                }
+                else if (!palabra.ToString().Equals("") && i == texto.Length - 1)
+                {
+                    palabra += texto[i];
+                    palabras.Add(palabra);
+                    palabra = "";
                 }
                 else
                 {
                     palabra += texto[i];
                 }
             }
+
+            palabrasSeparadas = palabras;
+
         }
 
-        public string AsignarValorPalabra()
+        public List<string> AsignarValorPalabra()
         {
-            string valor = "";
-            bool esToken = false;
-            bool esTipoDeDato = false;
-            bool esPalabraReservada = true;
-
-
+            List<string> colores = new List<string>();
             for (int i = 0; i < palabrasSeparadas.Count; i++)
             {
-                if (esPalabraReservada)
+                if (EsPalabraReservada(palabrasSeparadas[i]))
                 {
-                    for (int j = 0; j < palabrasReservadas.Count; j++)
-                    {
-                        if (palabrasSeparadas[i].Equals(palabrasReservadas[j]))
-                        {
-                            esPalabraReservada = true;
-                            valor = "Palabra reservada";
-                            break;
-                        }
-                        else
-                        {
-                            esPalabraReservada = false;
-                        }
-                    }
+                    colores.Add("azul");
                 }
-                else if (!esPalabraReservada)
+                else if (EsTipoDeDatos(palabrasSeparadas[i]))
                 {
-                    esToken = true;
-                    for (int k = 0; k < tokens.Count; k++)
-                    {
-                        if (palabrasSeparadas[i].Equals(tokens[k]))
-                        {
-                            esToken = true;
-                            valor = "Palabra reservada";
-                            break;
-                        }
-                        else
-                        {
-                            esToken = false;
-                        }
-                    }
+                    colores.Add("verde");
                 }
-                else if(!esToken)
+                else if (EsToken(palabrasSeparadas[i]))
                 {
-                    esTipoDeDato = true;
-                    for (int l = 0; l < tiposDeDatos.Count; l++)
-                    {
-                        if (palabrasSeparadas[i].Equals(tiposDeDatos[l]))
-                        {
-                            esTipoDeDato = true;
-                            valor = "Palabra reservada";
-                            break;
-                        }
-                        else
-                        {
-                            esTipoDeDato = false;
-                        }
-                    }
+                    colores.Add("rojo");
                 }
                 else
                 {
-
+                    colores.Add("negro");
                 }
-                
             }
-
-            return valor;
+            return colores;
         }
 
-        public string AsignarColor(string valorPalabra)
+        public bool EsPalabraReservada(string palabra)
         {
-            string color = "";
-
-            switch (valorPalabra)
+            for (int i = 0; i < palabrasReservadas.Count; i++)
             {
-                case "Palabra reservada":
-                    color = "azul";
-                    break;
-                case "token":
-                    color = "rojo";
-                    break;
-                case "tipo de dato":
-                    color = "verde";
-                    break;
-                default:
-                    color = "negro";
-                    break;
+                if (palabra.Equals(palabrasReservadas[i]))
+                {
+                    return true;
+                }
             }
-            return color;
+
+            return false;
         }
 
-        public string ReconstruirOracion()
+        public bool EsTipoDeDatos(string palabra)
         {
-            string linea = "";
+            for (int i = 0; i < tiposDeDatos.Count; i++)
+            {
+                if (palabra.Equals(tiposDeDatos[i]))
+                {
+                    return true;
+                }
+            }
 
-            return linea;
+            return false;
         }
 
+        public bool EsToken(string palabra)
+        {
+            for (int i = 0; i < tokens.Count; i++)
+            {
+                if (palabra.Equals(tokens[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
