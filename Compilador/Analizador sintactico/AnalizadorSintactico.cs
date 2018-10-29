@@ -538,7 +538,7 @@ namespace Compilador
             }
         }
         
-        public bool ProbarCadena(List<string> cadena,int fila)
+        public bool ProbarCadena()
         {
             listaTokens.Add(new Token("$", "", -1, -1));
             listaTokens.Reverse();
@@ -555,10 +555,10 @@ namespace Compilador
             {
                 int count1 = 0;
                 int count2 = 0;
-                if (cadenareglas[cadenareglas.Count - 1] == cadena[cadena.Count - 1])
+                if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count-1].GetPalabra())
                 {
                     cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                    cadena.RemoveAt(cadena.Count - 1);
+                    listaTokens.RemoveAt(listaTokens.Count - 1);
                 }
 
                 if (("" + cadenareglas[cadenareglas.Count - 1]) != "$")
@@ -572,7 +572,7 @@ namespace Compilador
                     }
                     for (int x = 1; x < tabla.GetLength(1); x++)
                     {
-                        if (("" + cadena[cadena.Count - 1]) == tabla[0, x])
+                        if ("" + listaTokens[listaTokens.Count-1].GetPalabra() == tabla[0, x])
                         {
                             count2 = x;
                         }
@@ -609,10 +609,10 @@ namespace Compilador
                                         cadenareglas.Add("" + tabla[count1, count2][x]);
                                     }
                                 }
-                                if (cadenareglas[cadenareglas.Count - 1] == cadena[cadena.Count - 1])
+                                if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
                                 {
                                     cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                                    cadena.RemoveAt(cadena.Count - 1);
+                                    listaTokens.RemoveAt(listaTokens.Count - 1);
                                 }
                             }
                         }
@@ -633,14 +633,14 @@ namespace Compilador
                 }
             }
 
-            if (cadenareglas[cadenareglas.Count - 1] == "$" && cadena[cadena.Count - 1] == "$")
+            if (cadenareglas[cadenareglas.Count - 1] == "$" && listaTokens[listaTokens.Count - 1].GetPalabra() == "$")
             {
                 return true;
             }
 
             else
             {
-                Console.WriteLine("Error en '" + cadena[cadena.Count - 1] + "' fila: " + fila + "," + (longitud - cadena.Count));
+                Console.WriteLine("Error en '" + listaTokens[listaTokens.Count - 1].GetPalabra() + "' fila: " + listaTokens[listaTokens.Count - 1].GetFila() + " columna " + listaTokens[listaTokens.Count - 1].GetColumna());
                 return false;
             }
         }
