@@ -15,6 +15,8 @@ namespace Compilador
         private List<string> terminales;
         private List<string> noTerminales;
 
+        private List<Token> listaTokens;
+
         private string simboloInicial;
 
         private List<Conjunto> primeros;
@@ -22,12 +24,14 @@ namespace Compilador
 
         public string[,] tabla;
 
-        public AnalizadorSintactico()
+        public AnalizadorSintactico(List<Token> listaTokens)
         {
             primeros = new List<Conjunto>();
             siguientes = new List<Conjunto>();
             terminales = new List<string>();
             noTerminales = new List<string>();
+
+            this.listaTokens = listaTokens;
 
             IniciarProducciones();
             CalcularPrimeros();
@@ -533,9 +537,12 @@ namespace Compilador
                 siguientes.Add(new Conjunto(noTerminal, ""));
             }
         }
-
-        public bool ProbarCadena(List<Token> cadena)
+        
+        public bool ProbarCadena(List<string> cadena,int fila)
         {
+            listaTokens.Add(new Token("$", "", -1, -1));
+            listaTokens.Reverse();
+
             //inicia con el simbolo inicial modificar el simbolo inicial a probar
             List<String> cadenareglas = new List<string>();
             cadenareglas.Add("$");
@@ -638,16 +645,10 @@ namespace Compilador
             }
         }
 
-        public List<String> Configurarcadena(String[] cadena)
+        public void Analizar()
         {
-            List<String> cadenanueva = new List<string>();
-            cadenanueva.Add("$");
-            for (int x = cadena.Length - 1; x >= 0; x--)
-            {
-                cadenanueva.Add(cadena[x]);
-            }
-            return cadenanueva;
+            
+            
         }
-
     }
 }
