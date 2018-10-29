@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Compilador
 {
-    class Confi
+    class Token
     {
         string orig, tip;
         int co, fi;
-        public Confi()
+        public Token()
         {
             orig = "";
             tip = "";
             co = 0;
             fi = 0;
         }
-        public Confi(string der, string iz, int co, int fi)
+        public Token(string der, string iz, int co, int fi)
         {
             this.orig = der;
             this.tip = iz;
@@ -25,22 +25,22 @@ namespace Compilador
             this.fi = fi;
         }
 
-        public string Getorig()
+        public string GetPalabra()
         {
             return orig;
         }
 
-        public string Gettip()
+        public string GetTipo()
         {
             return tip;
         }
 
-        public int Getco()
+        public int GetColumna()
         {
             return co;
         }
 
-        public int Getfi()
+        public int GetFila()
         {
             return fi;
         }

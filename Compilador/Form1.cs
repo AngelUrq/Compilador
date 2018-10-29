@@ -13,21 +13,11 @@ namespace Compilador
 {
     public partial class Form1 : Form
     {
-        List<Confi> lista_palabras = new List<Confi>();
+        List<Token> listaPalabras = new List<Token>();
+
         public Form1()
         {
-
             InitializeComponent();
-
-            Console.WriteLine("Iniciando compilador...");
-            Console.WriteLine("----------------------------------------");
-            Gramatica gramatica = new Gramatica("S", Archivo.LeerArchivo("../../Prueba.xqc"),null,null);
-            AnalizadorSintactico analizador = new AnalizadorSintactico(gramatica);
-            analizador.MostrarProducciones();
-            Console.WriteLine("----------------------------------------");
-            analizador.Analizar();
-            Console.WriteLine("----------------------------------------");
-            analizador.MostrarMatriz();
         }
 
         private void btnCargarArchivo_Click(object sender, EventArgs e)
@@ -41,7 +31,6 @@ namespace Compilador
             {
                 StreamReader leer = new StreamReader(abrir.FileName);
                 txtTexto.Text = leer.ReadToEnd();
-                
             }
         }
 
@@ -56,7 +45,7 @@ namespace Compilador
 
             int line = txtTexto.Lines.Length;
 
-            if(line <= 99)
+            if (line <= 99)
             {
                 w = 20 + (int)txtTexto.Font.Size;
             }
@@ -78,7 +67,7 @@ namespace Compilador
             int First_Line = txtTexto.GetLineFromCharIndex(First_Index);
             pt.X = ClientRectangle.Width;
             pt.Y = ClientRectangle.Height;
-            int Last_Index =txtTexto.GetCharIndexFromPosition(pt);
+            int Last_Index = txtTexto.GetCharIndexFromPosition(pt);
             int Last_Line = txtTexto.GetLineFromCharIndex(Last_Index);
             LineNumberTextBox.SelectionAlignment = HorizontalAlignment.Center;
             LineNumberTextBox.Text = "";
@@ -200,47 +189,56 @@ namespace Compilador
 
         private void button1_Click(object sender, EventArgs e)
         {
-            AL al = new AL();
-            OpenFileDialog abrir = new OpenFileDialog();
-            abrir.Filter = "Documento de texto|*.txt";
-            abrir.Title = "Guardar RichTextBox";
-            //abrir.FileName = "Prueba";
-            var resultado = abrir.ShowDialog();
-            if (resultado == DialogResult.OK)
-            {
-                StreamReader leer = new StreamReader(abrir.FileName);
-                txtBoxLexico.Text = leer.ReadToEnd();
-                String cadena1 = txtBoxLexico.Text;
-                al.Separar(cadena1);
-                int fi = 1;
-                int col = 1;
-                string fil = "";
-                for (int i = 0; i < al.palabra.Count; i++)
-                {
-                    if (al.palabra[i].Equals("#$") && al.tipoda[i].Equals("Salto"))
-                    {
-                        fi++;
-                        col = 1;
-                    }
-                    else
-                    if (al.tipoda[i].Equals("Error"))
-                    {
-                        MessageBox.Show("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
-                    }
-                    else
-                    {
-                        dGV1.Rows.Add(fi, col, al.palabra[i], al.tipoda[i]);
-                        col++;
-                        lista_palabras.Add(new Confi(al.palabra[i].ToString(), al.tipoda[i].ToString(), col, fi));
-                    }
-                }
-                for(int i=1; i < fi; i++)
-                {
-                    fil = fil + i + "\n";
-                }
-                LineNumberLexTextBox.Text = fil;
-                leer.Close();
-            }
+
         }
+
+        private void btnCompilar_Click(object sender, EventArgs e)
+        {
+            txtBoxLexico.Text = txtTexto.Text;
+
+            IniciarAnalizadorLexico();
+            IniciarAnalizadorSintactico();
+        }
+
+        private void IniciarAnalizadorLexico()
+        {
+            AnalizadorLexico al = new AnalizadorLexico();
+            String cadena1 = txtTexto.Text;
+            al.Separar(cadena1);
+            int fi = 1;
+            int col = 1;
+            string fil = "";
+            for (int i = 0; i < al.palabra.Count; i++)
+            {
+                if (al.palabra[i].Equals("#$") && al.tipoda[i].Equals("Salto"))
+                {
+                    fi++;
+                    col = 1;
+                }
+                else
+                if (al.tipoda[i].Equals("Error"))
+                {
+                    Console.WriteLine("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
+                }
+                else
+                {
+                    dGV1.Rows.Add(fi, col, al.palabra[i], al.tipoda[i]);
+                    col++;
+                    listaPalabras.Add(new Token(al.palabra[i].ToString(), al.tipoda[i].ToString(), col, fi));
+                }
+            }
+            for (int i = 1; i < fi; i++)
+            {
+                fil = fil + i + "\n";
+            }
+            LineNumberLexTextBox.Text = fil;
+        }
+
+        private void IniciarAnalizadorSintactico()
+        {
+            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico();
+            analizadorSintactico.ProbarCadena(listaPalabras);
+        }
+
     }
 }
