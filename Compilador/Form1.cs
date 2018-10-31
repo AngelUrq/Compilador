@@ -237,6 +237,7 @@ namespace Compilador
         private void IniciarAnalizadorSintactico()
         {
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(listaPalabras);
+            analizadorSintactico.ProbarCadena();
         }
 
     }
