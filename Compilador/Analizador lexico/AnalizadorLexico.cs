@@ -20,41 +20,37 @@ namespace Compilador
 
         private void Listas()
         {
-            tipo.Add("Xint");
-            tipo.Add("Xreal");
-            tipo.Add("Xtring");
-            tipo.Add("Xbool");
+            tipo.Add("tint");
+            tipo.Add("tfloat");
+            tipo.Add("tchar");
+            tipo.Add("tstring");
+            tipo.Add("tbool");
+            tipo.Add("void");
 
-            oyf.Add("=");
-            delimitadores.Add("(");
-            delimitadores.Add(")");
             palabrares.Add("++");
             palabrares.Add("--");
-            palabrares.Add(";");
-            palabrares.Add("\"");
-            palabrares.Add("\"");
-            palabrares.Add("Juice");
+            palabrares.Add("!");
             palabrares.Add("juice");
-            palabrares.Add("Xgimme");
-            palabrares.Add("Xtrue");
-            palabrares.Add("Xfalse");
-            oyf.Add(">");
-            oyf.Add("<");
+            palabrares.Add("give");
+            palabrares.Add("true");
+            palabrares.Add("false");
+            palabrares.Add(",");
+            palabrares.Add(":");
+            palabrares.Add("->");
+
             delimitadores.Add("{");
             delimitadores.Add("}");
             delimitadores.Add("[");
             delimitadores.Add("]");
-            palabrares.Add(",");
-            palabrares.Add("Juice");
+            delimitadores.Add("(");
+            delimitadores.Add(")");
 
-            oyf.Add("Xplus");
-            oyf.Add("Xminus");
-            oyf.Add("Xproduct");
-            oyf.Add("Xdivide");
-            oyf.Add("Xpow");
-            oyf.Add("Xsmash");
-            oyf.Add(">=");
-            oyf.Add("<=");
+            oyf.Add("=");
+            oyf.Add("bigger");
+            oyf.Add("lower");
+            oyf.Add("equals");
+            oyf.Add("biggerOrEqual");
+            oyf.Add("lowerOrEqual");
             oyf.Add("+");
             oyf.Add("-");
             oyf.Add("*");

@@ -8,41 +8,42 @@ namespace Compilador
 {
     class Token
     {
-        string orig, tip;
-        int co, fi;
+        protected string palabra, tipo;
+        protected int columna, fila;
+
         public Token()
         {
-            orig = "";
-            tip = "";
-            co = 0;
-            fi = 0;
+            palabra = "";
+            tipo = "";
+            columna = 0;
+            fila = 0;
         }
         public Token(string der, string iz, int co, int fi)
         {
-            this.orig = der;
-            this.tip = iz;
-            this.co = co;
-            this.fi = fi;
+            this.palabra = der;
+            this.tipo = iz;
+            this.columna = co;
+            this.fila = fi;
         }
 
         public string GetPalabra()
         {
-            return orig;
+            return palabra;
         }
 
         public string GetTipo()
         {
-            return tip;
+            return tipo;
         }
 
         public int GetColumna()
         {
-            return co;
+            return columna;
         }
 
         public int GetFila()
         {
-            return fi;
+            return fila;
         }
     }
 }

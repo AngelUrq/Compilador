@@ -25,12 +25,11 @@ namespace Compilador
 
             tokens.Add("(");
             tokens.Add(")");
-            tokens.Add("++");
-            tokens.Add("--");
             tokens.Add("bigger");
             tokens.Add("lower");
             tokens.Add("biggerOrEqual");
             tokens.Add("lowerOrEqual");
+            tokens.Add("equals");
             tokens.Add("{");
             tokens.Add("}");
             tokens.Add(";");
