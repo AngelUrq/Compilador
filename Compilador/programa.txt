@@ -1,12 +1,1 @@
-Juice hola()
-{
-   juice metodo(){
-   	Xplus(5,6);
-        xqcThonk(5>=0){
-	   agane(Xint i = 4; i < 10; i++)
-	   {
-		
-	   }
-	}
-   }
-}
+fcf

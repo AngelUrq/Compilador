@@ -79,7 +79,7 @@ namespace Compilador
                     {
                         AgregarLista(primeros, produccion.LadoDerecho[0].Nombre, ladoIzquierdo);
                     }
-                    else if (Pertenece(produccion.LadoDerecho[0].ToString(), noTerminales))
+                    else if (Pertenece(produccion.LadoDerecho[0].Nombre, noTerminales))
                     {
                         CalcularPrimeroNoTerminal(ladoIzquierdo, produccion.LadoDerecho[0].Nombre);
                     }
@@ -175,7 +175,7 @@ namespace Compilador
 
                     for (int i = 0; i < listaSiguientes.Length; i++)
                     {
-                        if (Regex.IsMatch(listaSiguientes[i], "S\\([A-Z]\\)"))
+                        if (Regex.IsMatch(listaSiguientes[i], "S\\(([a-zA-Z0-9])+\\)"))
                         {
                             seguirReemplazando = true;
 
@@ -517,19 +517,20 @@ namespace Compilador
             }
             Console.WriteLine("----------------------------------------");
 
-            terminales.Add("b");
-            terminales.Add("a");
-            terminales.Add("c");
-            terminales.Add("&");
             terminales.Add("(");
             terminales.Add(")");
+            terminales.Add("+");
+            terminales.Add("*");
+            terminales.Add("id");
 
-            noTerminales.Add("S");
-            noTerminales.Add("A");
+
             noTerminales.Add("E");
+            noTerminales.Add("EP");
             noTerminales.Add("T");
+            noTerminales.Add("TP");
+            noTerminales.Add("F");
 
-            simboloInicial = "S";
+            simboloInicial = "E";
 
             foreach (string noTerminal in noTerminales)
             {
@@ -643,12 +644,6 @@ namespace Compilador
                 Console.WriteLine("Error en '" + listaTokens[listaTokens.Count - 1].GetPalabra() + "' fila: " + listaTokens[listaTokens.Count - 1].GetFila() + " columna " + listaTokens[listaTokens.Count - 1].GetColumna());
                 return false;
             }
-        }
-
-        public void Analizar()
-        {
-            
-            
         }
     }
 }
