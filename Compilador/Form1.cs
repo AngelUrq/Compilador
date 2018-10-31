@@ -14,6 +14,8 @@ namespace Compilador
     public partial class Form1 : Form
     {
         List<Token> listaPalabras = new List<Token>();
+        ColoresInicio coloresInicio = new ColoresInicio();
+        List<string> palabras;
 
         public Form1()
         {
@@ -22,15 +24,76 @@ namespace Compilador
 
         private void btnCargarArchivo_Click(object sender, EventArgs e)
         {
+            Color textoColor = Color.Black, tipoDeDatoColor = Color.Green, tokenColor = Color.Red, palabraRColor = Color.Blue;
+
             OpenFileDialog abrir = new OpenFileDialog();
             abrir.Filter = "Documento de texto|*.txt";
             abrir.Title = "Archivo cargado";
             //abrir.FileName = "Prueba";
+
             var resultado = abrir.ShowDialog();
+
             if (resultado == DialogResult.OK)
             {
                 StreamReader leer = new StreamReader(abrir.FileName);
-                txtTexto.Text = leer.ReadToEnd();
+                //txtTexto.Text = leer.ReadToEnd();
+                string sLine = "";
+                List<string> textos = new List<string>();
+
+                while (sLine != null)
+                {
+                    sLine = leer.ReadLine();
+                    if (sLine != null)
+                        textos.Add(sLine);
+                }
+
+                leer.Close();
+
+
+                for (int i = 0; i < textos.Count; i++)
+                {
+                    try
+                    {
+
+                        coloresInicio.SepararParabras(textos[i].ToString());
+                        palabras = coloresInicio.palabrasSeparadas;
+
+                        Console.WriteLine(palabras[i].ToString());
+
+                        List<string> colores = coloresInicio.AsignarValorPalabra();
+
+                        for (int j = 0; j < colores.Count; j++)
+                        {
+                            if (colores[j].ToString().Equals("rojo"))
+                            {
+                                txtTexto.SelectionColor = tokenColor;
+                                txtTexto.AppendText(palabras[j].ToString());
+
+                            }
+                            else if (colores[j].ToString().Equals("azul"))
+                            {
+
+                                txtTexto.SelectionColor = palabraRColor;
+                                txtTexto.AppendText(palabras[j].ToString());
+
+                            }
+                            else if (colores[j].ToString().Equals("verde"))
+                            {
+                                txtTexto.SelectionColor = tipoDeDatoColor;
+                                txtTexto.AppendText(palabras[j].ToString());
+                            }
+                            else
+                            {
+                                txtTexto.SelectionColor = textoColor;
+                            }
+                        }
+                        txtTexto.AppendText("\r\n");
+                    }
+                    catch (Exception error)
+                    {
+                        Console.WriteLine(error.Message);
+                    }
+                }
             }
         }
 
