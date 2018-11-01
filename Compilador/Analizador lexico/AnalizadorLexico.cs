@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Compilador
 {
-    class AL
+    class AnalizadorLexico
     {
         public ArrayList palabra = new ArrayList();
         public ArrayList tipoda = new ArrayList();

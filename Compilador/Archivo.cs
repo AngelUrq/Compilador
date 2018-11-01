@@ -9,22 +9,21 @@ namespace Compilador
 {
     class Archivo
     {
-        public static List<Produccion> LeerArchivo(string direccionArchivo)
+        public static string LeerArchivo(string direccionArchivo)
         {
-            List<Produccion> producciones = new List<Produccion>();
+            string cadena = "";
 
             FileStream fileStream = new FileStream(direccionArchivo, FileMode.Open, FileAccess.Read);
-            using (StreamReader streamReader = new StreamReader(fileStream, Encoding.UTF8))
+            using (StreamReader streamReader = new StreamReader(fileStream, Encoding.Default, true))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)
                 {
-                    string[] linea = line.Split(',');
-                    producciones.Add(new Produccion(linea[0], linea[1]));
+                    cadena += line + "\n";
                 }
             }
 
-            return producciones;
+            return cadena;
         }
     }
 }

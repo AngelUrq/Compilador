@@ -1,0 +1,6 @@
+start xid:
+  Juice xmain:void->tint
+  {
+    give 0!
+  }
+final
