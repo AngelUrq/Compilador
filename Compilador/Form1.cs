@@ -225,12 +225,13 @@ namespace Compilador
                     else
                     if (al.tipoda[i].Equals("Error"))
                     {
+                        col = col + Convert.ToInt16(al.tamanio[i].ToString()) + 1;
                         MessageBox.Show("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
                     }
                     else
                     {
                         dGV1.Rows.Add(fi, col, al.palabra[i], al.tipoda[i]);
-                        col++;
+                        col = col + Convert.ToInt16(al.tamanio[i].ToString()) + 1;
                         lista_palabras.Add(new Confi(al.palabra[i].ToString(), al.tipoda[i].ToString(), col, fi));
                     }
                 }

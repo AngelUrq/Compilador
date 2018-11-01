@@ -11,60 +11,53 @@ namespace Compilador
     {
         public ArrayList palabra = new ArrayList();
         public ArrayList tipoda = new ArrayList();
-        ArrayList tipo = new ArrayList();
+        public ArrayList tamanio = new ArrayList();
         ArrayList palabrares = new ArrayList();
+        ArrayList operadores = new ArrayList();
         ArrayList delimitadores = new ArrayList();
-        ArrayList oyf = new ArrayList();
-        ArrayList ciclo = new ArrayList();
-        ArrayList condicion = new ArrayList();
+        ArrayList tipo = new ArrayList();
 
         private void Listas()
         {
-            tipo.Add("Xint");
-            tipo.Add("Xreal");
-            tipo.Add("Xtring");
-            tipo.Add("Xbool");
+            palabrares.Add("start");
+            palabrares.Add("final");
+            palabrares.Add("juice");
+            palabrares.Add("give");
+            palabrares.Add("xqcThonk");
+            palabrares.Add("xqcWut");
+            palabrares.Add("agane");
 
-            oyf.Add("=");
+            operadores.Add("equals");
+            operadores.Add("bigger");
+            operadores.Add("lower");
+            operadores.Add("lowerOrEqual");
+            operadores.Add("biggerOrEqual");
+            operadores.Add("and");
+            operadores.Add("or");
+            operadores.Add("not");
+            operadores.Add("+");
+            operadores.Add("-");
+            operadores.Add("/");
+            operadores.Add("*");
+            operadores.Add("^");
+            operadores.Add("->");
+
+            delimitadores.Add(":");
+            delimitadores.Add("!");
             delimitadores.Add("(");
             delimitadores.Add(")");
-            palabrares.Add("++");
-            palabrares.Add("--");
-            palabrares.Add(";");
-            palabrares.Add("\"");
-            palabrares.Add("\"");
-            palabrares.Add("Juice");
-            palabrares.Add("juice");
-            palabrares.Add("Xgimme");
-            palabrares.Add("Xtrue");
-            palabrares.Add("Xfalse");
-            oyf.Add(">");
-            oyf.Add("<");
-            delimitadores.Add("{");
-            delimitadores.Add("}");
             delimitadores.Add("[");
             delimitadores.Add("]");
-            palabrares.Add(",");
-            palabrares.Add("Juice");
+            delimitadores.Add("{");
+            delimitadores.Add("}");
+            delimitadores.Add(",");
 
-            oyf.Add("Xplus");
-            oyf.Add("Xminus");
-            oyf.Add("Xproduct");
-            oyf.Add("Xdivide");
-            oyf.Add("Xpow");
-            oyf.Add("Xsmash");
-            oyf.Add(">=");
-            oyf.Add("<=");
-            oyf.Add("+");
-            oyf.Add("-");
-            oyf.Add("*");
-            oyf.Add("/");
-
-            ciclo.Add("agane");
-
-            condicion.Add("Xif");
-            condicion.Add("Xelse");
-
+            tipo.Add("xint");
+            tipo.Add("xfloat");
+            tipo.Add("xbool");
+            tipo.Add("void");
+            tipo.Add("xtring");
+            tipo.Add("xchar");
         }
 
         public void Separar(string cadena)
@@ -75,69 +68,68 @@ namespace Compilador
             decimal asadec = 0;
             Listas();
 
-            string aa = cadena.Replace("=", " = ").Replace("<", " < ").Replace(">", " > ").Replace("+", " + ").Replace("-", " - ")
-                .Replace(">  =", " >= ").Replace("<  =", " <= ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ").Replace(")", " ) ")
-                .Replace("{", " { ").Replace("}", " } ").Replace("++", " ++ ").Replace("--", " -- ").Replace("[", " [ ").Replace("]", " ] ")
-                .Replace(";", " ; ").Replace(",", " , ").Replace("\n", " #$ ").Replace("\r", " ");
+            string aa = cadena.Replace("+", " + ").Replace("-", " - ").Replace("!", " ! ").Replace("->", " -> ")
+                .Replace("^", " ^ ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ").Replace(")", " ) ")
+                .Replace("{", " { ").Replace("}", " } ").Replace("[", " [ ").Replace("]", " ] ").Replace(":", " : ")
+                .Replace("\n", " #$ ").Replace("\r", " ").Replace(","," , ");
             char[] delimiterChars = { ' ', '\t' };
             string[] arr = aa.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string i in arr)
             {
-                if (ciclo.Contains(i))
-                {
-                    palabra.Add(i);
-                    tipoda.Add("Ciclo");
-                }
-                else if (tipo.Contains(i))
+                if (tipo.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Tipo de Dato");
+                    tamanio.Add(i.Length);
                 }
                 else if (palabrares.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Palabra clave");
+                    tamanio.Add(i.Length);
                 }
-                else if (oyf.Contains(i))
+                else if (operadores.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Operador o funcion");
-                }
-                else if (condicion.Contains(i))
-                {
-                    palabra.Add(i);
-                    tipoda.Add("Condicion");
+                    tamanio.Add(i.Length);
                 }
                 else if ((int.TryParse(i, out asa)) || (long.TryParse(i, out asalong)) || (byte.TryParse(i, out asabyte)) || (decimal.TryParse(i, out asadec)))
                 {
                     palabra.Add(i);
                     tipoda.Add("Numero");
+                    tamanio.Add(i.Length);
                 }
                 else if (i[0].Equals('\"') && i[i.Length - 1].Equals('\"'))
                 {
                     palabra.Add(i);
                     tipoda.Add("Cadena");
+                    tamanio.Add(i.Length);
                 }
                 else if (i.Equals("#$"))
                 {
                     palabra.Add(i);
                     tipoda.Add("Salto");
+                    tamanio.Add(i.Length);
                 }
                 else if (delimitadores.Contains(i))
                 {
                     palabra.Add(i);
                     tipoda.Add("Delimitador");
+                    tamanio.Add(i.Length);
                 }
                 else if (i[0].ToString().Equals("x"))
                 {
                     palabra.Add(i);
                     tipoda.Add("Identificador");
+                    tamanio.Add(i.Length);
                 }
                 else
                 {
                     palabra.Add(i);
                     tipoda.Add("Error");
+                    tamanio.Add(i.Length);
                 }
             }
         }
