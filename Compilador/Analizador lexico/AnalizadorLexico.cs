@@ -68,7 +68,7 @@ namespace Compilador
             decimal asadec = 0;
             Listas();
 
-            string aa = cadena.Replace("+", " + ").Replace("-", " - ").Replace("!", " ! ").Replace("->", " -> ")
+            string aa = cadena.Replace("+", " + ").Replace("-", " - ").Replace("!", " ! ").Replace("- >", " -> ")
                 .Replace("^", " ^ ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ").Replace(")", " ) ")
                 .Replace("{", " { ").Replace("}", " } ").Replace("[", " [ ").Replace("]", " ] ").Replace(":", " : ")
                 .Replace("\n", " #$ ").Replace("\r", " ").Replace(","," , ");

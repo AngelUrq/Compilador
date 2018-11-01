@@ -282,6 +282,7 @@ namespace Compilador
                 if (al.tipoda[i].Equals("Error"))
                 {
                     Console.WriteLine("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
+                    dGV1.Rows.Add(fi, col, al.palabra[i].ToString(), al.tipoda[i].ToString() + " de identificador");
                 }
                 else
                 {
