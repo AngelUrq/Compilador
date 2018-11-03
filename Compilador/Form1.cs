@@ -301,6 +301,9 @@ namespace Compilador
 
         private void IniciarAnalizadorSintactico()
         {
+            listaPalabras.Clear();
+            listaPalabras.Add(new Token("id","id",1,1));
+
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(listaPalabras);
             analizadorSintactico.ProbarCadena();
         }

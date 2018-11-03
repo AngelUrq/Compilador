@@ -578,6 +578,8 @@ namespace Compilador
                             count2 = x;
                         }
                     }
+
+                    Console.WriteLine(count1 + " " + count2);
                     if (count2 != 0)
                     {
                         if (tabla[count1, count2] != " ")
@@ -604,10 +606,12 @@ namespace Compilador
                                 else
                                 {
                                     cadenareglas.RemoveAt(cadenareglas.Count - 1);
-
-                                    for (int x = tabla[count1, count2].Length - 1; x >= 0; x--)
+                                    char[] delimiters = new char[] { ' ' };
+                                    string[] cadena = tabla[count1, count2].Split(delimiters,
+                                                     StringSplitOptions.RemoveEmptyEntries);
+                                    for (int x = cadena.Length - 1; x >= 0; x--)
                                     {
-                                        cadenareglas.Add("" + tabla[count1, count2][x]);
+                                        cadenareglas.Add("" + cadena[x]);
                                     }
                                 }
                                 if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
