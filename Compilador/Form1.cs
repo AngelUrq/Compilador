@@ -283,11 +283,12 @@ namespace Compilador
                 {
                     Console.WriteLine("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
                     dGV1.Rows.Add(fi, col, al.palabra[i].ToString(), al.tipoda[i].ToString() + " de identificador");
+                    col = col + Convert.ToInt32(al.tamanio[i].ToString());
                 }
                 else
                 {
                     dGV1.Rows.Add(fi, col, al.palabra[i], al.tipoda[i]);
-                    col++;
+                    col = col + Convert.ToInt32(al.tamanio[i].ToString());
                     listaPalabras.Add(new Token(al.palabra[i].ToString(), al.tipoda[i].ToString(), col, fi));
                 }
             }
