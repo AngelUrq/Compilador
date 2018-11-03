@@ -360,6 +360,11 @@ namespace Compilador
 
             foreach (Produccion regla in listaProducciones)
             {
+                if (regla.LadoIzquierdo.Equals("F"))
+                {
+                    int abc = 3;
+                }
+
                 if (regla.LadoDerecho[0].Nombre.Equals("€"))
                 {
                     for (int k = 0; k < noTerminalesSiguientes.Count; k++)
@@ -467,7 +472,7 @@ namespace Compilador
                         {
                             for (int j = 1; j < tabla.GetLength(1); j++)
                             {
-                                if (regla.GetLadoDerecho()[0].ToString().Equals(tabla[0, j]))
+                                if (regla.LadoDerecho[0].Nombre.Equals(tabla[0, j]))
                                 {
                                     numeroColumna = j;
                                 }
@@ -517,13 +522,12 @@ namespace Compilador
             }
             Console.WriteLine("----------------------------------------");
 
-            terminales.Add("(");
-            terminales.Add(")");
+            terminales.Add("id");
             terminales.Add("+");
             terminales.Add("*");
-            terminales.Add("id");
-
-
+            terminales.Add("(");
+            terminales.Add(")");
+            
             noTerminales.Add("E");
             noTerminales.Add("EP");
             noTerminales.Add("T");
