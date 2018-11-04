@@ -560,15 +560,16 @@ namespace Compilador
             {
                 int count1 = 0;
                 int count2 = 0;
-                if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count-1].GetPalabra())
-                {
-                    cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                    listaTokens.RemoveAt(listaTokens.Count - 1);
-                }
-
+               
+				
                 if (("" + cadenareglas[cadenareglas.Count - 1]) != "$")
                 {
-                    for (int x = 1; x < tabla.GetLength(0); x++)
+					if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
+					{
+						cadenareglas.RemoveAt(cadenareglas.Count - 1);
+						listaTokens.RemoveAt(listaTokens.Count - 1);
+					}
+					for (int x = 1; x < tabla.GetLength(0); x++)
                     {
                         if (("" + cadenareglas[cadenareglas.Count - 1]) == tabla[x, 0])
                         {
@@ -583,7 +584,7 @@ namespace Compilador
                         }
                     }
 
-                    Console.WriteLine(count1 + " " + count2);
+                   
                     if (count2 != 0)
                     {
                         if (tabla[count1, count2] != " ")
@@ -644,7 +645,9 @@ namespace Compilador
 
             if (cadenareglas[cadenareglas.Count - 1] == "$" && listaTokens[listaTokens.Count - 1].GetPalabra() == "$")
             {
+				
                 return true;
+			
             }
 
             else
