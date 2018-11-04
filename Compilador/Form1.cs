@@ -307,6 +307,9 @@ namespace Compilador
 
         private void IniciarAnalizadorSintactico()
         {
+            listaPalabras.Clear();
+            listaPalabras.Add(new Token("id","id",1,1));
+
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(listaPalabras);
             analizadorSintactico.ProbarCadena();
         }
@@ -411,7 +414,7 @@ namespace Compilador
                     break;
             }
 
-            Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
+            //Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
             return correcto;
         }
     }

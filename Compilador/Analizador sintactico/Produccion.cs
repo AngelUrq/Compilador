@@ -23,7 +23,7 @@ namespace Compilador
             string cadena = "";
             for (int i = 0; i < LadoDerecho.Length; i++)
             {
-                cadena += LadoDerecho[i].Nombre;
+                cadena += LadoDerecho[i].Nombre + " ";
             }
             return cadena;
         }
