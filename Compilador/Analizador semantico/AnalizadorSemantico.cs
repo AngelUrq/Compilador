@@ -22,16 +22,33 @@ namespace Compilador.Analizador_semantico
         {
             List<Variable> variables = new List<Variable>();
             string funcion = "";
+            string tipoFuncion = "";
 
             for (int i = listaPalabras.Count - 1; i > 0; i--)
             {
-                bool existe = false;
                 try
                 {
                     if (listaPalabras[i].GetPalabra().Equals("{"))
                     {
                         funcion = listaPalabras[i + 5].GetPalabra();
+                    }
 
+                    if (listaPalabras[i].GetPalabra().Equals("->"))
+                    {
+                        tipoFuncion = listaPalabras[i + 1].GetPalabra();
+                    }
+
+                    if (listaPalabras[i].GetPalabra().Equals("!"))
+                    {
+                        string palabra = listaPalabras[i + 1].GetPalabra();
+                        for (int j = 0; j < variables.Count; j++)
+                        {
+                            if (palabra.Equals(variables[j].GetPalabra()))
+                            {
+
+                            }
+                        }
+                  
                     }
       
                     if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("="))
@@ -40,15 +57,7 @@ namespace Compilador.Analizador_semantico
 
                         if (variables.Count > 0)
                         {
-                            for (int j = 0; j < variables.Count; j++)
-                            {
-                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
-                                {
-                                    existe = true;
-                                    continue;
-                                }
-                            }
-                            if (!existe)
+                            if (!ContieneVariable(variables, variable))
                             {
                                 if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
                                 {
@@ -103,11 +112,11 @@ namespace Compilador.Analizador_semantico
                     }
                     break;
                 case "tstring":
-                    Regex cadenas = new Regex(@"[a-zA-Z]+");
+                    Regex cadenas = new Regex('\x22' + ".*" + '\x22');
                     correcto = cadenas.IsMatch(valor);
                     break;
                 case "tchar":
-                    Regex caracteres = new Regex(@"[a-zA-Z]");
+                    Regex caracteres = new Regex(@"\'[a-zA-Z]\'");
                     correcto = caracteres.IsMatch(valor);
                     break;
                 default:
@@ -118,9 +127,20 @@ namespace Compilador.Analizador_semantico
                     break;
             }
 
-            //Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
+            Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
             return correcto;
         }
 
+        private bool ContieneVariable(List<Variable> variables, Variable variable)
+        {
+            for (int j = 0; j < variables.Count; j++)
+            {
+                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

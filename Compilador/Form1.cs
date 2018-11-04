@@ -39,8 +39,9 @@ namespace Compilador
             if (resultado == DialogResult.OK)
             {
                 StreamReader leer = new StreamReader(abrir.FileName);
-                //txtTexto.Text = leer.ReadToEnd();
-                string sLine = "";
+                txtTexto.Text = leer.ReadToEnd();
+
+                /*string sLine = "";
                 List<string> textos = new List<string>();
 
                 while (sLine != null)
@@ -50,10 +51,10 @@ namespace Compilador
                         textos.Add(sLine);
                 }
 
-                leer.Close();
+                leer.Close();*/
 
 
-                for (int i = 0; i < textos.Count; i++)
+                /*for (int i = 0; i < textos.Count; i++)
                 {
                     try
                     {
@@ -96,7 +97,7 @@ namespace Compilador
                     {
                         Console.WriteLine(error.Message);
                     }
-                }
+                }*/
             }
         }
 
