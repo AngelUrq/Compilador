@@ -10,11 +10,13 @@ namespace Compilador.Analizador_semantico
     {
         private string tipoIdentificador;
         private string valor;
+        private string funcion;
 
-        public Variable(string nombre, string tipoI, string valor, int fila, int columna): base(nombre, "Identificador", columna, fila)
+        public Variable(string nombre, string tipoI, string valor, int fila, int columna, string funcion): base(nombre, "Identificador", columna, fila)
         {
             this.tipoIdentificador = tipoI;
             this.valor = valor;
+            this.funcion = funcion;
         }
 
         public string GetTipoIdentificador()
@@ -35,6 +37,21 @@ namespace Compilador.Analizador_semantico
         public void SetValor(string valor)
         {
             this.valor = valor;
+        }
+
+        public string GetFuncion()
+        {
+            return this.funcion;
+        }
+
+        public void SetFuncion(string funcion)
+        {
+            this.funcion = funcion;
+        }
+
+        public override string ToString()
+        {
+            return "Palabra: " + GetPalabra() + ", tipo: " + GetTipo() + ", valor: " + valor + ", fila: " + GetFila() + ", columna: " + GetColumna() + ", función a la que pertenece: " + funcion;
         }
     }
 }

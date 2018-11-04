@@ -26,6 +26,8 @@ namespace Compilador
             palabrares.Add("xqcThonk");
             palabrares.Add("xqcWut");
             palabrares.Add("agane");
+            palabrares.Add("true");
+            palabrares.Add("false");
 
             operadores.Add("equals");
             operadores.Add("bigger");
@@ -40,6 +42,7 @@ namespace Compilador
             operadores.Add("/");
             operadores.Add("*");
             operadores.Add("^");
+            operadores.Add("=");
             operadores.Add("->");
 
             delimitadores.Add(":");
@@ -52,12 +55,12 @@ namespace Compilador
             delimitadores.Add("}");
             delimitadores.Add(",");
 
-            tipo.Add("xint");
-            tipo.Add("xfloat");
-            tipo.Add("xbool");
+            tipo.Add("tint");
+            tipo.Add("tfloat");
+            tipo.Add("tbool");
             tipo.Add("void");
-            tipo.Add("xtring");
-            tipo.Add("xchar");
+            tipo.Add("tstring");
+            tipo.Add("tchar");
         }
 
         public void Separar(string cadena)
@@ -68,7 +71,7 @@ namespace Compilador
             decimal asadec = 0;
             Listas();
 
-            string aa = cadena.Replace("+", " + ").Replace("-", " - ").Replace("!", " ! ").Replace("- >", " -> ")
+            string aa = cadena.Replace("+", " + ").Replace("=", " = ").Replace("-", " - ").Replace("!", " ! ").Replace("- >", " -> ")
                 .Replace("^", " ^ ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ").Replace(")", " ) ")
                 .Replace("{", " { ").Replace("}", " } ").Replace("[", " [ ").Replace("]", " ] ").Replace(":", " : ")
                 .Replace("\n", " #$ ").Replace("\r", " ").Replace(","," , ");
