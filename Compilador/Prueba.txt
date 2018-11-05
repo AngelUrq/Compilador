@@ -1,5 +1,5 @@
 start xid:
-  Juice xmain:void->tint
+  juice xmain:void->tint
   {
    tint xuno = 5!
    tbool xy = true!

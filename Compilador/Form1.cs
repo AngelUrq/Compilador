@@ -339,6 +339,7 @@ namespace Compilador
         {
             AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(listaPalabras);
             analizadorSemantico.AnalizarFunciones();
+            analizadorSemantico.Separarcomprobaciones(listaPalabras);
             richTextBox5.Clear();
             int NumeroLinea = 1;
             String Linea = "";

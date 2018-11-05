@@ -32,9 +32,9 @@ namespace Compilador.Analizador_semantico
             {
                 try
                 {
-                    if (listaPalabras[i].GetPalabra().Equals("{"))
+                    if (listaPalabras[i].GetPalabra().Equals("juice"))
                     {
-                        funcion = listaPalabras[i + 5].GetPalabra();
+                        funcion = listaPalabras[i - 1].GetPalabra();
                         if (!funciones.Contains(funcion))
                         {
                             funciones.Add(funcion);
@@ -113,6 +113,8 @@ namespace Compilador.Analizador_semantico
                             variables.Add(variable);
                         }
                     }
+
+                    
                 }
                 catch (Exception e)
                 {
@@ -178,7 +180,7 @@ namespace Compilador.Analizador_semantico
             return false;
         }
 
-        private void Tbool()
+        /*private void Tbool()
         {
             List<Variable> variables = new List<Variable>();
             string funcion = "";
@@ -240,7 +242,7 @@ namespace Compilador.Analizador_semantico
             {
                 Console.WriteLine(variable.ToString());
             }
-        }
+        }*/
 
         public void VerificarCondiciones(String CodigoFuente, int NumeroLinea)
         {
@@ -378,6 +380,7 @@ namespace Compilador.Analizador_semantico
 					for (int a = posinit; a < x; a++)
 					{
 						nuevalinea.Add(new Token(valores[a].GetPalabra(), valores[a].GetTipo(), valores[a].GetColumna(), valores[a].GetFila()));
+                        //Console.WriteLine(nuevalinea[nuevalinea.Count - 1].ToString());
 					}
 					Comprobarvariablesasignaciones(nuevalinea);
 					nuevalinea.Clear();

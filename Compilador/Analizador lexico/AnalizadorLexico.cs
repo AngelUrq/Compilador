@@ -28,6 +28,7 @@ namespace Compilador
             palabrares.Add("agane");
             palabrares.Add("true");
             palabrares.Add("false");
+            palabrares.Add("null");
 
             operadores.Add("equals");
             operadores.Add("bigger");
@@ -108,6 +109,12 @@ namespace Compilador
                 {
                     palabra.Add(i);
                     tipoda.Add("Cadena");
+                    tamanio.Add(i.Length);
+                }
+                else if (i[0].Equals('\'') && i[i.Length - 1].Equals('\''))
+                {
+                    palabra.Add(i);
+                    tipoda.Add("Caracter");
                     tamanio.Add(i.Length);
                 }
                 else if (i.Equals("#$"))
