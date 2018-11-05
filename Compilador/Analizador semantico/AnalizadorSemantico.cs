@@ -311,5 +311,229 @@ namespace Compilador.Analizador_semantico
             }
             
         }
-    }
+		public void Separarcomprobaciones(List<Token> valores)
+		{
+			int posinit = 0;
+			for (int x = 0; x < valores.Count; x++)
+			{
+				List<Token> nuevalinea = new List<Token>();
+				if (valores[x].GetPalabra() == "!")
+				{
+					for (int a = posinit; a < x; a++)
+					{
+						nuevalinea.Add(new Token(valores[a].GetPalabra(), valores[a].GetTipo(), valores[a].GetColumna(), valores[a].GetFila()));
+					}
+					Comprobarvariablesasignaciones(nuevalinea);
+					nuevalinea.Clear();
+					posinit = x + 1;
+				}
+
+			}
+		}
+		public void Comprobarvariablesasignaciones(List<Token> lista)
+		{
+			switch (lista[0].GetTipo())
+			{
+				case "tbool":
+
+					if ((lista.Count - 3) == 1)
+					{
+						if (lista[lista.Count - 1].GetTipo() == lista[0].GetTipo())
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+						}
+					}
+					else if ((lista.Count - 3) > 1)
+					{
+						bool comp = true;
+						int pos = 0;
+						for (int x = 3; x < lista.Count; x++)
+						{
+							if ((lista[x].GetTipo() != lista[0].GetTipo()) && x % 2 != 0)
+							{
+								comp = false;
+								pos = x;
+								break;
+							}
+						}
+						if (comp)
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+						}
+					}
+					else
+					{
+						Console.WriteLine("error de asignación ");
+					}
+					break;
+				case "tint":
+					if ((lista.Count - 3) == 1)
+					{
+						if (lista[lista.Count - 1].GetTipo() == lista[0].GetTipo())
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+						}
+					}
+					else if ((lista.Count - 3) > 1)
+					{
+						bool comp = true;
+						int pos = 0;
+						for (int x = 3; x < lista.Count; x++)
+						{
+							if ((lista[x].GetTipo() != lista[0].GetTipo()) && x % 2 != 0)
+							{
+								comp = false;
+								pos = x;
+								break;
+							}
+						}
+						if (comp)
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+						}
+					}
+					else
+					{
+						Console.WriteLine("error de asignación ");
+					}
+					break;
+				case "tfloat":
+					if ((lista.Count - 3) == 1)
+					{
+						if (lista[lista.Count - 1].GetTipo() == lista[0].GetTipo())
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+						}
+					}
+					else if ((lista.Count - 3) > 1)
+					{
+						bool comp = true;
+						int pos = 0;
+						for (int x = 3; x < lista.Count; x++)
+						{
+							if ((lista[x].GetTipo() != lista[0].GetTipo()) && x % 2 != 0)
+							{
+								comp = false;
+								pos = x;
+								break;
+							}
+						}
+						if (comp)
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+						}
+					}
+					else
+					{
+						Console.WriteLine("error de asignación ");
+					}
+					break;
+				case "tstring":
+					if ((lista.Count - 3) == 1)
+					{
+						if (lista[lista.Count - 1].GetTipo() == lista[0].GetTipo())
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+						}
+					}
+					else if ((lista.Count - 3) > 1)
+					{
+						bool comp = true;
+						int pos = 0;
+						for (int x = 3; x < lista.Count; x++)
+						{
+							if ((lista[x].GetTipo() != lista[0].GetTipo()) && x % 2 != 0)
+							{
+								comp = false;
+								pos = x;
+								break;
+							}
+						}
+						if (comp)
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+						}
+					}
+					else
+					{
+						Console.WriteLine("error de asignación ");
+					}
+					break;
+				case "tchar":
+					if ((lista.Count - 3) == 1)
+					{
+						if (lista[lista.Count - 1].GetTipo() == lista[0].GetTipo())
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+						}
+					}
+					else if ((lista.Count - 3) > 1)
+					{
+						bool comp = true;
+						int pos = 0;
+						for (int x = 3; x < lista.Count; x++)
+						{
+							if ((lista[x].GetTipo() != lista[0].GetTipo()) && x % 2 != 0)
+							{
+								comp = false;
+								pos = x;
+								break;
+							}
+						}
+						if (comp)
+						{
+							Console.WriteLine("es correcto");
+						}
+						else
+						{
+							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+						}
+					}
+					else
+					{
+						Console.WriteLine("error de asignación ");
+					}
+					break;
+				default:
+					Console.WriteLine("no hay tipo");
+					break;
+			}
+		}
+	}
 }
