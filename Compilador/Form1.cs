@@ -22,8 +22,10 @@ namespace Compilador
         public Form1()
         {
             InitializeComponent();
-            
+            _Form1 = this;
+
         }
+        public static Form1 _Form1;
 
         private void btnCargarArchivo_Click(object sender, EventArgs e)
         {
@@ -125,7 +127,7 @@ namespace Compilador
             }
             return w;
         }
-
+        //Añade Numero de Fila a la parte del Editor de Codigo
         public void AddLineNumbers()
         {
             Point pt = new Point(0, 0);
@@ -143,6 +145,7 @@ namespace Compilador
                 LineNumberTextBox.Text += i + 1 + "\n";
             }
         }
+        //Añade Numero de Fila al Editor del Lexico
         public void AddLineNumbersLexico()
         {
             Point pt = new Point(0, 0);
@@ -160,6 +163,25 @@ namespace Compilador
                 LineNumberLexTextBox.Text += i + 1 + "\n";
             }
         }
+        //Añade Numero de Fila a la parte Semantico
+        public void AddLineNumbersSemantico()
+        {
+            Point pt = new Point(0, 0);
+            int First_Index = txtBoxSemantico.GetCharIndexFromPosition(pt);
+            int First_Line = txtBoxSemantico.GetLineFromCharIndex(First_Index);
+            pt.X = ClientRectangle.Width;
+            pt.Y = ClientRectangle.Height;
+            int Last_Index = txtBoxSemantico.GetCharIndexFromPosition(pt);
+            int Last_Line = txtBoxSemantico.GetLineFromCharIndex(Last_Index);
+            LineNumberSemantico.SelectionAlignment = HorizontalAlignment.Center;
+            LineNumberSemantico.Text = "";
+            LineNumberSemantico.Width = getWidth();
+            for (int i = First_Line; i <= Last_Line + 1; i++)
+            {
+                LineNumberSemantico.Text += i + 1 + "\n";
+            }
+        }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -316,7 +338,71 @@ namespace Compilador
         private void IniciarAnalizadorSemantico()
         {
             AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(listaPalabras);
+            richTextBox5.Clear();
+            int NumeroLinea = 1;
+            String Linea = "";
+            //este ciclo va encontrar la fila en donde contiene xqcThonk o Agane
+            foreach (string line in txtTexto.Lines)
+            {
+                if (line.Contains("xqcThonk"))
+                {
+                    Console.WriteLine("Se encontro xqcThonk " + NumeroLinea);
+                    Linea = line;
+                    analizadorSemantico.VerificarCondiciones(Linea, NumeroLinea);
+
+                }
+                else if (line.Contains("Agane"))
+                {
+                    Console.WriteLine("Se encontro Agane " + NumeroLinea);
+                    Linea = line;
+                    analizadorSemantico.VerificarCondiciones(Linea, NumeroLinea);
+                }
+                NumeroLinea++;
+            }
             analizadorSemantico.Analizar();
+        }
+
+        //Este metodo se encarga de añadir a la consola del tab Semantico de la clase AnalizadorSemantico
+        public void update(string message)
+        {
+            richTextBox5.AppendText(message);
+        }
+
+        private void txtBoxSemantico_SelectionChanged(object sender, EventArgs e)
+        {
+            Point pt = txtBoxSemantico.GetPositionFromCharIndex(txtBoxSemantico.SelectionStart);
+            if (pt.X == 1)
+            {
+                AddLineNumbersSemantico();
+            }
+        }
+
+        private void txtBoxSemantico_VScroll(object sender, EventArgs e)
+        {
+            LineNumberSemantico.Text = "";
+            AddLineNumbersSemantico();
+            LineNumberSemantico.Invalidate();
+        }
+
+        private void txtBoxSemantico_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBoxSemantico.Text == "")
+            {
+                AddLineNumbersSemantico();
+            }
+        }
+
+        private void txtBoxSemantico_FontChanged(object sender, EventArgs e)
+        {
+            LineNumberSemantico.Font = txtBoxSemantico.Font;
+            txtBoxSemantico.Select();
+            AddLineNumbersSemantico();
+        }
+
+        private void txtBoxSemantico_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtBoxSemantico.Select();
+            LineNumberSemantico.DeselectAll();
         }
     }
 }
