@@ -21,7 +21,9 @@ namespace Compilador.Analizador_semantico
         public void Analizar()
         {
             List<Variable> variables = new List<Variable>();
+            List<string> v = new List<string>();
             string funcion = "";
+            string cadenadevar = "";
 
             for (int i = listaPalabras.Count - 1; i > 0; i--)
             {
@@ -31,10 +33,44 @@ namespace Compilador.Analizador_semantico
                     if (listaPalabras[i].GetPalabra().Equals("{"))
                     {
                         funcion = listaPalabras[i + 5].GetPalabra();
+                    }
+                    if (listaPalabras[i].GetPalabra().Equals("tint") && listaPalabras[i - 2].GetPalabra().Equals("="))
+                    {
+                        int ind = i - 3;
+                        for (int k = ind; listaPalabras[k].GetPalabra() != "!"; k--)
+                        {
+                            v.Add(listaPalabras[k].GetPalabra());
+                            cadenadevar += listaPalabras[k].GetPalabra();
+                        }
+                        Variable variable = new Variable(listaPalabras[i - 1].GetPalabra(), listaPalabras[i].GetPalabra(), cadenadevar, listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
+                        for (int j = 0; j < variables.Count; j++)
+                        {
+                            if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                            {
+                                existe = true;
+                                continue;
+                            }
+                        }
+                        if (!existe)
+                        {
+                            if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
+                            {
+                                variables.Add(variable);
+                            }
+
+                            else
+                            {
+                                Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                        }
                     }
 
-                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("="))
+                    else if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("=") && !listaPalabras[i + 1].GetPalabra().Equals("tint"))
                     {
                         Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
@@ -90,7 +126,15 @@ namespace Compilador.Analizador_semantico
             {
                 case "tint":
                     Regex numerosEnteros = new Regex(@"[0-9]+");
-                    correcto = numerosEnteros.IsMatch(valor);
+                    Regex aritmetica = new Regex(@"([-+]?[0 - 9] *\.?[0 - 9] +[\/\+\-\*])+([-+]?[0 - 9] *\.?[0-9]+)");
+                    if (numerosEnteros.IsMatch(valor))
+                    {
+                        correcto = true;
+                    }
+                    else if (aritmetica.IsMatch(valor))
+                    {
+                        correcto = true;
+                    }
                     break;
                 case "tfloat":
                     Regex numerosFlotantes = new Regex(@"[0-9]+\.[0-9]+");
