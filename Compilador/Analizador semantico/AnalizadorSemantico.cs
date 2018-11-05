@@ -22,42 +22,33 @@ namespace Compilador.Analizador_semantico
         {
             List<Variable> variables = new List<Variable>();
             string funcion = "";
-            string tipoFuncion = "";
 
             for (int i = listaPalabras.Count - 1; i > 0; i--)
             {
+                bool existe = false;
                 try
                 {
                     if (listaPalabras[i].GetPalabra().Equals("{"))
                     {
                         funcion = listaPalabras[i + 5].GetPalabra();
+
                     }
 
-                    if (listaPalabras[i].GetPalabra().Equals("->"))
-                    {
-                        tipoFuncion = listaPalabras[i + 1].GetPalabra();
-                    }
-
-                    if (listaPalabras[i].GetPalabra().Equals("!"))
-                    {
-                        string palabra = listaPalabras[i + 1].GetPalabra();
-                        for (int j = 0; j < variables.Count; j++)
-                        {
-                            if (palabra.Equals(variables[j].GetPalabra()))
-                            {
-
-                            }
-                        }
-                  
-                    }
-      
                     if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("="))
                     {
                         Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
                         if (variables.Count > 0)
                         {
-                            if (!ContieneVariable(variables, variable))
+                            for (int j = 0; j < variables.Count; j++)
+                            {
+                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                                {
+                                    existe = true;
+                                    continue;
+                                }
+                            }
+                            if (!existe)
                             {
                                 if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
                                 {
@@ -112,11 +103,11 @@ namespace Compilador.Analizador_semantico
                     }
                     break;
                 case "tstring":
-                    Regex cadenas = new Regex('\x22' + ".*" + '\x22');
+                    Regex cadenas = new Regex(@"[a-zA-Z]+");
                     correcto = cadenas.IsMatch(valor);
                     break;
                 case "tchar":
-                    Regex caracteres = new Regex(@"\'[a-zA-Z]\'");
+                    Regex caracteres = new Regex(@"[a-zA-Z]");
                     correcto = caracteres.IsMatch(valor);
                     break;
                 default:
@@ -127,20 +118,72 @@ namespace Compilador.Analizador_semantico
                     break;
             }
 
-            Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
+            //Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
             return correcto;
         }
 
-        private bool ContieneVariable(List<Variable> variables, Variable variable)
+        private void Tbool()
         {
-            for (int j = 0; j < variables.Count; j++)
+            List<Variable> variables = new List<Variable>();
+            string funcion = "";
+
+            for (int i = listaPalabras.Count - 1; i > 0; i--)
             {
-                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                bool existe = false;
+                try
                 {
-                    return true;
+                    if (listaPalabras[i].GetPalabra().Equals("{"))
+                    {
+                        funcion = listaPalabras[i + 5].GetPalabra();
+
+                    }
+                    
+                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("tbool") && listaPalabras[i + 1].GetPalabra().Equals("=") && (listaPalabras[i + 2].GetPalabra().Equals("false") || listaPalabras[i + 2].GetPalabra().Equals("true")))
+                    {
+                        Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
+
+                        if (variables.Count > 0)
+                        {
+                            for (int j = 0; j < variables.Count; j++)
+                            {
+                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                                {
+                                    existe = true;
+                                    continue;
+                                }
+                            }
+                            if (!existe)
+                            {
+                                if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
+                                {
+                                    variables.Add(variable);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                            }
+                        }
+                        else
+                        {
+                            variables.Add(variable);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e.Message);
                 }
             }
-            return false;
+
+            foreach (Variable variable in variables)
+            {
+                Console.WriteLine(variable.ToString());
+            }
         }
     }
 }
