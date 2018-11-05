@@ -41,8 +41,8 @@ namespace Compilador
             if (resultado == DialogResult.OK)
             {
                 StreamReader leer = new StreamReader(abrir.FileName);
-                //txtTexto.Text = leer.ReadToEnd();
-                string sLine = "";
+                txtTexto.Text = leer.ReadToEnd();
+                /*string sLine = "";
                 List<string> textos = new List<string>();
 
                 while (sLine != null)
@@ -98,7 +98,7 @@ namespace Compilador
                     {
                         Console.WriteLine(error.Message);
                     }
-                }
+                }*/
             }
         }
 
@@ -338,6 +338,7 @@ namespace Compilador
         private void IniciarAnalizadorSemantico()
         {
             AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(listaPalabras);
+            analizadorSemantico.AnalizarFunciones();
             richTextBox5.Clear();
             int NumeroLinea = 1;
             String Linea = "";
@@ -359,7 +360,6 @@ namespace Compilador
                 }
                 NumeroLinea++;
             }
-            analizadorSemantico.Analizar();
         }
 
         //Este metodo se encarga de añadir a la consola del tab Semantico de la clase AnalizadorSemantico

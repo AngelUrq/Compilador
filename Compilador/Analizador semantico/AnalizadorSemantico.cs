@@ -11,80 +11,88 @@ namespace Compilador.Analizador_semantico
     {
         List<Token> listaPalabras;
         List<Variable> variables;
+        List<string> funciones;
 
         public AnalizadorSemantico(List<Token> listaPalabras)
         {
             this.listaPalabras = listaPalabras;
             variables = new List<Variable>();
+            funciones = new List<string>();
         }
 
-        public void Analizar()
+        public void AnalizarFunciones()
         {
             List<Variable> variables = new List<Variable>();
-            List<string> v = new List<string>();
+            bool existe = false;
+            bool funcionUnica = true;
             string funcion = "";
-            string cadenadevar = "";
+            string tipoFuncion = "";
 
             for (int i = listaPalabras.Count - 1; i > 0; i--)
             {
-                bool existe = false;
                 try
                 {
                     if (listaPalabras[i].GetPalabra().Equals("{"))
                     {
                         funcion = listaPalabras[i + 5].GetPalabra();
-                    }
-                    if (listaPalabras[i].GetPalabra().Equals("tint") && listaPalabras[i - 2].GetPalabra().Equals("="))
-                    {
-                        int ind = i - 3;
-                        for (int k = ind; listaPalabras[k].GetPalabra() != "!"; k--)
+                        if (!funciones.Contains(funcion))
                         {
-                            v.Add(listaPalabras[k].GetPalabra());
-                            cadenadevar += listaPalabras[k].GetPalabra();
+                            funciones.Add(funcion);
+                            funcionUnica = true;
                         }
-                        Variable variable = new Variable(listaPalabras[i - 1].GetPalabra(), listaPalabras[i].GetPalabra(), cadenadevar, listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
+                        else
+                        {
+                            Console.WriteLine("Existen dos funciones con el nombre " + funcion);
+                            funcionUnica = false;
+                        }
+                    }
 
+                    if (listaPalabras[i].GetPalabra().Equals("->") && funcionUnica)
+                    {
+                        tipoFuncion = listaPalabras[i - 1].GetPalabra();
+                    }
+
+                    if (listaPalabras[i].GetPalabra().Equals("give") && funcionUnica)
+                    {
                         for (int j = 0; j < variables.Count; j++)
                         {
-                            if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                            if (listaPalabras[i - 1].GetPalabra().Equals(variables[j].GetPalabra()))
                             {
+                                if (!TipoYValorCorrecto(tipoFuncion, variables[j].GetValor()))
+                                {
+                                    Console.WriteLine("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
+                                }
+                                else
+                                {
+                                    Console.WriteLine("La función " + funcion + " devuelve el tipo de datos correcto :)");
+                                }
                                 existe = true;
                                 continue;
                             }
                         }
+
                         if (!existe)
                         {
-                            if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
+                            if (!TipoYValorCorrecto(tipoFuncion, listaPalabras[i - 1].GetPalabra()))
                             {
-                                variables.Add(variable);
+                                Console.WriteLine("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
                             }
-
                             else
                             {
-                                Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+
+                                Console.WriteLine("La función " + funcion + " devuelve el tipo de datos correcto :)");
                             }
                         }
-                        else
-                        {
-                            Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
-                        }
+
                     }
 
-                    else if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("=") && !listaPalabras[i + 1].GetPalabra().Equals("tint"))
+                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("=") && funcionUnica && listaPalabras[i - 3].GetPalabra().Equals("!"))
                     {
                         Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
                         if (variables.Count > 0)
                         {
-                            for (int j = 0; j < variables.Count; j++)
-                            {
-                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
-                                {
-                                    existe = true;
-                                    continue;
-                                }
-                            }
-                            if (!existe)
+                            if (!ContieneVariable(variables, variable))
                             {
                                 if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
                                 {
@@ -92,7 +100,7 @@ namespace Compilador.Analizador_semantico
                                 }
                                 else
                                 {
-                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto. Fila: " + variable.GetFila() + ", columna: " + variable.GetColumna());
                                 }
                             }
                             else
@@ -126,15 +134,7 @@ namespace Compilador.Analizador_semantico
             {
                 case "tint":
                     Regex numerosEnteros = new Regex(@"[0-9]+");
-                    Regex aritmetica = new Regex(@"([-+]?[0 - 9] *\.?[0 - 9] +[\/\+\-\*])+([-+]?[0 - 9] *\.?[0-9]+)");
-                    if (numerosEnteros.IsMatch(valor))
-                    {
-                        correcto = true;
-                    }
-                    else if (aritmetica.IsMatch(valor))
-                    {
-                        correcto = true;
-                    }
+                    correcto = numerosEnteros.IsMatch(valor);
                     break;
                 case "tfloat":
                     Regex numerosFlotantes = new Regex(@"[0-9]+\.[0-9]+");
@@ -147,11 +147,11 @@ namespace Compilador.Analizador_semantico
                     }
                     break;
                 case "tstring":
-                    Regex cadenas = new Regex(@"[a-zA-Z]+");
+                    Regex cadenas = new Regex('\x22' + ".*" + '\x22');
                     correcto = cadenas.IsMatch(valor);
                     break;
                 case "tchar":
-                    Regex caracteres = new Regex(@"[a-zA-Z]");
+                    Regex caracteres = new Regex(@"\'[a-zA-Z]\'");
                     correcto = caracteres.IsMatch(valor);
                     break;
                 default:
@@ -164,6 +164,18 @@ namespace Compilador.Analizador_semantico
 
             //Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
             return correcto;
+        }
+
+        private bool ContieneVariable(List<Variable> variables, Variable variable)
+        {
+            for (int j = 0; j < variables.Count; j++)
+            {
+                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void Tbool()

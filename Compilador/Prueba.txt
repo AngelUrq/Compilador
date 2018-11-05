@@ -1,9 +1,9 @@
 start xid:
   Juice xmain:void->tint
   {
-   tint xuno = 5
-   tbool xy = true
-   tstring xa = hola
+   tint xuno = 5!
+   tbool xy = true!
+   tstring xa = hola!
     give 0!
   }
 final
