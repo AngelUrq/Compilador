@@ -57,4 +57,4 @@ C:\Git proyects\compll1 2\Compilador\Compilador\obj\Debug\Compilador.csproj.Gene
 C:\Git proyects\compll1 2\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
 C:\Git proyects\compll1 2\Compilador\Compilador\obj\Debug\Compilador.exe
 C:\Git proyects\compll1 2\Compilador\Compilador\obj\Debug\Compilador.pdb
-C:\Users\angel\source\repos\Compilador\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\Angel\source\repos\Compilador\Compilador\obj\Debug\Compilador.csprojResolveAssemblyReference.cache

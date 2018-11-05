@@ -718,32 +718,21 @@ namespace Compilador
             terminales.Add("tfloat");
             terminales.Add("tchar");
             terminales.Add("0");
-            terminales.Add("x");
-            terminales.Add("a");
-            terminales.Add("b");
-            terminales.Add("c");
-            terminales.Add("d");
-            terminales.Add("e");
-            terminales.Add("f");
-            terminales.Add("g");
-            terminales.Add("h");
-            terminales.Add("i");
-            terminales.Add("j");
-            terminales.Add("k");
-            terminales.Add("l");
-            terminales.Add("m");
-            terminales.Add("n");
-            terminales.Add("o");
-            terminales.Add("p");
-            terminales.Add("q");
-            terminales.Add("r");
-            terminales.Add("s");
-            terminales.Add("t");
-            terminales.Add("u");
-            terminales.Add("v");
-            terminales.Add("w");
-            terminales.Add("y");
-            terminales.Add("z");
+            terminales.Add("xid");
+            terminales.Add("xvar");
+            terminales.Add("xvar2");
+            terminales.Add("xvar3");
+            terminales.Add("xvar4");
+            terminales.Add("xvar5");
+            terminales.Add("xvar6");
+            terminales.Add("xvar7");
+            terminales.Add("xfun");
+            terminales.Add("xfun2");
+            terminales.Add("xfun3");
+            terminales.Add("xfun4");
+            terminales.Add("xfun5");
+            terminales.Add("xfun6");
+            terminales.Add("xfun7");
 
             noTerminales.Add("PROGRAM");
             noTerminales.Add("BODY");
@@ -757,7 +746,6 @@ namespace Compilador
             noTerminales.Add("TYPE");
             noTerminales.Add("VALOR");
             noTerminales.Add("ID");
-            noTerminales.Add("NOMBRE");
 
             simboloInicial = "PROGRAM";
 

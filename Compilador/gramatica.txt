@@ -17,7 +17,18 @@ TYPE,tstring
 TYPE,tfloat
 TYPE,tchar
 VALOR,0
-ID,x ID
-ID,i d
-ID,b
-ID,c
+ID,xid
+ID,xvar
+ID,xvar2
+ID,xvar3
+ID,xvar4
+ID,xvar5
+ID,xvar6
+ID,xvar7
+ID,xfun
+ID,xfun2
+ID,xfun3
+ID,xfun4
+ID,xfun5
+ID,xfun6
+ID,xfun7
