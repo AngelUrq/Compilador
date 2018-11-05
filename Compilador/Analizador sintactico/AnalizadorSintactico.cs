@@ -46,20 +46,57 @@ namespace Compilador
 
         private void CalcularPrimeros()
         {
+            List<Produccion> proximasProducciones = new List<Produccion>();
+            List<bool> calculados = new List<bool>();
+
             foreach (Produccion produccion in listaProducciones)
             {
                 string primerElementoLadoDerecho = produccion.LadoDerecho[0].Nombre;
 
                 if (Pertenece(primerElementoLadoDerecho, terminales))
                 {
-                    AgregarLista(primeros, primerElementoLadoDerecho, produccion.LadoIzquierdo);
-                    BuscarEpsilonPrimero(produccion.LadoIzquierdo);
+                    if (!primerElementoLadoDerecho.Equals("€"))
+                    {
+                        AgregarLista(primeros, primerElementoLadoDerecho, produccion.LadoIzquierdo);
+                        BuscarEpsilonPrimero(produccion.LadoIzquierdo);
+                    }
                 }
                 else if (Pertenece(primerElementoLadoDerecho, noTerminales))
                 {
-                    CalcularPrimeroNoTerminal(produccion.LadoIzquierdo, primerElementoLadoDerecho);
+                    proximasProducciones.Add(produccion);
+                    calculados.Add(false);
                 }
             }
+
+            bool huboSinCalcular = true;
+            while (huboSinCalcular)
+            {
+                huboSinCalcular = false;
+
+                for(int j = 0; j < proximasProducciones.Count; j++)
+                {
+                    Produccion produccion = proximasProducciones[j];
+
+                    string primerElementoLadoDerecho = produccion.LadoDerecho[0].Nombre;
+
+                    for(int i = 0; i < proximasProducciones.Count; i++)
+                    {
+                        if (proximasProducciones[i].LadoIzquierdo.Equals(produccion.LadoDerecho[0].Nombre))
+                        {
+                            if (!calculados[i])
+                            {
+                                huboSinCalcular = true;
+                                continue;
+                            }
+                        }
+                    }
+
+                    CalcularPrimeroNoTerminal(produccion.LadoIzquierdo, produccion.LadoDerecho, primerElementoLadoDerecho);
+                    calculados[j] = true;
+                }
+            }
+
+            EliminarRepetidos(primeros);
 
             Console.WriteLine("----------------PRIMEROS----------------");
             foreach (Conjunto primero in primeros)
@@ -69,22 +106,79 @@ namespace Compilador
             Console.WriteLine("----------------------------------------");
         }
 
-        private void CalcularPrimeroNoTerminal(string ladoIzquierdo, string noTerminal)
+        private void CalcularPrimeroNoTerminal(string ladoIzquierdo,Simbolo[] ladoDerecho, string noTerminal)
         {
-            foreach (Produccion produccion in listaProducciones)
+            bool noTerminalEncontrado = false;
+
+            Conjunto misPrimeros = new Conjunto("","");
+
+            while (!noTerminalEncontrado)
             {
-                if (produccion.LadoIzquierdo.Equals(noTerminal))
+                misPrimeros = BuscarPrimeros(noTerminal);
+
+                if (misPrimeros.LadoIzquierdo.Equals("") || misPrimeros.LadoDerecho.Equals(""))
                 {
-                    if (Pertenece(produccion.LadoDerecho[0].Nombre, terminales))
+                    foreach (Produccion produccion in listaProducciones)
                     {
-                        AgregarLista(primeros, produccion.LadoDerecho[0].Nombre, ladoIzquierdo);
-                    }
-                    else if (Pertenece(produccion.LadoDerecho[0].Nombre, noTerminales))
-                    {
-                        CalcularPrimeroNoTerminal(ladoIzquierdo, produccion.LadoDerecho[0].Nombre);
+                        if (produccion.LadoIzquierdo.Equals(noTerminal))
+                        {
+                            noTerminal = produccion.LadoDerecho[0].Nombre;
+                            break;
+                        }
                     }
                 }
+                else
+                {
+                    noTerminalEncontrado = true;
+                }
             }
+
+            string[] primerosNoTerminal = misPrimeros.LadoDerecho.Split(',');
+
+            for (int i = 0; i < primerosNoTerminal.Length; i++)
+            {
+                if (primerosNoTerminal[i].Equals("€"))
+                {
+                    Simbolo[] nuevoLadoDerecho = new Simbolo[ladoDerecho.Length - 1];
+                    for(int j = 0; j < nuevoLadoDerecho.Length; j++)
+                    {
+                        nuevoLadoDerecho[j] = ladoDerecho[j+1];
+                    }
+
+                    if (nuevoLadoDerecho.Length > 0)
+                    {
+                        if (Pertenece(nuevoLadoDerecho[0].Nombre, terminales))
+                        {
+                            AgregarLista(primeros, nuevoLadoDerecho[0].Nombre, ladoIzquierdo);
+                        }
+                        else
+                        {
+                            CalcularPrimeroNoTerminal(ladoIzquierdo, nuevoLadoDerecho, nuevoLadoDerecho[0].Nombre);
+                        }
+                    }
+                    else
+                    {
+                        AgregarLista(primeros, "€", ladoIzquierdo);
+                    }
+                }
+                else
+                {
+                    AgregarLista(primeros, primerosNoTerminal[i], ladoIzquierdo);
+                }
+            }
+        }
+
+        private bool PerteneceAlArreglo(string[] lista, string elemento)
+        {
+            for(int i = 0; i < lista.Length; i++)
+            {
+                if (lista[i].Equals(elemento))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void AgregarLista(List<Conjunto> lista, string simbolo, string ladoIzquierdo)
@@ -134,25 +228,18 @@ namespace Compilador
         {
             AgregarLista(siguientes, "$", simboloInicial);
 
-            foreach (Produccion produccion in listaProducciones)
+            foreach(string noTerminal in noTerminales)
             {
-                if (produccion.LadoDerecho.Length == 3)
+                if (noTerminal.Equals("EXTRA"))
                 {
-                    AgregarSiguienteS1(produccion.LadoDerecho[1].Nombre, produccion.LadoDerecho[2].Nombre);
-
-                    if (DerivaEnEpsilon(produccion.LadoDerecho[2].Nombre))
-                    {
-                        AgregarSiguienteS2(produccion.LadoDerecho[1].Nombre, produccion.LadoIzquierdo);
-                    }
+                    int a = 3;
                 }
 
-                if (produccion.LadoDerecho.Length == 2)
-                {
-                    AgregarSiguienteS2(produccion.LadoDerecho[1].Nombre, produccion.LadoIzquierdo);
-                }
+                CalcularSiguiente(noTerminal);
             }
 
             ReemplazarSiguientes();
+            EliminarRepetidos(siguientes);
 
             Console.WriteLine("----------------SIGUIENTES--------------");
             foreach (Conjunto siguiente in siguientes)
@@ -160,6 +247,133 @@ namespace Compilador
                 Console.WriteLine(siguiente.ToString());
             }
             Console.WriteLine("----------------------------------------");
+        }
+
+        private void EliminarRepetidos(List<Conjunto> conjunto)
+        {
+            foreach(Conjunto siguiente in conjunto)
+            {
+                string[] ladoDerecho = siguiente.LadoDerecho.Split(',');
+                string nuevoLadoDerecho = "";
+
+                for(int i = 0; i < ladoDerecho.Length; i++)
+                {
+                    string[] nuevosLadosDerechos = nuevoLadoDerecho.Split(',');
+
+                    bool pertenece = false;
+                    for(int j = 0; j < nuevosLadosDerechos.Length; j++)
+                    {
+                        if (ladoDerecho[i].Equals(nuevosLadosDerechos[j]))
+                        {
+                            pertenece = true;
+                            break;
+                        }
+                    }
+
+                    if (!pertenece)
+                    {
+                        nuevoLadoDerecho += ladoDerecho[i] + ",";
+                    }
+                }
+
+                if (nuevoLadoDerecho.Length > 0)
+                {
+                    if (nuevoLadoDerecho[nuevoLadoDerecho.Length - 1].Equals(','))
+                    {
+                        nuevoLadoDerecho = nuevoLadoDerecho.Substring(0, nuevoLadoDerecho.Length - 1);
+                    }
+
+                    siguiente.LadoDerecho = nuevoLadoDerecho;
+                }
+            }
+        }
+
+        private void CalcularSiguiente(string ladoIzquierdo)
+        {
+            foreach (Produccion produccion in listaProducciones)
+            {
+                for (int i = 0; i < produccion.LadoDerecho.Length; i++)
+                {
+                    if (produccion.LadoDerecho[i].Nombre.Equals(ladoIzquierdo))
+                    {
+                        if (i + 1 < produccion.LadoDerecho.Length)
+                        {
+                            if (Pertenece(produccion.LadoDerecho[i+1].Nombre,terminales))
+                            {
+                                AgregarLista(siguientes, produccion.LadoDerecho[i + 1].Nombre, ladoIzquierdo);
+                            }
+                            else
+                            {
+                                AgregarSiguienteNoTerminal(i+1, produccion, ladoIzquierdo);
+                            }
+                        }
+                        else
+                        {
+                            if (!produccion.LadoIzquierdo.Equals(ladoIzquierdo))
+                            {
+                                Conjunto siguiente = BuscarSiguientes(produccion.LadoIzquierdo);
+
+                                if (siguiente.LadoDerecho.Equals("") || siguiente.LadoIzquierdo.Equals(""))
+                                {
+                                    AgregarLista(siguientes, "S(" + produccion.LadoIzquierdo + ")", ladoIzquierdo);
+                                }
+                                else
+                                {
+                                    string[] listaSiguientes = siguiente.LadoDerecho.Split(',');
+                                    for(int j = 0; j < listaSiguientes.Length; j++)
+                                    {
+                                        AgregarLista(siguientes, listaSiguientes[j], ladoIzquierdo);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void AgregarSiguienteNoTerminal(int i, Produccion produccion, string ladoIzquierdo)
+        {
+            string[] nuevosPrimeros = BuscarPrimeros(produccion.LadoDerecho[i].Nombre).LadoDerecho.Split(',');
+
+            if (Pertenece(produccion.LadoDerecho[i].Nombre,terminales))
+            {
+                AgregarLista(siguientes, produccion.LadoDerecho[i].Nombre, ladoIzquierdo);
+            }
+            else
+            {
+                for (int j = 0; j < nuevosPrimeros.Length; j++)
+                {
+                    if (nuevosPrimeros[j].Equals("€"))
+                    {
+                        if (i + 1 < produccion.LadoDerecho.Length)
+                        {
+                            AgregarSiguienteNoTerminal(i + 1, produccion, ladoIzquierdo);
+                        }
+                        else
+                        {
+                            Conjunto siguiente = BuscarSiguientes(produccion.LadoIzquierdo);
+
+                            if (siguiente.LadoIzquierdo.Equals(""))
+                            {
+                                AgregarLista(siguientes, "S(" + produccion.LadoIzquierdo + ")", ladoIzquierdo);
+                            }
+                            else
+                            {
+                                string[] listaSiguientes = siguiente.LadoDerecho.Split(',');
+                                for (int k = 0; k < listaSiguientes.Length; k++)
+                                {
+                                    AgregarLista(siguientes, listaSiguientes[k], ladoIzquierdo);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        AgregarLista(siguientes, nuevosPrimeros[j], ladoIzquierdo);
+                    }
+                }
+            }
         }
 
         private void ReemplazarSiguientes()
@@ -189,32 +403,6 @@ namespace Compilador
             } while (seguirReemplazando);
         }
 
-        private void AgregarSiguienteS1(string izquierda, string derecha)
-        {
-            Conjunto primerosDerecha = BuscarPrimeros(derecha);
-
-            if (!(primerosDerecha.LadoDerecho.Equals("") && primerosDerecha.LadoIzquierdo.Equals("")))
-            {
-                string[] listaPrimeros = primerosDerecha.LadoDerecho.Split(',');
-
-                for (int i = 0; i < listaPrimeros.Length; i++)
-                {
-                    if (!listaPrimeros[i].Equals("€"))
-                    {
-                        AgregarLista(siguientes, listaPrimeros[i], izquierda);
-                    }
-
-                }
-            }
-            else if (Pertenece(derecha, terminales))
-            {
-                if (!ExisteEn(BuscarSiguientes(izquierda).LadoDerecho.Split(','), derecha))
-                {
-                    AgregarLista(siguientes, derecha, izquierda);
-                }
-            }
-        }
-
         private bool ExisteEn(string[] lista, string elemento)
         {
             for (int i = 0; i < lista.Length; i++)
@@ -227,12 +415,7 @@ namespace Compilador
 
             return false;
         }
-
-        private void AgregarSiguienteS2(string izquierda, string derecha)
-        {
-            AgregarLista(siguientes, "S(" + derecha + ")", izquierda);
-        }
-
+       
         private bool DerivaEnEpsilon(string noTerminal)
         {
             Conjunto primerosNoTerminal = BuscarPrimeros(noTerminal);
@@ -360,11 +543,6 @@ namespace Compilador
 
             foreach (Produccion regla in listaProducciones)
             {
-                if (regla.LadoIzquierdo.Equals("F"))
-                {
-                    int abc = 3;
-                }
-
                 if (regla.LadoDerecho[0].Nombre.Equals("€"))
                 {
                     for (int k = 0; k < noTerminalesSiguientes.Count; k++)
@@ -522,19 +700,28 @@ namespace Compilador
             }
             Console.WriteLine("----------------------------------------");
 
-            terminales.Add("id");
-            terminales.Add("+");
-            terminales.Add("*");
-            terminales.Add("(");
-            terminales.Add(")");
-            
-            noTerminales.Add("E");
-            noTerminales.Add("EP");
-            noTerminales.Add("T");
-            noTerminales.Add("TP");
-            noTerminales.Add("F");
+            terminales.Add("start");
+            terminales.Add("xid");
+            terminales.Add(":");
+            terminales.Add("final");
+            terminales.Add("juice");
+            terminales.Add("xmain");
+            terminales.Add("void");
+            terminales.Add("->");
+            terminales.Add("tint");
+            terminales.Add("{");
+            terminales.Add("}");
+            terminales.Add("give");
+            terminales.Add("0");
+            terminales.Add("!");
 
-            simboloInicial = "E";
+            noTerminales.Add("PROGRAM");
+            noTerminales.Add("BODY");
+            noTerminales.Add("RETORNO");
+            noTerminales.Add("EXTRA");
+            noTerminales.Add("FUNCTION");
+
+            simboloInicial = "PROGRAM";
 
             foreach (string noTerminal in noTerminales)
             {
@@ -561,7 +748,6 @@ namespace Compilador
                 int count1 = 0;
                 int count2 = 0;
                
-				
                 if (("" + cadenareglas[cadenareglas.Count - 1]) != "$")
                 {
 					if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
@@ -645,9 +831,8 @@ namespace Compilador
 
             if (cadenareglas[cadenareglas.Count - 1] == "$" && listaTokens[listaTokens.Count - 1].GetPalabra() == "$")
             {
-				
+                Console.WriteLine("El programa es correcto");
                 return true;
-			
             }
 
             else

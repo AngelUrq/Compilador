@@ -1,8 +1,6 @@
-E,T EP
-EP,+ T EP
-EP,€
-T,F TP
-TP,* F TP
-TP,€
-F,( E )
-F,id
+PROGRAM,start xid : BODY final
+BODY,juice xmain : void -> tint { RETORNO } EXTRA
+RETORNO,give 0 !
+EXTRA,FUNCTION
+EXTRA,€
+FUNCTION,juice xid : void -> void { RETORNO } EXTRA

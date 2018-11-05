@@ -1,1 +1,8 @@
-fcf
+start xid:
+
+juice xmain:void->tint
+{
+give 0!
+}
+
+final
