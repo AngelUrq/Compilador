@@ -701,26 +701,49 @@ namespace Compilador
             Console.WriteLine("----------------------------------------");
 
             terminales.Add("start");
-            terminales.Add("xid");
             terminales.Add(":");
             terminales.Add("final");
             terminales.Add("juice");
             terminales.Add("xmain");
             terminales.Add("void");
             terminales.Add("->");
+            terminales.Add("tint");
             terminales.Add("{");
             terminales.Add("}");
             terminales.Add("give");
             terminales.Add("!");
             terminales.Add("coma");
-            terminales.Add("");
-            terminales.Add("tint");
             terminales.Add("tbool");
             terminales.Add("tstring");
             terminales.Add("tfloat");
             terminales.Add("tchar");
-            terminales.Add("id");
             terminales.Add("0");
+            terminales.Add("x");
+            terminales.Add("a");
+            terminales.Add("b");
+            terminales.Add("c");
+            terminales.Add("d");
+            terminales.Add("e");
+            terminales.Add("f");
+            terminales.Add("g");
+            terminales.Add("h");
+            terminales.Add("i");
+            terminales.Add("j");
+            terminales.Add("k");
+            terminales.Add("l");
+            terminales.Add("m");
+            terminales.Add("n");
+            terminales.Add("o");
+            terminales.Add("p");
+            terminales.Add("q");
+            terminales.Add("r");
+            terminales.Add("s");
+            terminales.Add("t");
+            terminales.Add("u");
+            terminales.Add("v");
+            terminales.Add("w");
+            terminales.Add("y");
+            terminales.Add("z");
 
             noTerminales.Add("PROGRAM");
             noTerminales.Add("BODY");
@@ -730,9 +753,11 @@ namespace Compilador
             noTerminales.Add("EXPRESION");
             noTerminales.Add("ARGS");
             noTerminales.Add("ARGS2");
+            noTerminales.Add("FTYPE");
             noTerminales.Add("TYPE");
-            noTerminales.Add("ID");
             noTerminales.Add("VALOR");
+            noTerminales.Add("ID");
+            noTerminales.Add("NOMBRE");
 
             simboloInicial = "PROGRAM";
 

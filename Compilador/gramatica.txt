@@ -1,15 +1,23 @@
-PROGRAM,start xid : BODY final
+PROGRAM,start ID : BODY final
 BODY,juice xmain : void -> tint { EXPRESION RETORNO } EXTRA
 RETORNO,give VALOR !
 EXTRA,FUNCTION
 EXTRA,€
-FUNCTION,juice ID : TYPE -> TYPE { EXPRESION RETORNO } EXTRA
+FUNCTION,juice ID : ARGS -> FTYPE { EXPRESION RETORNO } EXTRA
 EXPRESION,€
+ARGS,void
+ARGS,TYPE ID ARGS2
+ARGS2,coma ARGS
+ARGS2,€
+FTYPE,void
+FTYPE,TYPE
 TYPE,tint
 TYPE,tbool
 TYPE,tstring
 TYPE,tfloat
 TYPE,tchar
-TYPE,void
-ID,xid
 VALOR,0
+ID,x ID
+ID,i d
+ID,b
+ID,c
