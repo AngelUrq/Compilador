@@ -708,18 +708,31 @@ namespace Compilador
             terminales.Add("xmain");
             terminales.Add("void");
             terminales.Add("->");
-            terminales.Add("tint");
             terminales.Add("{");
             terminales.Add("}");
             terminales.Add("give");
-            terminales.Add("0");
             terminales.Add("!");
+            terminales.Add("coma");
+            terminales.Add("");
+            terminales.Add("tint");
+            terminales.Add("tbool");
+            terminales.Add("tstring");
+            terminales.Add("tfloat");
+            terminales.Add("tchar");
+            terminales.Add("id");
+            terminales.Add("0");
 
             noTerminales.Add("PROGRAM");
             noTerminales.Add("BODY");
             noTerminales.Add("RETORNO");
             noTerminales.Add("EXTRA");
             noTerminales.Add("FUNCTION");
+            noTerminales.Add("EXPRESION");
+            noTerminales.Add("ARGS");
+            noTerminales.Add("ARGS2");
+            noTerminales.Add("TYPE");
+            noTerminales.Add("ID");
+            noTerminales.Add("VALOR");
 
             simboloInicial = "PROGRAM";
 
@@ -734,7 +747,10 @@ namespace Compilador
         {
             listaTokens.Add(new Token("$", "", -1, -1));
             listaTokens.Reverse();
-
+			for(int x=0;x<listaTokens.Count;x++)
+			{
+				Console.Write(" "+x+" " + listaTokens[x].GetPalabra());
+			}
             //inicia con el simbolo inicial modificar el simbolo inicial a probar
             List<String> cadenareglas = new List<string>();
             cadenareglas.Add("$");
@@ -755,73 +771,77 @@ namespace Compilador
 						cadenareglas.RemoveAt(cadenareglas.Count - 1);
 						listaTokens.RemoveAt(listaTokens.Count - 1);
 					}
-					for (int x = 1; x < tabla.GetLength(0); x++)
-                    {
-                        if (("" + cadenareglas[cadenareglas.Count - 1]) == tabla[x, 0])
-                        {
-                            count1 = x;
-                        }
-                    }
-                    for (int x = 1; x < tabla.GetLength(1); x++)
-                    {
-                        if ("" + listaTokens[listaTokens.Count-1].GetPalabra() == tabla[0, x])
-                        {
-                            count2 = x;
-                        }
-                    }
+					else
+					{
 
-                   
-                    if (count2 != 0)
-                    {
-                        if (tabla[count1, count2] != " ")
-                        {
-                            if (tabla[count1, count2] == "€")
-                            {
-                                cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                            }
-                            else
-                            {
-                                bool ver = true;
-                                for (int y = 0; y < tabla.GetLength(1); y++)
-                                {
-                                    if (tabla[0, y] == tabla[count1, count2])
-                                    {
-                                        ver = false;
-                                    }
-                                }
-                                if (!ver)
-                                {
-                                    cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                                    cadenareglas.Add(tabla[count1, count2]);
-                                }
-                                else
-                                {
-                                    cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                                    char[] delimiters = new char[] { ' ' };
-                                    string[] cadena = tabla[count1, count2].Split(delimiters,
-                                                     StringSplitOptions.RemoveEmptyEntries);
-                                    for (int x = cadena.Length - 1; x >= 0; x--)
-                                    {
-                                        cadenareglas.Add("" + cadena[x]);
-                                    }
-                                }
-                                if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
-                                {
-                                    cadenareglas.RemoveAt(cadenareglas.Count - 1);
-                                    listaTokens.RemoveAt(listaTokens.Count - 1);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            seguir_camino = !seguir_camino;
-                        }
-                    }
-                    else
-                    {
-                        seguir_camino = !seguir_camino;
-                    }
 
+						for (int x = 1; x < tabla.GetLength(0); x++)
+						{
+							if (("" + cadenareglas[cadenareglas.Count - 1]) == tabla[x, 0])
+							{
+								count1 = x;
+							}
+						}
+						for (int x = 1; x < tabla.GetLength(1); x++)
+						{
+							if ("" + listaTokens[listaTokens.Count - 1].GetPalabra() == tabla[0, x])
+							{
+								count2 = x;
+							}
+						}
+
+						Console.WriteLine(count1 + " " + count2);
+						if (count2 != 0&&count1!=0)
+						{
+							if (tabla[count1, count2] != " ")
+							{
+								if (tabla[count1, count2] == "€")
+								{
+									cadenareglas.RemoveAt(cadenareglas.Count - 1);
+								}
+								else
+								{
+									bool ver = true;
+									for (int y = 0; y < tabla.GetLength(1); y++)
+									{
+										if (tabla[0, y] == tabla[count1, count2])
+										{
+											ver = false;
+										}
+									}
+									if (!ver)
+									{
+										cadenareglas.RemoveAt(cadenareglas.Count - 1);
+										cadenareglas.Add(tabla[count1, count2]);
+									}
+									else
+									{
+										cadenareglas.RemoveAt(cadenareglas.Count - 1);
+										char[] delimiters = new char[] { ' ' };
+										string[] cadena = tabla[count1, count2].Split(delimiters,
+														 StringSplitOptions.RemoveEmptyEntries);
+										for (int x = cadena.Length - 1; x >= 0; x--)
+										{
+											cadenareglas.Add("" + cadena[x]);
+										}
+									}
+									if (cadenareglas[cadenareglas.Count - 1] == listaTokens[listaTokens.Count - 1].GetPalabra())
+									{
+										cadenareglas.RemoveAt(cadenareglas.Count - 1);
+										listaTokens.RemoveAt(listaTokens.Count - 1);
+									}
+								}
+							}
+							else
+							{
+								seguir_camino = !seguir_camino;
+							}
+						}
+						else
+						{
+							seguir_camino = !seguir_camino;
+						}
+					}
                 }
                 else
                 {

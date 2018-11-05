@@ -1,6 +1,15 @@
 PROGRAM,start xid : BODY final
-BODY,juice xmain : void -> tint { RETORNO } EXTRA
-RETORNO,give 0 !
+BODY,juice xmain : void -> tint { EXPRESION RETORNO } EXTRA
+RETORNO,give VALOR !
 EXTRA,FUNCTION
 EXTRA,€
-FUNCTION,juice xid : void -> void { RETORNO } EXTRA
+FUNCTION,juice ID : TYPE -> TYPE { EXPRESION RETORNO } EXTRA
+EXPRESION,€
+TYPE,tint
+TYPE,tbool
+TYPE,tstring
+TYPE,tfloat
+TYPE,tchar
+TYPE,void
+ID,xid
+VALOR,0
