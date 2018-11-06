@@ -31,11 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Editor = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtConsola = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.NewFileBtn = new System.Windows.Forms.Button();
@@ -62,14 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LineNumberLexTextBox = new System.Windows.Forms.RichTextBox();
             this.txtBoxLexico = new System.Windows.Forms.RichTextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tabControl3 = new System.Windows.Forms.TabControl();
@@ -89,11 +82,6 @@
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).BeginInit();
-            this.tabPage3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage6.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.panel7.SuspendLayout();
             this.tabControl3.SuspendLayout();
@@ -108,7 +96,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Editor.Controls.Add(this.tabPage1);
             this.Editor.Controls.Add(this.tabPage2);
-            this.Editor.Controls.Add(this.tabPage3);
             this.Editor.Controls.Add(this.tabPage4);
             this.Editor.Location = new System.Drawing.Point(1, 1);
             this.Editor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -120,6 +107,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tabPage1.Controls.Add(this.btnActualizar);
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.pictureBox2);
@@ -141,6 +129,18 @@
             this.tabPage1.Size = new System.Drawing.Size(1331, 776);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Editor de código";
+            // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnActualizar.Image = ((System.Drawing.Image)(resources.GetObject("btnActualizar.Image")));
+            this.btnActualizar.Location = new System.Drawing.Point(1183, 308);
+            this.btnActualizar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(72, 50);
+            this.btnActualizar.TabIndex = 15;
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
             // panel3
             // 
@@ -180,7 +180,7 @@
             // 
             this.tabPage5.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.tabPage5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.tabPage5.Controls.Add(this.richTextBox1);
+            this.tabPage5.Controls.Add(this.txtConsola);
             this.tabPage5.Location = new System.Drawing.Point(4, 25);
             this.tabPage5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage5.Name = "tabPage5";
@@ -189,17 +189,17 @@
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "Consola";
             // 
-            // richTextBox1
+            // txtConsola
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtConsola.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(3, 2);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(855, 197);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.txtConsola.Location = new System.Drawing.Point(3, 2);
+            this.txtConsola.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtConsola.Name = "txtConsola";
+            this.txtConsola.Size = new System.Drawing.Size(855, 197);
+            this.txtConsola.TabIndex = 0;
+            this.txtConsola.Text = "";
             // 
             // pictureBox2
             // 
@@ -218,10 +218,10 @@
             // 
             this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
-            this.SaveBtn.Location = new System.Drawing.Point(1164, 305);
+            this.SaveBtn.Location = new System.Drawing.Point(1105, 308);
             this.SaveBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(81, 50);
+            this.SaveBtn.Size = new System.Drawing.Size(72, 50);
             this.SaveBtn.TabIndex = 11;
             this.SaveBtn.UseVisualStyleBackColor = true;
             this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
@@ -230,10 +230,10 @@
             // 
             this.NewFileBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NewFileBtn.Image = ((System.Drawing.Image)(resources.GetObject("NewFileBtn.Image")));
-            this.NewFileBtn.Location = new System.Drawing.Point(961, 305);
+            this.NewFileBtn.Location = new System.Drawing.Point(949, 308);
             this.NewFileBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NewFileBtn.Name = "NewFileBtn";
-            this.NewFileBtn.Size = new System.Drawing.Size(85, 50);
+            this.NewFileBtn.Size = new System.Drawing.Size(71, 50);
             this.NewFileBtn.TabIndex = 10;
             this.NewFileBtn.UseVisualStyleBackColor = true;
             this.NewFileBtn.Click += new System.EventHandler(this.NewFileBtn_Click);
@@ -242,10 +242,10 @@
             // 
             this.btnCompilar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCompilar.Image = ((System.Drawing.Image)(resources.GetObject("btnCompilar.Image")));
-            this.btnCompilar.Location = new System.Drawing.Point(1061, 305);
+            this.btnCompilar.Location = new System.Drawing.Point(1026, 308);
             this.btnCompilar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCompilar.Name = "btnCompilar";
-            this.btnCompilar.Size = new System.Drawing.Size(84, 50);
+            this.btnCompilar.Size = new System.Drawing.Size(73, 50);
             this.btnCompilar.TabIndex = 9;
             this.btnCompilar.UseVisualStyleBackColor = true;
             this.btnCompilar.Click += new System.EventHandler(this.btnCompilar_Click);
@@ -279,7 +279,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(957, 260);
+            this.label5.Location = new System.Drawing.Point(946, 263);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(179, 20);
             this.label5.TabIndex = 6;
@@ -289,10 +289,10 @@
             // 
             this.btnInformacion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInformacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInformacion.Location = new System.Drawing.Point(961, 462);
+            this.btnInformacion.Location = new System.Drawing.Point(950, 463);
             this.btnInformacion.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInformacion.Name = "btnInformacion";
-            this.btnInformacion.Size = new System.Drawing.Size(284, 47);
+            this.btnInformacion.Size = new System.Drawing.Size(305, 47);
             this.btnInformacion.TabIndex = 5;
             this.btnInformacion.Text = "Información";
             this.btnInformacion.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             this.label4.CausesValidation = false;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(965, 94);
+            this.label4.Location = new System.Drawing.Point(974, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(266, 29);
             this.label4.TabIndex = 4;
@@ -315,10 +315,10 @@
             // btnSalir
             // 
             this.btnSalir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSalir.Location = new System.Drawing.Point(961, 537);
+            this.btnSalir.Location = new System.Drawing.Point(950, 532);
             this.btnSalir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(284, 47);
+            this.btnSalir.Size = new System.Drawing.Size(306, 47);
             this.btnSalir.TabIndex = 3;
             this.btnSalir.Text = "Salir";
             this.btnSalir.UseVisualStyleBackColor = true;
@@ -327,10 +327,10 @@
             // btnCargarArchivo
             // 
             this.btnCargarArchivo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCargarArchivo.Location = new System.Drawing.Point(961, 394);
+            this.btnCargarArchivo.Location = new System.Drawing.Point(950, 395);
             this.btnCargarArchivo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCargarArchivo.Name = "btnCargarArchivo";
-            this.btnCargarArchivo.Size = new System.Drawing.Size(284, 47);
+            this.btnCargarArchivo.Size = new System.Drawing.Size(305, 47);
             this.btnCargarArchivo.TabIndex = 1;
             this.btnCargarArchivo.Text = "Cargar archivo";
             this.btnCargarArchivo.UseVisualStyleBackColor = true;
@@ -351,6 +351,7 @@
             this.txtTexto.VScroll += new System.EventHandler(this.txtTexto_VScroll);
             this.txtTexto.FontChanged += new System.EventHandler(this.txtTexto_FontChanged);
             this.txtTexto.TextChanged += new System.EventHandler(this.txtTexto_TextChanged);
+            this.txtTexto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTexto_KeyPress);
             // 
             // tabPage2
             // 
@@ -363,7 +364,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Size = new System.Drawing.Size(1331, 776);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Analizador léxico";
+            this.tabPage2.Text = "Análisis";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -429,7 +430,7 @@
             this.Palabra,
             this.Tipo});
             this.dGV1.Location = new System.Drawing.Point(37, 239);
-            this.dGV1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dGV1.Margin = new System.Windows.Forms.Padding(4);
             this.dGV1.Name = "dGV1";
             this.dGV1.Size = new System.Drawing.Size(523, 448);
             this.dGV1.TabIndex = 5;
@@ -463,7 +464,7 @@
             this.botonAL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.botonAL.Image = ((System.Drawing.Image)(resources.GetObject("botonAL.Image")));
             this.botonAL.Location = new System.Drawing.Point(243, 89);
-            this.botonAL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.botonAL.Margin = new System.Windows.Forms.Padding(4);
             this.botonAL.Name = "botonAL";
             this.botonAL.Size = new System.Drawing.Size(115, 50);
             this.botonAL.TabIndex = 4;
@@ -504,6 +505,7 @@
             this.txtBoxLexico.Location = new System.Drawing.Point(43, 2);
             this.txtBoxLexico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtBoxLexico.Name = "txtBoxLexico";
+            this.txtBoxLexico.ReadOnly = true;
             this.txtBoxLexico.Size = new System.Drawing.Size(691, 774);
             this.txtBoxLexico.TabIndex = 1;
             this.txtBoxLexico.Text = "";
@@ -511,101 +513,6 @@
             this.txtBoxLexico.VScroll += new System.EventHandler(this.txtBoxLexico_VScroll);
             this.txtBoxLexico.FontChanged += new System.EventHandler(this.txtBoxLexico_FontChanged);
             this.txtBoxLexico.TextChanged += new System.EventHandler(this.txtBoxLexico_TextChanged);
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.panel6);
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.panel4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1331, 776);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Analizador sintáctico";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel6.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel6.BackgroundImage")));
-            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel6.Location = new System.Drawing.Point(27, 78);
-            this.panel6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1268, 374);
-            this.panel6.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(551, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(243, 17);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "El resultado del análisis sintáctico es:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel4
-            // 
-            this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel4.Controls.Add(this.tabControl2);
-            this.panel4.Location = new System.Drawing.Point(-4, 473);
-            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1335, 252);
-            this.panel4.TabIndex = 0;
-            // 
-            // tabControl2
-            // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl2.Controls.Add(this.tabPage6);
-            this.tabControl2.Location = new System.Drawing.Point(4, 2);
-            this.tabControl2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(1328, 246);
-            this.tabControl2.TabIndex = 0;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Controls.Add(this.panel5);
-            this.tabPage6.Location = new System.Drawing.Point(4, 25);
-            this.tabPage6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage6.Size = new System.Drawing.Size(1320, 217);
-            this.tabPage6.TabIndex = 0;
-            this.tabPage6.Text = "Consola";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.BackColor = System.Drawing.Color.Gray;
-            this.panel5.Controls.Add(this.richTextBox2);
-            this.panel5.Location = new System.Drawing.Point(-1, -1);
-            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1321, 217);
-            this.panel5.TabIndex = 0;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox2.Location = new System.Drawing.Point(3, 2);
-            this.richTextBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(1315, 211);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
             // 
             // tabPage4
             // 
@@ -732,12 +639,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).EndInit();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage6.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.panel7.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
@@ -752,7 +653,6 @@
         private System.Windows.Forms.TabControl Editor;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.RichTextBox txtTexto;
         private System.Windows.Forms.Button btnCargarArchivo;
@@ -775,7 +675,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage5;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txtConsola;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
@@ -785,13 +685,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
         private System.Windows.Forms.DataGridViewTextBoxColumn Palabra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.RichTextBox LineNumberSemantico;
         private System.Windows.Forms.RichTextBox txtBoxSemantico;
         private System.Windows.Forms.Panel panel7;
@@ -799,6 +692,7 @@
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.RichTextBox richTextBox5;
+        private System.Windows.Forms.Button btnActualizar;
     }
 }
 
