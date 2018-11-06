@@ -284,10 +284,13 @@ namespace Compilador
         {
             txtBoxLexico.Text = txtTexto.Text;
 
+            listaPalabras = new List<Token>();
+            coloresInicio = new ColoresInicio();
+            palabras = new List<string>();
+
             IniciarAnalizadorLexico();
             IniciarAnalizadorSintactico();
             IniciarAnalizadorSemantico();
-
         }
 
         private void IniciarAnalizadorLexico()
@@ -328,9 +331,6 @@ namespace Compilador
 
         private void IniciarAnalizadorSintactico()
         {
-            //listaPalabras.Clear();
-            //listaPalabras.Add(new Token("id","id",1,1));
-
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(listaPalabras);
             analizadorSintactico.ProbarCadena();
         }
