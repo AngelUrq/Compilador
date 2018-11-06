@@ -203,6 +203,8 @@ namespace Compilador.Analizador_semantico
                     correcto = numerosFlotantes.IsMatch(valor);
                     break;
                 case "tbool":
+                    Regex truefalse = new Regex(@"[true-false]+");
+                    Regex operacion = new Regex(@"[not]( ? [and-or] ? )");
                     if (valor.Equals("true") || valor.Equals("false"))
                     {
                         correcto = true;
@@ -239,7 +241,68 @@ namespace Compilador.Analizador_semantico
             }
             return false;
         }
+        
+        private void Tbool()
+        {
+            List<Variable> variables = new List<Variable>();
+            List<string> v = new List<string>();
+            string funcion = "";
 
+            for (int i = listaPalabras.Count - 1; i > 0; i--)
+            {
+                bool existe = false;
+                try
+                {
+                    string cadenadevar = "";
+
+                    if (listaPalabras[i].GetPalabra().Equals("tbool") && listaPalabras[i - 2].GetPalabra().Equals("="))
+                    {
+                        int ind = i - 3;
+                        for (int k = ind; listaPalabras[k].GetPalabra() != "!"; k--)
+                        {
+                            v.Add(listaPalabras[k].GetPalabra());
+                            cadenadevar += listaPalabras[k].GetPalabra();
+                        }
+                        Variable variable = new Variable(listaPalabras[i - 1].GetPalabra(), listaPalabras[i].GetPalabra(), cadenadevar, listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
+
+                        if (variables.Count > 0)
+                        {
+                            if (!ContieneVariable(variables, variable))
+                            {
+                                if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
+                                {
+                                    variables.Add(variable);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto. Fila: " + variable.GetFila() + ", columna: " + variable.GetColumna());
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                            }
+                        }
+                        else
+                        {
+                            variables.Add(variable);
+                        }
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e.Message);
+                }
+            }
+
+            foreach (Variable variable in variables)
+            {
+                Form1._Form1.AñadirConsola(variable.ToString());
+            }
+        }
+        
         public void VerificarCondiciones(String CodigoFuente, int NumeroLinea)
         {
             String error = "false";
@@ -776,7 +839,7 @@ namespace Compilador.Analizador_semantico
 						}
 					}
 
-					//Inicializarvariablesmetodo(fun, funnombre);
+					Inicializarvariablesmetodo(fun, funnombre);
 					for (int a = posfinal; a < lista2.Count; a++)
 					{
 						if (lista2[a].GetPalabra() != "}")
@@ -807,7 +870,7 @@ namespace Compilador.Analizador_semantico
 			}
 		}
 
-		/*public void Inicializarvariablesmetodo(List<Token> datos, String funcionnombre)
+		public void Inicializarvariablesmetodo(List<Token> datos, String funcionnombre)
 		{
 			List<Token> tokens = new List<Token>();
 			if (datos[0].GetPalabra() != "void")
@@ -839,7 +902,7 @@ namespace Compilador.Analizador_semantico
 				}
 			}
 
-		}*/
+		}
 
 	}
 }
