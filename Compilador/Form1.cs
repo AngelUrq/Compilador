@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Compilador
 {
@@ -104,7 +105,7 @@ namespace Compilador
 
         private void btnNuevoProyecto_Click(object sender, EventArgs e)
         {
-
+            Process.Start("https://xqcode.jimdosite.com/");
         }
 
         public int getWidth()
@@ -445,6 +446,11 @@ namespace Compilador
                 sr.WriteLine(txtTexto.Text);
                 sr.Close();
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
