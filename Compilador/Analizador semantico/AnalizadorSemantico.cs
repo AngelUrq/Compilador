@@ -193,6 +193,8 @@ namespace Compilador.Analizador_semantico
                     correcto = numerosFlotantes.IsMatch(valor);
                     break;
                 case "tbool":
+                    Regex truefalse = new Regex(@"[true-false]+");
+                    Regex operacion = new Regex(@"[not]( ? [and-or] ? )");
                     if (valor.Equals("true") || valor.Equals("false"))
                     {
                         correcto = true;
@@ -230,9 +232,10 @@ namespace Compilador.Analizador_semantico
             return false;
         }
 
-        /*private void Tbool()
+        private void Tbool()
         {
             List<Variable> variables = new List<Variable>();
+            List<string> v = new List<string>();
             string funcion = "";
 
             for (int i = listaPalabras.Count - 1; i > 0; i--)
@@ -240,27 +243,21 @@ namespace Compilador.Analizador_semantico
                 bool existe = false;
                 try
                 {
-                    if (listaPalabras[i].GetPalabra().Equals("{"))
-                    {
-                        funcion = listaPalabras[i + 5].GetPalabra();
+                    string cadenadevar = "";
 
-                    }
-                    
-                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("tbool") && listaPalabras[i + 1].GetPalabra().Equals("=") && (listaPalabras[i + 2].GetPalabra().Equals("false") || listaPalabras[i + 2].GetPalabra().Equals("true")))
+                    if (listaPalabras[i].GetPalabra().Equals("tbool") && listaPalabras[i - 2].GetPalabra().Equals("="))
                     {
-                        Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
+                        int ind = i - 3;
+                        for (int k = ind; listaPalabras[k].GetPalabra() != "!"; k--)
+                        {
+                            v.Add(listaPalabras[k].GetPalabra());
+                            cadenadevar += listaPalabras[k].GetPalabra();
+                        }
+                        Variable variable = new Variable(listaPalabras[i - 1].GetPalabra(), listaPalabras[i].GetPalabra(), cadenadevar, listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
                         if (variables.Count > 0)
                         {
-                            for (int j = 0; j < variables.Count; j++)
-                            {
-                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
-                                {
-                                    existe = true;
-                                    continue;
-                                }
-                            }
-                            if (!existe)
+                            if (!ContieneVariable(variables, variable))
                             {
                                 if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
                                 {
@@ -268,19 +265,21 @@ namespace Compilador.Analizador_semantico
                                 }
                                 else
                                 {
-                                    Form1._Form1.AñadirConsola("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto. Fila: " + variable.GetFila() + ", columna: " + variable.GetColumna());
                                 }
                             }
                             else
                             {
-                                Form1._Form1.AñadirConsola("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                                Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
                             }
                         }
                         else
                         {
                             variables.Add(variable);
                         }
+
                     }
+
                 }
                 catch (Exception e)
                 {
@@ -292,7 +291,7 @@ namespace Compilador.Analizador_semantico
             {
                 Form1._Form1.AñadirConsola(variable.ToString());
             }
-        }*/
+        }
 
         public void VerificarCondiciones(String CodigoFuente, int NumeroLinea)
         {
