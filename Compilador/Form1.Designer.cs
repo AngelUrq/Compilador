@@ -63,14 +63,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.LineNumberLexTextBox = new System.Windows.Forms.RichTextBox();
             this.txtBoxLexico = new System.Windows.Forms.RichTextBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.tabControl3 = new System.Windows.Forms.TabControl();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.richTextBox5 = new System.Windows.Forms.RichTextBox();
-            this.LineNumberSemantico = new System.Windows.Forms.RichTextBox();
-            this.txtBoxSemantico = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.Editor.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -82,11 +74,6 @@
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).BeginInit();
-            this.tabPage4.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.tabControl3.SuspendLayout();
-            this.tabPage7.SuspendLayout();
-            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // Editor
@@ -96,7 +83,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Editor.Controls.Add(this.tabPage1);
             this.Editor.Controls.Add(this.tabPage2);
-            this.Editor.Controls.Add(this.tabPage4);
             this.Editor.Location = new System.Drawing.Point(1, 1);
             this.Editor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Editor.Name = "Editor";
@@ -514,106 +500,6 @@
             this.txtBoxLexico.FontChanged += new System.EventHandler(this.txtBoxLexico_FontChanged);
             this.txtBoxLexico.TextChanged += new System.EventHandler(this.txtBoxLexico_TextChanged);
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.panel7);
-            this.tabPage4.Controls.Add(this.LineNumberSemantico);
-            this.tabPage4.Controls.Add(this.txtBoxSemantico);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
-            this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1331, 776);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Analizador semántico";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel7.Controls.Add(this.tabControl3);
-            this.panel7.Location = new System.Drawing.Point(3, 517);
-            this.panel7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(1325, 206);
-            this.panel7.TabIndex = 2;
-            // 
-            // tabControl3
-            // 
-            this.tabControl3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl3.Controls.Add(this.tabPage7);
-            this.tabControl3.Location = new System.Drawing.Point(0, 0);
-            this.tabControl3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabControl3.Name = "tabControl3";
-            this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(1323, 202);
-            this.tabControl3.TabIndex = 0;
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.panel8);
-            this.tabPage7.Location = new System.Drawing.Point(4, 25);
-            this.tabPage7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage7.Size = new System.Drawing.Size(1315, 173);
-            this.tabPage7.TabIndex = 0;
-            this.tabPage7.Text = "Consola";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // panel8
-            // 
-            this.panel8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel8.BackColor = System.Drawing.Color.DimGray;
-            this.panel8.Controls.Add(this.richTextBox5);
-            this.panel8.Location = new System.Drawing.Point(1, -1);
-            this.panel8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(1313, 177);
-            this.panel8.TabIndex = 0;
-            // 
-            // richTextBox5
-            // 
-            this.richTextBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox5.Location = new System.Drawing.Point(0, 2);
-            this.richTextBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(1311, 166);
-            this.richTextBox5.TabIndex = 0;
-            this.richTextBox5.Text = "";
-            // 
-            // LineNumberSemantico
-            // 
-            this.LineNumberSemantico.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LineNumberSemantico.Location = new System.Drawing.Point(0, 0);
-            this.LineNumberSemantico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.LineNumberSemantico.Name = "LineNumberSemantico";
-            this.LineNumberSemantico.ReadOnly = true;
-            this.LineNumberSemantico.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumberSemantico.Size = new System.Drawing.Size(39, 776);
-            this.LineNumberSemantico.TabIndex = 1;
-            this.LineNumberSemantico.Text = "";
-            // 
-            // txtBoxSemantico
-            // 
-            this.txtBoxSemantico.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtBoxSemantico.Location = new System.Drawing.Point(45, 2);
-            this.txtBoxSemantico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtBoxSemantico.Name = "txtBoxSemantico";
-            this.txtBoxSemantico.Size = new System.Drawing.Size(1271, 509);
-            this.txtBoxSemantico.TabIndex = 0;
-            this.txtBoxSemantico.Text = "";
-            this.txtBoxSemantico.SelectionChanged += new System.EventHandler(this.txtBoxSemantico_SelectionChanged);
-            this.txtBoxSemantico.VScroll += new System.EventHandler(this.txtBoxSemantico_VScroll);
-            this.txtBoxSemantico.FontChanged += new System.EventHandler(this.txtBoxSemantico_FontChanged);
-            this.txtBoxSemantico.TextChanged += new System.EventHandler(this.txtBoxSemantico_TextChanged);
-            this.txtBoxSemantico.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtBoxSemantico_MouseDown);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -639,11 +525,6 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).EndInit();
-            this.tabPage4.ResumeLayout(false);
-            this.panel7.ResumeLayout(false);
-            this.tabControl3.ResumeLayout(false);
-            this.tabPage7.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -653,7 +534,6 @@
         private System.Windows.Forms.TabControl Editor;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.RichTextBox txtTexto;
         private System.Windows.Forms.Button btnCargarArchivo;
         private System.Windows.Forms.Button btnInformacion;
@@ -685,13 +565,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
         private System.Windows.Forms.DataGridViewTextBoxColumn Palabra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
-        private System.Windows.Forms.RichTextBox LineNumberSemantico;
-        private System.Windows.Forms.RichTextBox txtBoxSemantico;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.TabControl tabControl3;
-        private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.RichTextBox richTextBox5;
         private System.Windows.Forms.Button btnActualizar;
     }
 }

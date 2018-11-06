@@ -170,25 +170,7 @@ namespace Compilador
                 LineNumberLexTextBox.Text += i + 1 + "\n";
             }
         }
-        //Añade Numero de Fila a la parte Semantico
-        public void AddLineNumbersSemantico()
-        {
-            Point pt = new Point(0, 0);
-            int First_Index = txtBoxSemantico.GetCharIndexFromPosition(pt);
-            int First_Line = txtBoxSemantico.GetLineFromCharIndex(First_Index);
-            pt.X = ClientRectangle.Width;
-            pt.Y = ClientRectangle.Height;
-            int Last_Index = txtBoxSemantico.GetCharIndexFromPosition(pt);
-            int Last_Line = txtBoxSemantico.GetLineFromCharIndex(Last_Index);
-            LineNumberSemantico.SelectionAlignment = HorizontalAlignment.Center;
-            LineNumberSemantico.Text = "";
-            LineNumberSemantico.Width = getWidth();
-            for (int i = First_Line; i <= Last_Line + 1; i++)
-            {
-                LineNumberSemantico.Text += i + 1 + "\n";
-            }
-        }
-
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -285,6 +267,7 @@ namespace Compilador
 
         private void btnCompilar_Click(object sender, EventArgs e)
         {
+            txtConsola.Clear();
             txtBoxLexico.Text = txtTexto.Text;
 
             listaPalabras = new List<Token>();
@@ -301,11 +284,25 @@ namespace Compilador
             AnalizadorLexico al = new AnalizadorLexico();
             String cadena1 = txtTexto.Text;
             al.Separar(cadena1);
+            int contador = 0;
             int fi = 1;
             int col = 1;
             string fil = "";
             for (int i = 0; i < al.palabra.Count; i++)
             {
+                if (i == 0)
+                {
+                    AñadirConsola("Realizando análisis semántico...");
+                }
+                if (i == al.palabra.Count - 1)
+                {
+                    AñadirConsola("¡Análisis léxico realizado con éxito!");
+                    if (contador == 0)
+                    {
+                        AñadirConsola("No se encontraron errores en el analizador léxico");
+                    }
+                }
+               
                 if (al.palabra[i].Equals("#$") && al.tipoda[i].Equals("Salto"))
                 {
                     fi++;
@@ -315,8 +312,10 @@ namespace Compilador
                 if (al.tipoda[i].Equals("Error"))
                 {
                     Console.WriteLine("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
+                    AñadirConsola("El identificador que se encuentra en la fila # " + fi + " y en la columna " + col + " no cumple las reglas de un identificador " + al.palabra[i].ToString());
                     dGV1.Rows.Add(fi, col, al.palabra[i].ToString(), al.tipoda[i].ToString() + " de identificador");
                     col = col + Convert.ToInt32(al.tamanio[i].ToString());
+                    contador++;
                 }
                 else
                 {
@@ -343,7 +342,6 @@ namespace Compilador
             AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(listaPalabras);
             analizadorSemantico.AnalizarFunciones();
             analizadorSemantico.Separarmetodosaprobar();
-            richTextBox5.Clear();
             int NumeroLinea = 1;
             String Linea = "";
             //este ciclo va encontrar la fila en donde contiene xqcThonk o Agane
@@ -366,47 +364,9 @@ namespace Compilador
             }
         }
 
-        //Este metodo se encarga de añadir a la consola del tab Semantico de la clase AnalizadorSemantico
-        public void update(string message)
+        public void AñadirConsola(string mensaje)
         {
-            richTextBox5.AppendText(message);
-        }
-
-        private void txtBoxSemantico_SelectionChanged(object sender, EventArgs e)
-        {
-            Point pt = txtBoxSemantico.GetPositionFromCharIndex(txtBoxSemantico.SelectionStart);
-            if (pt.X == 1)
-            {
-                AddLineNumbersSemantico();
-            }
-        }
-
-        private void txtBoxSemantico_VScroll(object sender, EventArgs e)
-        {
-            LineNumberSemantico.Text = "";
-            AddLineNumbersSemantico();
-            LineNumberSemantico.Invalidate();
-        }
-
-        private void txtBoxSemantico_TextChanged(object sender, EventArgs e)
-        {
-            if (txtBoxSemantico.Text == "")
-            {
-                AddLineNumbersSemantico();
-            }
-        }
-
-        private void txtBoxSemantico_FontChanged(object sender, EventArgs e)
-        {
-            LineNumberSemantico.Font = txtBoxSemantico.Font;
-            txtBoxSemantico.Select();
-            AddLineNumbersSemantico();
-        }
-
-        private void txtBoxSemantico_MouseDown(object sender, MouseEventArgs e)
-        {
-            txtBoxSemantico.Select();
-            LineNumberSemantico.DeselectAll();
+            txtConsola.AppendText(mensaje + "\n");
         }
 
         private void NewFileBtn_Click(object sender, EventArgs e)

@@ -23,8 +23,11 @@ namespace Compilador.Analizador_semantico
         public void AnalizarFunciones()
         {
             List<Variable> variables = new List<Variable>();
+            List<string> v = new List<string>();
+
             bool existe = false;
             bool funcionUnica = true;
+
             string funcion = "";
             string tipoFuncion = "";
 
@@ -32,6 +35,9 @@ namespace Compilador.Analizador_semantico
             {
                 try
                 {
+                    string cadenadevar = "";
+                    bool comprobado = false;
+
                     if (listaPalabras[i].GetPalabra().Equals("juice"))
                     {
                         funcion = listaPalabras[i - 1].GetPalabra();
@@ -42,7 +48,7 @@ namespace Compilador.Analizador_semantico
                         }
                         else
                         {
-                            Console.WriteLine("Existen dos funciones con el nombre " + funcion);
+                            Form1._Form1.AñadirConsola("Existen dos funciones con el nombre " + funcion);
                             funcionUnica = false;
                         }
                     }
@@ -60,11 +66,11 @@ namespace Compilador.Analizador_semantico
                             {
                                 if (!TipoYValorCorrecto(tipoFuncion, variables[j].GetValor()))
                                 {
-                                    Console.WriteLine("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
+                                    Form1._Form1.AñadirConsola("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
                                 }
                                 else
                                 {
-                                    Console.WriteLine("La función " + funcion + " devuelve el tipo de datos correcto :)");
+                                    Form1._Form1.AñadirConsola("La función " + funcion + " devuelve el tipo de datos correcto");
                                 }
                                 existe = true;
                                 continue;
@@ -75,20 +81,56 @@ namespace Compilador.Analizador_semantico
                         {
                             if (!TipoYValorCorrecto(tipoFuncion, listaPalabras[i - 1].GetPalabra()))
                             {
-                                Console.WriteLine("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
+                                Form1._Form1.AñadirConsola("¡Error!, la función " + funcion + " de tipo " + tipoFuncion + " no devuelve un tipo de datos coherente.");
                             }
                             else
                             {
 
-                                Console.WriteLine("La función " + funcion + " devuelve el tipo de datos correcto :)");
+                                Form1._Form1.AñadirConsola("La función " + funcion + " devuelve el tipo de datos correcto");
                             }
                         }
 
                     }
 
-                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("=") && funcionUnica && listaPalabras[i - 3].GetPalabra().Equals("!"))
+
+                   if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("=") && !listaPalabras[i + 1].GetPalabra().Equals("tint") && funcionUnica && listaPalabras[i - 3].GetPalabra().Equals("!"))
                     {
                         Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
+
+                        if (variables.Count > 0)
+                        {
+                            if (!ContieneVariable(variables, variable))
+                            {
+                                if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
+                                {
+                                    variables.Add(variable);
+                                }
+                                else
+                                {
+                                    Form1._Form1.AñadirConsola("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto. Fila: " + variable.GetFila() + ", columna: " + variable.GetColumna());
+                                }
+                            }
+                            else
+                            {
+                                Form1._Form1.AñadirConsola("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                            }
+                        }
+                        else
+                        {
+                            variables.Add(variable);
+                        }
+                    }
+
+
+                    if (listaPalabras[i].GetPalabra().Equals("tint") && listaPalabras[i - 2].GetPalabra().Equals("="))
+                    {
+                        int ind = i - 3;
+                        for (int k = ind; listaPalabras[k].GetPalabra() != "!"; k--)
+                        {
+                            v.Add(listaPalabras[k].GetPalabra());
+                            cadenadevar += listaPalabras[k].GetPalabra();
+                        }
+                        Variable variable = new Variable(listaPalabras[i - 1].GetPalabra(), listaPalabras[i].GetPalabra(), cadenadevar, listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
 
                         if (variables.Count > 0)
                         {
@@ -112,9 +154,9 @@ namespace Compilador.Analizador_semantico
                         {
                             variables.Add(variable);
                         }
+
                     }
 
-                    
                 }
                 catch (Exception e)
                 {
@@ -124,7 +166,7 @@ namespace Compilador.Analizador_semantico
 
             foreach (Variable variable in variables)
             {
-                Console.WriteLine(variable.ToString());
+                //Form1._Form1.AñadirConsola(variable.ToString());
             }
         }
 
@@ -136,7 +178,15 @@ namespace Compilador.Analizador_semantico
             {
                 case "tint":
                     Regex numerosEnteros = new Regex(@"[0-9]+");
-                    correcto = numerosEnteros.IsMatch(valor);
+                    Regex aritmetica = new Regex(@"([-+]?[0 - 9] *\.?[0 - 9] +[\/\+\-\*])+([-+]?[0 - 9] *\.?[0-9]+)");
+                    if (numerosEnteros.IsMatch(valor))
+                    {
+                        correcto = true;
+                    }
+                    else if (aritmetica.IsMatch(valor))
+                    {
+                        correcto = true;
+                    }
                     break;
                 case "tfloat":
                     Regex numerosFlotantes = new Regex(@"[0-9]+\.[0-9]+");
@@ -164,7 +214,7 @@ namespace Compilador.Analizador_semantico
                     break;
             }
 
-            //Console.WriteLine("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
+            //Form1._Form1.AñadirConsola("Tipo: " + tipo + ", valor: " + valor + ", accion: " + correcto.ToString());
             return correcto;
         }
 
@@ -218,12 +268,12 @@ namespace Compilador.Analizador_semantico
                                 }
                                 else
                                 {
-                                    Console.WriteLine("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
+                                    Form1._Form1.AñadirConsola("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
                                 }
                             }
                             else
                             {
-                                Console.WriteLine("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
+                                Form1._Form1.AñadirConsola("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
                             }
                         }
                         else
@@ -240,7 +290,7 @@ namespace Compilador.Analizador_semantico
 
             foreach (Variable variable in variables)
             {
-                Console.WriteLine(variable.ToString());
+                Form1._Form1.AñadirConsola(variable.ToString());
             }
         }*/
 
@@ -250,7 +300,7 @@ namespace Compilador.Analizador_semantico
             int ParenthesisIzq = 0;
             int ParenthesisDer = 0;
             String CodigoReemplazado = CodigoFuente.Replace("(", " ( ").Replace(")", " ) ");
-            Console.WriteLine(CodigoReemplazado);
+            Form1._Form1.AñadirConsola(CodigoReemplazado);
             char[] delimitadoresChars = { ' ', '\t' };
             string[] condicion = CodigoReemplazado.Split(delimitadoresChars, StringSplitOptions.RemoveEmptyEntries);
 
@@ -264,18 +314,18 @@ namespace Compilador.Analizador_semantico
                 }
                 else
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + "* No Es Valido |Fila: " + NumeroLinea.ToString() + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + "* No Es Valido |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 //Verifica si se esta abriendo otro parenthesis "()" Ej: Agane(true)(true)
                 if (condicion[i].Equals("("))
                 {
-                    Console.WriteLine("");
+                    Form1._Form1.AñadirConsola("");
                     if (ParenthesisIzq != 0 && ParenthesisDer != 0)
                     {
                         if (ParenthesisIzq == ParenthesisDer)
                         {
-                            Form1._Form1.update("Error Semantico: Error en los Parenthesis" + "|Linea : " + NumeroLinea.ToString() + " \n");
+                            Form1._Form1.AñadirConsola("Error Semantico: Error en los Parenthesis" + "|Linea : " + NumeroLinea.ToString() + " \n");
                             error = "true";
                         }
                     }
@@ -299,63 +349,63 @@ namespace Compilador.Analizador_semantico
                 //Esto verifica que si despues de la palabra reservada hay un parenthesis abierto "("
                 if (condicion[i].Equals("xqcThonk") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.update("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("Agane") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.update("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 //Verifica que si despues de "(" hay un ")" que significa que el contenido dentro del parenthesis esta vacio
                 if (condicion[i].Equals("(") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.update("Error Semantico: No Existen Datos dentro los Parenthesis |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: No Existen Datos dentro los Parenthesis |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existan duplicados que esten a lado ej: xqcThonk(true true), xqcThonk(false true) etc..
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("true") || condicion[i].Equals("true") && condicion[i + 1].Equals("false"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("false") && condicion[i + 1].Equals("true") || condicion[i].Equals("false") && condicion[i + 1].Equals("false"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("not") && condicion[i + 1].Equals("not"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existen duplicados del "and" y "or" ej: xqcThonk(true and and true), xqcThonk(false and or true) etc..
                 if (condicion[i].Equals("and") && condicion[i + 1].Equals("or") || condicion[i].Equals("and") && condicion[i + 1].Equals("and"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("or") && condicion[i + 1].Equals("and") || condicion[i].Equals("or") && condicion[i + 1].Equals("or"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si se abre parenthesis despues de un true o false
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("(") || condicion[i].Equals("false") && condicion[i + 1].Equals("("))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existe un not despues de un true o false
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("not") || condicion[i].Equals("false") && condicion[i + 1].Equals("not"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si se despues de un "not" hay un ")"
                 if (condicion[i].Equals("not") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.update("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
 
@@ -363,9 +413,9 @@ namespace Compilador.Analizador_semantico
             }
             if (ParenthesisIzq != ParenthesisDer)
             {
-                Form1._Form1.update("Error Semantico: Los Parenthesis no estan Balanceados" + " |Fila: " + NumeroLinea + "\n");
+                Form1._Form1.AñadirConsola("Error Semantico: Los Parenthesis no estan Balanceados" + " |Fila: " + NumeroLinea + "\n");
                 error = "true";
-                Console.WriteLine(ParenthesisIzq.ToString() + " = " + ParenthesisDer.ToString());
+                Form1._Form1.AñadirConsola(ParenthesisIzq.ToString() + " = " + ParenthesisDer.ToString());
             }
             
         }
@@ -411,13 +461,13 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tbool"))
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
 						}
 					}
 					else if ((lista.Count - 3) > 1)
@@ -437,18 +487,18 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
 						}
 					}
 					else
 					{
-						Console.WriteLine("error de asignación ");
+						Form1._Form1.AñadirConsola("error de asignación ");
 					}
 					break;
 				case "tint":
@@ -456,13 +506,13 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tint"))
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
 						}
 					}
 					else if ((lista.Count - 3) > 1)
@@ -482,18 +532,18 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
 						}
 					}
 					else
 					{
-						Console.WriteLine("error de asignación ");
+						Form1._Form1.AñadirConsola("error de asignación ");
 					}
 					break;
 				case "tfloat":
@@ -501,13 +551,13 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tfloat"))
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
 						}
 					}
 					else if ((lista.Count - 3) > 1)
@@ -527,18 +577,18 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
 						}
 					}
 					else
 					{
-						Console.WriteLine("error de asignación ");
+						Form1._Form1.AñadirConsola("error de asignación ");
 					}
 					break;
 				case "tstring":
@@ -546,13 +596,13 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tstring"))
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
 						}
 					}
 					else if ((lista.Count - 3) > 1)
@@ -572,18 +622,18 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
 						}
 					}
 					else
 					{
-						Console.WriteLine("error de asignación ");
+						Form1._Form1.AñadirConsola("error de asignación ");
 					}
 					break;
 				case "tchar":
@@ -591,13 +641,13 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tchar"))
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[lista.Count - 1].GetFila() + " columna " + lista[lista.Count - 1].GetColumna() + " palabra  " + lista[lista.Count - 1].GetPalabra());
 						}
 					}
 					else if ((lista.Count - 3) > 1)
@@ -617,22 +667,22 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Console.WriteLine("es correcto");
+							Form1._Form1.AñadirConsola("es correcto");
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
 						else
 						{
-							Console.WriteLine("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
+							Form1._Form1.AñadirConsola("error en fila: " + lista[pos].GetFila() + " columna " + lista[pos].GetColumna() + " palabra  " + lista[pos].GetPalabra());
 						}
 					}
 					else
 					{
-						Console.WriteLine("error de asignación ");
+						Form1._Form1.AñadirConsola("error de asignación ");
 					}
 					break;
 				default:
-					Console.WriteLine("no hay tipo");
+					Form1._Form1.AñadirConsola("no hay tipo");
 					break;
 			}
 		}
@@ -717,7 +767,7 @@ namespace Compilador.Analizador_semantico
 
 			for (int y = 0; y < variables.Count; y++)
 			{
-				Console.WriteLine(variables[y].GetPalabra() + "  " + variables[y].GetTipo() + "  " + variables[y].GetTipoIdentificador() + " " + variables[y].GetValor());
+				Form1._Form1.AñadirConsola(variables[y].GetPalabra() + "  " + variables[y].GetTipo() + "  " + variables[y].GetTipoIdentificador() + " " + variables[y].GetValor());
 			}
 		}
 
@@ -737,7 +787,7 @@ namespace Compilador.Analizador_semantico
 				}
 				for (int x = 0; x < tokens.Count; x = x + 2)
 				{
-					Console.WriteLine("es correcto  variable funcion");
+					Form1._Form1.AñadirConsola("es correcto  variable funcion");
 					variables.Add(new Variable(tokens[x + 1].GetPalabra(), tokens[x].GetPalabra(), "", tokens[x + 1].GetFila(), tokens[x + 1].GetColumna(), funcionnombre));
 				}
 			}
