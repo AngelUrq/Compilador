@@ -811,8 +811,8 @@ namespace Compilador.Analizador_semantico
 		{
 			List<Token> lista2 = new List<Token>();
 			lista2 = listaPalabras;
-			//lista2.RemoveAt(lista2.Count - 1);
-			//lista2.Reverse();
+			lista2.RemoveAt(lista2.Count - 1);
+			lista2.Reverse();
 			int posinit, posfinal = 0;
 			String funnombre;
 			for (int x = 0; x < lista2.Count; x++)
@@ -903,6 +903,11 @@ namespace Compilador.Analizador_semantico
 			}
 
 		}
+
+        public List<Variable> GetVariables()
+        {
+            return this.variables;
+        }
 
 	}
 }

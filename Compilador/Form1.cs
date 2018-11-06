@@ -268,6 +268,7 @@ namespace Compilador
         private void btnCompilar_Click(object sender, EventArgs e)
         {
             txtConsola.Clear();
+            dGV2.Rows.Clear();
             txtBoxLexico.Text = txtTexto.Text;
 
             listaPalabras = new List<Token>();
@@ -362,6 +363,14 @@ namespace Compilador
                 }
                 NumeroLinea++;
             }
+
+            List<Variable> variables = analizadorSemantico.GetVariables();
+
+            foreach (Variable variable in variables)
+            {
+                dGV2.Rows.Add(variable.GetPalabra(), variable.GetTipoIdentificador(), variable.GetValor(), variable.GetFila(), variable.GetColumna(), variable.GetFuncion());
+            }
+
         }
 
         public void AñadirConsola(string mensaje)

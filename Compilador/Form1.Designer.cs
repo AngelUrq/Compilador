@@ -52,18 +52,22 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.dGV1 = new System.Windows.Forms.DataGridView();
             this.Fila = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Palabra = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.botonAL = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.LineNumberLexTextBox = new System.Windows.Forms.RichTextBox();
             this.txtBoxLexico = new System.Windows.Forms.RichTextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.dGV2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Función = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Editor.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -74,6 +78,8 @@
             this.tabPage2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).BeginInit();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dGV2)).BeginInit();
             this.SuspendLayout();
             // 
             // Editor
@@ -83,6 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Editor.Controls.Add(this.tabPage1);
             this.Editor.Controls.Add(this.tabPage2);
+            this.Editor.Controls.Add(this.tabPage3);
             this.Editor.Location = new System.Drawing.Point(1, 1);
             this.Editor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Editor.Name = "Editor";
@@ -359,11 +366,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.button5);
-            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.dGV1);
-            this.panel1.Controls.Add(this.botonAL);
-            this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(727, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
@@ -376,33 +379,11 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(261, 178);
+            this.label6.Location = new System.Drawing.Point(263, 41);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 29);
             this.label6.TabIndex = 13;
             this.label6.Text = "Análisis";
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Image = ((System.Drawing.Image)(resources.GetObject("button5.Image")));
-            this.button5.Location = new System.Drawing.Point(373, 89);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(109, 50);
-            this.button5.TabIndex = 12;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(109, 89);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(119, 50);
-            this.button4.TabIndex = 11;
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // dGV1
             // 
@@ -415,10 +396,10 @@
             this.Columna,
             this.Palabra,
             this.Tipo});
-            this.dGV1.Location = new System.Drawing.Point(37, 239);
+            this.dGV1.Location = new System.Drawing.Point(37, 94);
             this.dGV1.Margin = new System.Windows.Forms.Padding(4);
             this.dGV1.Name = "dGV1";
-            this.dGV1.Size = new System.Drawing.Size(523, 448);
+            this.dGV1.Size = new System.Drawing.Size(523, 593);
             this.dGV1.TabIndex = 5;
             // 
             // Fila
@@ -444,30 +425,6 @@
             this.Tipo.HeaderText = "Tipo";
             this.Tipo.Name = "Tipo";
             this.Tipo.Width = 131;
-            // 
-            // botonAL
-            // 
-            this.botonAL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.botonAL.Image = ((System.Drawing.Image)(resources.GetObject("botonAL.Image")));
-            this.botonAL.Location = new System.Drawing.Point(243, 89);
-            this.botonAL.Margin = new System.Windows.Forms.Padding(4);
-            this.botonAL.Name = "botonAL";
-            this.botonAL.Size = new System.Drawing.Size(115, 50);
-            this.botonAL.TabIndex = 4;
-            this.botonAL.UseVisualStyleBackColor = true;
-            this.botonAL.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(91, 47);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(156, 18);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "¿Qué deseas realizar?";
             // 
             // LineNumberLexTextBox
             // 
@@ -500,6 +457,65 @@
             this.txtBoxLexico.FontChanged += new System.EventHandler(this.txtBoxLexico_FontChanged);
             this.txtBoxLexico.TextChanged += new System.EventHandler(this.txtBoxLexico_TextChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.dGV2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1331, 776);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Tabla de símbolos";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // dGV2
+            // 
+            this.dGV2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dGV2.BackgroundColor = System.Drawing.Color.White;
+            this.dGV2.ColumnHeadersHeight = 25;
+            this.dGV2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.Column1,
+            this.Función});
+            this.dGV2.Location = new System.Drawing.Point(105, 43);
+            this.dGV2.Margin = new System.Windows.Forms.Padding(4);
+            this.dGV2.Name = "dGV2";
+            this.dGV2.Size = new System.Drawing.Size(1113, 593);
+            this.dGV2.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Variable";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Tipo ";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Valor";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Fila";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Columna";
+            this.Column1.Name = "Column1";
+            // 
+            // Función
+            // 
+            this.Función.HeaderText = "Función";
+            this.Función.Name = "Función";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -525,6 +541,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGV1)).EndInit();
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dGV2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -545,8 +563,6 @@
         private System.Windows.Forms.RichTextBox txtBoxLexico;
         private System.Windows.Forms.RichTextBox LineNumberLexTextBox;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button botonAL;
         private System.Windows.Forms.DataGridView dGV1;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Button NewFileBtn;
@@ -557,15 +573,21 @@
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.RichTextBox txtConsola;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fila;
         private System.Windows.Forms.DataGridViewTextBoxColumn Columna;
         private System.Windows.Forms.DataGridViewTextBoxColumn Palabra;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView dGV2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Función;
     }
 }
 
