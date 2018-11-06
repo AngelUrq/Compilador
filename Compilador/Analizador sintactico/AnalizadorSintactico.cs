@@ -731,13 +731,24 @@ namespace Compilador
             terminales.Add("xfun5");
             terminales.Add("xfun6");
             terminales.Add("xfun7");
-            terminales.Add("CONDICIONAL");
             terminales.Add("=");
             terminales.Add("agane");
             terminales.Add("(");
             terminales.Add(")");
+            terminales.Add("xqcThonk");
+            terminales.Add("xqcWut");
             terminales.Add("true");
+            terminales.Add("false");
             terminales.Add("0");
+            terminales.Add("1");
+            terminales.Add("2");
+            terminales.Add("3");
+            terminales.Add("4");
+            terminales.Add("5");
+            terminales.Add("6");
+            terminales.Add("7");
+            terminales.Add("8");
+            terminales.Add("9");
 
             noTerminales.Add("PROGRAM");
             noTerminales.Add("BODY");
@@ -751,10 +762,11 @@ namespace Compilador
             noTerminales.Add("ID");
             noTerminales.Add("EXPRESION");
             noTerminales.Add("DECLARACION");
-            noTerminales.Add("DECLARACION2");
             noTerminales.Add("CICLO");
+            noTerminales.Add("CONDICIONAL");
             noTerminales.Add("CONDICION");
             noTerminales.Add("VALOR");
+            noTerminales.Add("NUM");
 
             simboloInicial = "PROGRAM";
 
@@ -879,7 +891,7 @@ namespace Compilador
 
             else
             {
-                Console.WriteLine("Error en '" + listaTokens[listaTokens.Count - 1].GetPalabra() + "' fila: " + listaTokens[listaTokens.Count - 1].GetFila() + " columna " + listaTokens[listaTokens.Count - 1].GetColumna());
+                Console.WriteLine("Error cercano a '" + listaTokens[listaTokens.Count - 1].GetPalabra() + "' fila: " + listaTokens[listaTokens.Count - 1].GetFila() + " columna " + listaTokens[listaTokens.Count - 1].GetColumna());
                 return false;
             }
         }
