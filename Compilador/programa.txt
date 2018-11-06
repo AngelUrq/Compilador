@@ -2,10 +2,14 @@ start xid:
 
 juice xmain:void->tint
 {
+	tbool xvar1 = true!
+	tint xvar2 = 3 + xvar1!
+
 	xqcThonk(3 lower 3)
 	{
 		agane(not (1 biggerOrEqual 3))
 		{
+			tint xvar3 = 3 +4 +5 +6 +7 +8 * 9 - 3 * 8!
 		}	
 	} 	
 	xqcWut
@@ -18,7 +22,7 @@ juice xmain:void->tint
 
 juice xfun1:tint xvar6 comma tbool xvar7->void
 {
-	agane(5 equals 6)
+	agane(xvar6 equals 6)
 	{
 		xfun2(3)!
 	}
@@ -28,6 +32,7 @@ juice xfun1:tint xvar6 comma tbool xvar7->void
 juice xfun2:tint xvar5->tint
 {
 	tbool xvar4 = false!
+	tbool xvar4 = true!
 	give 0!
 }
 

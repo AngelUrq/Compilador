@@ -84,25 +84,20 @@ namespace Compilador
                 }
                 else if (texto[i].ToString().Equals("+") && !palabra.Equals(""))
                 {
-                    if (texto[i + 1].ToString().Equals("+"))
-                    {
+                    
                         palabras.Add(palabra);
-                        string operador = texto[i].ToString() + texto[i + 1];
+                        string operador = texto[i].ToString();
                         palabras.Add(operador);
                         palabra = "";
-                        i++;
-                    }
+                  
                 }
                 else if (texto[i].ToString().Equals("-"))
                 {
-                    if (texto[i + 1].ToString().Equals("-") || texto[i + 1].ToString().Equals(">"))
-                    {
                         palabras.Add(palabra);
-                        string operador = texto[i].ToString() + texto[i + 1];
+                        string operador = texto[i].ToString();
                         palabras.Add(operador);
                         palabra = "";
-                        i++;
-                    }
+                       
                 }
 
                 else if (delimitadoresOFunciones.Contains(texto[i].ToString()))

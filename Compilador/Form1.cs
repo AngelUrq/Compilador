@@ -78,7 +78,7 @@ namespace Compilador
                             if (colores[j].ToString().Equals("rojo"))
                             {
                                 txtTexto.SelectionColor = tokenColor;
-                                cadena = palabras[j].ToString().Replace("+", " + ").Replace("=", " = ").Replace("-", " - ").Replace("- >", " -> ")
+                                cadena = palabras[j].ToString().Replace("+", " + ").Replace("=", " = ").Replace("- >", " -> ")
                                 .Replace("^", " ^ ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ");
                                 txtTexto.AppendText(cadena);
 
@@ -356,14 +356,14 @@ namespace Compilador
             {
                 if (line.Contains("xqcThonk"))
                 {
-                    Console.WriteLine("Se encontro xqcThonk " + NumeroLinea);
+                    //Console.WriteLine("Se encontro xqcThonk " + NumeroLinea);
                     Linea = line;
                     analizadorSemantico.VerificarCondiciones(Linea, NumeroLinea);
 
                 }
                 else if (line.Contains("Agane"))
                 {
-                    Console.WriteLine("Se encontro Agane " + NumeroLinea);
+                    //Console.WriteLine("Se encontro Agane " + NumeroLinea);
                     Linea = line;
                     analizadorSemantico.VerificarCondiciones(Linea, NumeroLinea);
                 }
@@ -439,7 +439,7 @@ namespace Compilador
         {
             if (e.KeyChar == (char)Keys.Space && !archivoCargado)
             {
-                ColorearTexto(txtTexto.Text);
+                //ColorearTexto(txtTexto.Text);
             }
         }
 

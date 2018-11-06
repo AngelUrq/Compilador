@@ -323,7 +323,7 @@ namespace Compilador.Analizador_semantico
                 }
                 else
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + "* No Es Valido |Fila: " + NumeroLinea.ToString() + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + "* No Es Valido |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 //Verifica si se esta abriendo otro parenthesis "()" Ej: Agane(true)(true)
@@ -334,7 +334,7 @@ namespace Compilador.Analizador_semantico
                     {
                         if (ParenthesisIzq == ParenthesisDer)
                         {
-                            Form1._Form1.AñadirConsola("Error Semantico: Error en los Parenthesis" + "|Linea : " + NumeroLinea.ToString() + " \n");
+                            //Form1._Form1.AñadirConsola("Error Semantico: Error en los Parenthesis" + "|Linea : " + NumeroLinea.ToString() + " \n");
                             error = "true";
                         }
                     }
@@ -358,63 +358,63 @@ namespace Compilador.Analizador_semantico
                 //Esto verifica que si despues de la palabra reservada hay un parenthesis abierto "("
                 if (condicion[i].Equals("xqcThonk") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("Agane") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: Error de Parenthesis despues de *" + condicion[i] + "* |Fila: " + NumeroLinea.ToString() + "\n");
                     error = "true";
                 }
                 //Verifica que si despues de "(" hay un ")" que significa que el contenido dentro del parenthesis esta vacio
                 if (condicion[i].Equals("(") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: No Existen Datos dentro los Parenthesis |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: No Existen Datos dentro los Parenthesis |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existan duplicados que esten a lado ej: xqcThonk(true true), xqcThonk(false true) etc..
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("true") || condicion[i].Equals("true") && condicion[i + 1].Equals("false"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("false") && condicion[i + 1].Equals("true") || condicion[i].Equals("false") && condicion[i + 1].Equals("false"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("not") && condicion[i + 1].Equals("not"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existen duplicados del "and" y "or" ej: xqcThonk(true and and true), xqcThonk(false and or true) etc..
                 if (condicion[i].Equals("and") && condicion[i + 1].Equals("or") || condicion[i].Equals("and") && condicion[i + 1].Equals("and"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 else if (condicion[i].Equals("or") && condicion[i + 1].Equals("and") || condicion[i].Equals("or") && condicion[i + 1].Equals("or"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si se abre parenthesis despues de un true o false
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("(") || condicion[i].Equals("false") && condicion[i + 1].Equals("("))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si existe un not despues de un true o false
                 if (condicion[i].Equals("true") && condicion[i + 1].Equals("not") || condicion[i].Equals("false") && condicion[i + 1].Equals("not"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
                 //Verifica si se despues de un "not" hay un ")"
                 if (condicion[i].Equals("not") && condicion[i + 1].Equals(")"))
                 {
-                    Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
+                    //Form1._Form1.AñadirConsola("Error Semantico: *" + condicion[i] + " " + condicion[i + 1] + "* No es Valido" + " |Fila: " + NumeroLinea + "\n");
                     error = "true";
                 }
 
@@ -422,9 +422,9 @@ namespace Compilador.Analizador_semantico
             }
             if (ParenthesisIzq != ParenthesisDer)
             {
-                Form1._Form1.AñadirConsola("Error Semantico: Los Parenthesis no estan Balanceados" + " |Fila: " + NumeroLinea + "\n");
+                //Form1._Form1.AñadirConsola("Error Semantico: Los Parenthesis no estan Balanceados" + " |Fila: " + NumeroLinea + "\n");
                 error = "true";
-                Form1._Form1.AñadirConsola(ParenthesisIzq.ToString() + " = " + ParenthesisDer.ToString());
+                //Form1._Form1.AñadirConsola(ParenthesisIzq.ToString() + " = " + ParenthesisDer.ToString());
             }
             
         }
@@ -568,7 +568,7 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -659,7 +659,7 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tstring"))
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -694,7 +694,7 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -722,7 +722,7 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tchar"))
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -757,7 +757,7 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -881,7 +881,7 @@ namespace Compilador.Analizador_semantico
 				}
 				for (int x = 0; x < tokens.Count; x = x + 2)
 				{
-					Form1._Form1.AñadirConsola("es correcto  variable funcion");
+					//Form1._Form1.AñadirConsola("es correcto  variable funcion");
 					bool nr = true;
 					for(int m=0;m<variables.Count;m++)
 					{

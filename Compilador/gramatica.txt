@@ -12,7 +12,6 @@ FTYPE,void
 FTYPE,TYPE
 TYPE,tint
 TYPE,tbool
-TYPE,tfloat
 TYPE,tchar
 ID,xid
 ID,xvar
@@ -23,6 +22,7 @@ ID,xvar4
 ID,xvar5
 ID,xvar6
 ID,xvar7
+ID,xvar8
 ID,xfun
 ID,xfun1
 ID,xfun2

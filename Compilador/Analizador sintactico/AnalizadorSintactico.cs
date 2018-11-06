@@ -725,6 +725,7 @@ namespace Compilador
             terminales.Add("xvar5");
             terminales.Add("xvar6");
             terminales.Add("xvar7");
+            terminales.Add("xvar8");
             terminales.Add("xfun");
             terminales.Add("xfun1");
             terminales.Add("xfun2");
@@ -737,7 +738,6 @@ namespace Compilador
             terminales.Add("(");
             terminales.Add(")");
             terminales.Add("xqcWut");
-            terminales.Add("XID");
             terminales.Add("=");
             terminales.Add("agane");
             terminales.Add("not");
