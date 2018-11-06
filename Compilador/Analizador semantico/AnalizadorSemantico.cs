@@ -309,7 +309,7 @@ namespace Compilador.Analizador_semantico
             int ParenthesisIzq = 0;
             int ParenthesisDer = 0;
             String CodigoReemplazado = CodigoFuente.Replace("(", " ( ").Replace(")", " ) ");
-            Form1._Form1.AñadirConsola(CodigoReemplazado);
+            //Form1._Form1.AñadirConsola(CodigoReemplazado);
             char[] delimitadoresChars = { ' ', '\t' };
             string[] condicion = CodigoReemplazado.Split(delimitadoresChars, StringSplitOptions.RemoveEmptyEntries);
 

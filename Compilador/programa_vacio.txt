@@ -1,0 +1,7 @@
+start xid:
+
+juice xmain:void->tint
+{
+}
+
+final
