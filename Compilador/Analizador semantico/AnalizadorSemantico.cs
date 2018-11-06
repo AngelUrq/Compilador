@@ -660,24 +660,27 @@ namespace Compilador.Analizador_semantico
 		}
 		public void Separarmetodosaprobar()
 		{
-
+			List<Token> lista2 = new List<Token>();
+			lista2 = listaPalabras;
+			lista2.RemoveAt(lista2.Count - 1);
+			lista2.Reverse();
 			int posinit, posfinal = 0;
 			String funnombre;
-			for (int x = 0; x < listaPalabras.Count; x++)
+			for (int x = 0; x < lista2.Count; x++)
 			{
 
 
-				if (listaPalabras[x].GetPalabra() == "juice")
+				if (lista2[x].GetPalabra() == "juice")
 				{
-					funnombre = listaPalabras[x + 1].GetPalabra();
+					funnombre = lista2[x + 1].GetPalabra();
 					List<Token> fun = new List<Token>();
 					List<Token> listadatos = new List<Token>();
 					posinit = x + 3;
-					for (int y = posinit; y < listaPalabras.Count; y++)
+					for (int y = posinit; y < lista2.Count; y++)
 					{
-						if (listaPalabras[y].GetPalabra() != "->")
+						if (lista2[y].GetPalabra() != "->")
 						{
-							fun.Add(new Token(listaPalabras[y].GetPalabra(), listaPalabras[y].GetTipo(), listaPalabras[y].GetColumna(), listaPalabras[y].GetFila()));
+							fun.Add(new Token(lista2[y].GetPalabra(), lista2[y].GetTipo(), lista2[y].GetColumna(), lista2[y].GetFila()));
 
 						}
 						else
@@ -688,11 +691,11 @@ namespace Compilador.Analizador_semantico
 					}
 
 					Inicializarvariablesmetodo(fun, funnombre);
-					for (int a = posfinal; a < listaPalabras.Count; a++)
+					for (int a = posfinal; a < lista2.Count; a++)
 					{
-						if (listaPalabras[a].GetPalabra() != "}")
+						if (lista2[a].GetPalabra() != "}")
 						{
-							listadatos.Add(new Token(listaPalabras[a].GetPalabra(), listaPalabras[a].GetTipo(), listaPalabras[a].GetColumna(), listaPalabras[a].GetFila()));
+							listadatos.Add(new Token(lista2[a].GetPalabra(), lista2[a].GetTipo(), lista2[a].GetColumna(), lista2[a].GetFila()));
 
 						}
 						else
