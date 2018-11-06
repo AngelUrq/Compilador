@@ -714,10 +714,8 @@ namespace Compilador
             terminales.Add("!");
             terminales.Add("coma");
             terminales.Add("tbool");
-            terminales.Add("tstring");
             terminales.Add("tfloat");
             terminales.Add("tchar");
-            terminales.Add("0");
             terminales.Add("xid");
             terminales.Add("xvar");
             terminales.Add("xvar2");
@@ -733,19 +731,30 @@ namespace Compilador
             terminales.Add("xfun5");
             terminales.Add("xfun6");
             terminales.Add("xfun7");
+            terminales.Add("CONDICIONAL");
+            terminales.Add("=");
+            terminales.Add("agane");
+            terminales.Add("(");
+            terminales.Add(")");
+            terminales.Add("true");
+            terminales.Add("0");
 
             noTerminales.Add("PROGRAM");
             noTerminales.Add("BODY");
             noTerminales.Add("RETORNO");
             noTerminales.Add("EXTRA");
             noTerminales.Add("FUNCTION");
-            noTerminales.Add("EXPRESION");
             noTerminales.Add("ARGS");
             noTerminales.Add("ARGS2");
             noTerminales.Add("FTYPE");
             noTerminales.Add("TYPE");
-            noTerminales.Add("VALOR");
             noTerminales.Add("ID");
+            noTerminales.Add("EXPRESION");
+            noTerminales.Add("DECLARACION");
+            noTerminales.Add("DECLARACION2");
+            noTerminales.Add("CICLO");
+            noTerminales.Add("CONDICION");
+            noTerminales.Add("VALOR");
 
             simboloInicial = "PROGRAM";
 
