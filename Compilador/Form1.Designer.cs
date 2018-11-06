@@ -37,8 +37,8 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.SaveBtn = new System.Windows.Forms.Button();
+            this.NewFileBtn = new System.Windows.Forms.Button();
             this.btnCompilar = new System.Windows.Forms.Button();
             this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -123,8 +123,8 @@
             this.tabPage1.Controls.Add(this.panel3);
             this.tabPage1.Controls.Add(this.panel2);
             this.tabPage1.Controls.Add(this.pictureBox2);
-            this.tabPage1.Controls.Add(this.button3);
-            this.tabPage1.Controls.Add(this.button2);
+            this.tabPage1.Controls.Add(this.SaveBtn);
+            this.tabPage1.Controls.Add(this.NewFileBtn);
             this.tabPage1.Controls.Add(this.btnCompilar);
             this.tabPage1.Controls.Add(this.LineNumberTextBox);
             this.tabPage1.Controls.Add(this.pictureBox1);
@@ -214,27 +214,29 @@
             this.pictureBox2.TabIndex = 12;
             this.pictureBox2.TabStop = false;
             // 
-            // button3
+            // SaveBtn
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(873, 248);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(61, 41);
-            this.button3.TabIndex = 11;
-            this.button3.UseVisualStyleBackColor = true;
+            this.SaveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveBtn.Image = ((System.Drawing.Image)(resources.GetObject("SaveBtn.Image")));
+            this.SaveBtn.Location = new System.Drawing.Point(873, 248);
+            this.SaveBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.SaveBtn.Name = "SaveBtn";
+            this.SaveBtn.Size = new System.Drawing.Size(61, 41);
+            this.SaveBtn.TabIndex = 11;
+            this.SaveBtn.UseVisualStyleBackColor = true;
+            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
             // 
-            // button2
+            // NewFileBtn
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(721, 248);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(64, 41);
-            this.button2.TabIndex = 10;
-            this.button2.UseVisualStyleBackColor = true;
+            this.NewFileBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.NewFileBtn.Image = ((System.Drawing.Image)(resources.GetObject("NewFileBtn.Image")));
+            this.NewFileBtn.Location = new System.Drawing.Point(721, 248);
+            this.NewFileBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.NewFileBtn.Name = "NewFileBtn";
+            this.NewFileBtn.Size = new System.Drawing.Size(64, 41);
+            this.NewFileBtn.TabIndex = 10;
+            this.NewFileBtn.UseVisualStyleBackColor = true;
+            this.NewFileBtn.Click += new System.EventHandler(this.NewFileBtn_Click);
             // 
             // btnCompilar
             // 
@@ -768,8 +770,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button botonAL;
         private System.Windows.Forms.DataGridView dGV1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Button NewFileBtn;
         private System.Windows.Forms.Button btnCompilar;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Panel panel2;

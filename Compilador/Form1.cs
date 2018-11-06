@@ -405,5 +405,46 @@ namespace Compilador
             txtBoxSemantico.Select();
             LineNumberSemantico.DeselectAll();
         }
+
+        private void NewFileBtn_Click(object sender, EventArgs e)
+        {
+            if (txtTexto.Text.Length > 0)
+            {
+                if (MessageBox.Show("¿Quieres guardar el archivo?", "Advertencia", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Title = "Selecciona ubicación del archivo";
+                    sfd.Filter = "Archivo de texto (*.txt)|*.txt";
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        StreamWriter sr = new StreamWriter(sfd.FileName);
+                        sr.WriteLine(txtTexto.Text);
+                        sr.Close();
+                    }
+                    txtTexto.Clear();
+                }
+                else
+                {
+                    txtTexto.Clear();
+                }
+            }
+            else
+            {
+                txtTexto.Clear();
+            }
+        }
+   
+        private void SaveBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Selecciona ubicación del archivo";
+            sfd.Filter = "Archivo de texto (*.txt)|*.txt";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sr = new StreamWriter(sfd.FileName);
+                sr.WriteLine(txtTexto.Text);
+                sr.Close();
+            }
+        }
     }
 }

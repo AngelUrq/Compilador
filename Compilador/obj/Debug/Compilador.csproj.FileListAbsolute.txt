@@ -57,3 +57,13 @@ C:\Users\Rodrigo\Desktop\Compilador-development\Compilador\obj\Debug\Compilador.
 C:\Users\Rodrigo\Desktop\Compilador-development\Compilador\obj\Debug\Compilador.Form1.resources
 C:\Users\Rodrigo\Desktop\Compilador-development\Compilador\obj\Debug\Compilador.Properties.Resources.resources
 C:\Users\Rodrigo\Desktop\Compilador-development\Compilador\obj\Debug\Compilador.csproj.GenerateResource.Cache
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\bin\Debug\Compilador.exe.config
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\bin\Debug\Compilador.exe
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\bin\Debug\Compilador.pdb
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.csprojAssemblyReference.cache
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.Form1.resources
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.Properties.Resources.resources
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.csproj.GenerateResource.cache
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.csproj.CoreCompileInputs.cache
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.exe
+C:\Users\Dell\source\repos\Compilador3\Compilador\Compilador\obj\Debug\Compilador.pdb
