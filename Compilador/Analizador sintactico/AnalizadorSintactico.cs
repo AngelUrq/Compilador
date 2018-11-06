@@ -718,6 +718,7 @@ namespace Compilador
             terminales.Add("tchar");
             terminales.Add("xid");
             terminales.Add("xvar");
+            terminales.Add("xvar1");
             terminales.Add("xvar2");
             terminales.Add("xvar3");
             terminales.Add("xvar4");
@@ -725,6 +726,7 @@ namespace Compilador
             terminales.Add("xvar6");
             terminales.Add("xvar7");
             terminales.Add("xfun");
+            terminales.Add("xfun1");
             terminales.Add("xfun2");
             terminales.Add("xfun3");
             terminales.Add("xfun4");
@@ -746,6 +748,10 @@ namespace Compilador
             terminales.Add("lower");
             terminales.Add("biggerOrEqual");
             terminales.Add("lowerOrEqual");
+            terminales.Add("+");
+            terminales.Add("-");
+            terminales.Add("*");
+            terminales.Add("/");
             terminales.Add("0");
             terminales.Add("1");
             terminales.Add("2");
@@ -798,10 +804,15 @@ namespace Compilador
             noTerminales.Add("DECLARACION");
             noTerminales.Add("CICLO");
             noTerminales.Add("CONDICION");
-            noTerminales.Add("COMP");
-            noTerminales.Add("BOOL");
             noTerminales.Add("VALOR");
+            noTerminales.Add("BOOL");
             noTerminales.Add("OPERADOR");
+            noTerminales.Add("OPERACION");
+            noTerminales.Add("EXP");
+            noTerminales.Add("EXP1");
+            noTerminales.Add("EXP2");
+            noTerminales.Add("EXP4");
+            noTerminales.Add("EXP3");
             noTerminales.Add("NUM");
             noTerminales.Add("CARACTER");
             noTerminales.Add("LETRA");

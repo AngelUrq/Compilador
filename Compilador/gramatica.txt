@@ -16,6 +16,7 @@ TYPE,tfloat
 TYPE,tchar
 ID,xid
 ID,xvar
+ID,xvar1
 ID,xvar2
 ID,xvar3
 ID,xvar4
@@ -23,6 +24,7 @@ ID,xvar5
 ID,xvar6
 ID,xvar7
 ID,xfun
+ID,xfun1
 ID,xfun2
 ID,xfun3
 ID,xfun4
