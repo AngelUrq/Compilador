@@ -819,10 +819,7 @@ namespace Compilador
         {
             listaTokens.Add(new Token("$", "", -1, -1));
             listaTokens.Reverse();
-            for (int x = 0; x < listaTokens.Count; x++)
-            {
-                Console.Write(" " + x + " " + listaTokens[x].GetPalabra());
-            }
+            
             //inicia con el simbolo inicial modificar el simbolo inicial a probar
             List<String> cadenareglas = new List<string>();
             cadenareglas.Add("$");
@@ -862,7 +859,7 @@ namespace Compilador
                             }
                         }
 
-                        Console.WriteLine(count1 + " " + count2);
+                      
                         if (count2 != 0 && count1 != 0)
                         {
                             if (tabla[count1, count2] != " ")

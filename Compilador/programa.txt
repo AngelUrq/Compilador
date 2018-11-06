@@ -2,6 +2,7 @@ start xid:
 
 juice xmain:void->tint
 {
+tint xvar2 = 2!
 give 0!
 }
 

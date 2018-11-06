@@ -333,7 +333,7 @@ namespace Compilador
 
         private void IniciarAnalizadorSintactico()
         {
-            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(listaPalabras);
+            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(new List<Token>(listaPalabras));
             analizadorSintactico.ProbarCadena();
         }
 

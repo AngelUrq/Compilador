@@ -462,6 +462,15 @@ namespace Compilador.Analizador_semantico
 						if (Ver_tipo(lista[lista.Count - 1], "tbool"))
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[ 1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -488,6 +497,15 @@ namespace Compilador.Analizador_semantico
 						if (comp)
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -507,6 +525,15 @@ namespace Compilador.Analizador_semantico
 						if (Ver_tipo(lista[lista.Count - 1], "tint"))
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -533,6 +560,15 @@ namespace Compilador.Analizador_semantico
 						if (comp)
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -552,6 +588,15 @@ namespace Compilador.Analizador_semantico
 						if (Ver_tipo(lista[lista.Count - 1], "tfloat"))
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -578,6 +623,15 @@ namespace Compilador.Analizador_semantico
 						if (comp)
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -597,6 +651,15 @@ namespace Compilador.Analizador_semantico
 						if (Ver_tipo(lista[lista.Count - 1], "tstring"))
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -623,6 +686,15 @@ namespace Compilador.Analizador_semantico
 						if (comp)
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -642,6 +714,15 @@ namespace Compilador.Analizador_semantico
 						if (Ver_tipo(lista[lista.Count - 1], "tchar"))
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), lista[3].GetPalabra(), lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -668,6 +749,15 @@ namespace Compilador.Analizador_semantico
 						if (comp)
 						{
 							Form1._Form1.AñadirConsola("es correcto");
+							bool nr = true;
+							for (int m = 0; m < variables.Count; m++)
+							{
+								if (variables[m].GetPalabra() == lista[1].GetPalabra())
+								{
+									nr = false;
+								}
+							}
+							if (nr)
 							variables.Add(new Variable(lista[1].GetPalabra(), lista[0].GetPalabra(), valor, lista[1].GetFila(), lista[1].GetColumna(), funcion));
 
 						}
@@ -712,8 +802,8 @@ namespace Compilador.Analizador_semantico
 		{
 			List<Token> lista2 = new List<Token>();
 			lista2 = listaPalabras;
-			lista2.RemoveAt(lista2.Count - 1);
-			lista2.Reverse();
+			//lista2.RemoveAt(lista2.Count - 1);
+			//lista2.Reverse();
 			int posinit, posfinal = 0;
 			String funnombre;
 			for (int x = 0; x < lista2.Count; x++)
@@ -788,7 +878,18 @@ namespace Compilador.Analizador_semantico
 				for (int x = 0; x < tokens.Count; x = x + 2)
 				{
 					Form1._Form1.AñadirConsola("es correcto  variable funcion");
-					variables.Add(new Variable(tokens[x + 1].GetPalabra(), tokens[x].GetPalabra(), "", tokens[x + 1].GetFila(), tokens[x + 1].GetColumna(), funcionnombre));
+					bool nr = true;
+					for(int m=0;m<variables.Count;m++)
+					{
+						if(variables[m].GetPalabra()==tokens[x+1].GetPalabra())
+						{
+							nr = false;
+						}
+					}
+					if (nr)
+					{
+						variables.Add(new Variable(tokens[x + 1].GetPalabra(), tokens[x].GetPalabra(), "", tokens[x + 1].GetFila(), tokens[x + 1].GetColumna(), funcionnombre));
+					}
 				}
 			}
 
