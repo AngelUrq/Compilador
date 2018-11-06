@@ -712,7 +712,7 @@ namespace Compilador
             terminales.Add("}");
             terminales.Add("give");
             terminales.Add("!");
-            terminales.Add("coma");
+            terminales.Add("comma");
             terminales.Add("tbool");
             terminales.Add("tfloat");
             terminales.Add("tchar");
@@ -733,12 +733,15 @@ namespace Compilador
             terminales.Add("xfun5");
             terminales.Add("xfun6");
             terminales.Add("xfun7");
-            terminales.Add("CONDICIONAL");
-            terminales.Add("=");
-            terminales.Add("agane");
+            terminales.Add("xqcThonk");
             terminales.Add("(");
             terminales.Add(")");
+            terminales.Add("xqcWut");
+            terminales.Add("XID");
+            terminales.Add("=");
+            terminales.Add("agane");
             terminales.Add("not");
+            terminales.Add("null");
             terminales.Add("true");
             terminales.Add("false");
             terminales.Add("and");
@@ -801,6 +804,8 @@ namespace Compilador
             noTerminales.Add("TYPE");
             noTerminales.Add("ID");
             noTerminales.Add("EXPRESION");
+            noTerminales.Add("CONDICIONAL");
+            noTerminales.Add("LLAMADA");
             noTerminales.Add("DECLARACION");
             noTerminales.Add("CICLO");
             noTerminales.Add("CONDICION");

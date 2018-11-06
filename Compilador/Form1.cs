@@ -21,6 +21,8 @@ namespace Compilador
         private List<string> palabras;
         private bool archivoCargado;
 
+        private bool programaCorrecto = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -277,7 +279,11 @@ namespace Compilador
 
             IniciarAnalizadorLexico();
             IniciarAnalizadorSintactico();
-            IniciarAnalizadorSemantico();
+
+            if (programaCorrecto)
+            {
+                IniciarAnalizadorSemantico();
+            }
         }
 
         private void IniciarAnalizadorLexico()
@@ -335,7 +341,7 @@ namespace Compilador
         private void IniciarAnalizadorSintactico()
         {
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(new List<Token>(listaPalabras));
-            analizadorSintactico.ProbarCadena();
+            programaCorrecto = analizadorSintactico.ProbarCadena();
         }
 
         private void IniciarAnalizadorSemantico()

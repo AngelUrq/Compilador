@@ -2,8 +2,33 @@ start xid:
 
 juice xmain:void->tint
 {
-tint xvar2 = 2!
-give 0!
+	xqcThonk(3 lower 3)
+	{
+		agane(not (1 biggerOrEqual 3))
+		{
+		}	
+	} 	
+	xqcWut
+	{
+
+	}
+
+	give 0!
+}
+
+juice xfun1:tint xvar6 comma tbool xvar7->void
+{
+	agane(5 equals 6)
+	{
+		xfun2(3)!
+	}
+	give null!
+}
+
+juice xfun2:tint xvar5->tint
+{
+	tbool xvar4 = false!
+	give 0!
 }
 
 final

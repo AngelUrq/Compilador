@@ -29,6 +29,7 @@ namespace Compilador
             palabrares.Add("true");
             palabrares.Add("false");
             palabrares.Add("null");
+            palabrares.Add("comma");
 
             operadores.Add("equals");
             operadores.Add("bigger");

@@ -470,7 +470,7 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tbool"))
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -505,7 +505,7 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -533,7 +533,7 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tint"))
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -596,7 +596,7 @@ namespace Compilador.Analizador_semantico
 					{
 						if (Ver_tipo(lista[lista.Count - 1], "tfloat"))
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -631,7 +631,7 @@ namespace Compilador.Analizador_semantico
 						}
 						if (comp)
 						{
-							Form1._Form1.AñadirConsola("es correcto");
+							//Form1._Form1.AñadirConsola("es correcto");
 							bool nr = true;
 							for (int m = 0; m < variables.Count; m++)
 							{
@@ -862,11 +862,6 @@ namespace Compilador.Analizador_semantico
 
 
 				}
-			}
-
-			for (int y = 0; y < variables.Count; y++)
-			{
-				Form1._Form1.AñadirConsola(variables[y].GetPalabra() + "  " + variables[y].GetTipo() + "  " + variables[y].GetTipoIdentificador() + " " + variables[y].GetValor());
 			}
 		}
 
