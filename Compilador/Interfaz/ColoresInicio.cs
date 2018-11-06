@@ -9,7 +9,7 @@ namespace Compilador
     class ColoresInicio
     {
         private List<string> palabrasReservadas;
-        private List<string> tokens;
+        private List<string> delimitadoresOFunciones;
         private List<string> tiposDeDatos;
 
         public List<string> palabrasSeparadas;
@@ -18,25 +18,32 @@ namespace Compilador
         public ColoresInicio()
         {
             palabrasReservadas = new List<string>();
-            tokens = new List<string>();
+            delimitadoresOFunciones = new List<string>();
             tiposDeDatos = new List<string>();
             palabrasSeparadas = new List<string>();
             //colores = new List<string>();
 
-            tokens.Add("(");
-            tokens.Add(")");
-            tokens.Add("bigger");
-            tokens.Add("lower");
-            tokens.Add("biggerOrEqual");
-            tokens.Add("lowerOrEqual");
-            tokens.Add("equals");
-            tokens.Add("{");
-            tokens.Add("}");
-            tokens.Add(";");
-            tokens.Add(":");
-            tokens.Add(",");
-            tokens.Add("->");
-            tokens.Add("!");
+            delimitadoresOFunciones.Add("(");
+            delimitadoresOFunciones.Add(")");
+            delimitadoresOFunciones.Add("bigger");
+            delimitadoresOFunciones.Add("lower");
+            delimitadoresOFunciones.Add("biggerOrEqual");
+            delimitadoresOFunciones.Add("lowerOrEqual");
+            delimitadoresOFunciones.Add("equals");
+            delimitadoresOFunciones.Add("{");
+            delimitadoresOFunciones.Add("}");
+            delimitadoresOFunciones.Add(";");
+            delimitadoresOFunciones.Add(":");
+            delimitadoresOFunciones.Add(",");
+            delimitadoresOFunciones.Add("->");
+            delimitadoresOFunciones.Add("!");
+            delimitadoresOFunciones.Add("+");
+            delimitadoresOFunciones.Add("-");
+            delimitadoresOFunciones.Add("*");
+            delimitadoresOFunciones.Add("/");
+            delimitadoresOFunciones.Add("not");
+            delimitadoresOFunciones.Add("=");
+            delimitadoresOFunciones.Add("^");
 
             palabrasReservadas.Add("juice");
             palabrasReservadas.Add("agane");
@@ -62,13 +69,11 @@ namespace Compilador
 
             for (int i = 0; i < texto.Length; i++)
             {
-                if (texto[i] == '}')
-                {
-                    int a = 5;
-                }
-                if ((texto[i].ToString().Equals(" ") || texto[i].Equals('\n')) && !palabra.ToString().Equals(""))
+               
+                if ((texto[i].ToString().Equals(" ") || texto[i].Equals('\n')))
                 {
                     palabras.Add(palabra);
+                    palabras.Add(texto[i].ToString());
                     palabra = "";
                 }
                 else if ((texto[i].ToString().Equals("{") || texto[i].ToString().Equals("}") || texto[i].ToString().Equals("(") || texto[i].ToString().Equals(")")))
@@ -77,7 +82,7 @@ namespace Compilador
                     palabras.Add(texto[i].ToString());
                     palabra = "";
                 }
-                else if (texto[i].ToString().Equals("+") && !palabra.ToString().Equals(""))
+                else if (texto[i].ToString().Equals("+") && !palabra.Equals(""))
                 {
                     if (texto[i + 1].ToString().Equals("+"))
                     {
@@ -88,7 +93,7 @@ namespace Compilador
                         i++;
                     }
                 }
-                else if (texto[i].ToString().Equals("-") && !palabra.ToString().Equals(""))
+                else if (texto[i].ToString().Equals("-"))
                 {
                     if (texto[i + 1].ToString().Equals("-") || texto[i + 1].ToString().Equals(">"))
                     {
@@ -99,15 +104,8 @@ namespace Compilador
                         i++;
                     }
                 }
-                else if (texto[i].ToString().Equals(":") && !palabra.ToString().Equals(""))
-                {
-                    palabras.Add(palabra);
-                    string operador = texto[i].ToString();
-                    palabras.Add(operador);
-                    palabra = "";
-
-                }
-                else if (texto[i].ToString().Equals("!") && !palabra.ToString().Equals(""))
+               
+                else if (delimitadoresOFunciones.Contains(texto[i].ToString()))
                 {
                     palabras.Add(palabra);
                     string operador = texto[i].ToString();
@@ -144,7 +142,7 @@ namespace Compilador
                 {
                     colores.Add("verde");
                 }
-                else if (EsToken(palabrasSeparadas[i]))
+                else if (EsDelimitadorOFuncion(palabrasSeparadas[i]))
                 {
                     colores.Add("rojo");
                 }
@@ -182,11 +180,11 @@ namespace Compilador
             return false;
         }
 
-        public bool EsToken(string palabra)
+        public bool EsDelimitadorOFuncion(string palabra)
         {
-            for (int i = 0; i < tokens.Count; i++)
+            for (int i = 0; i < delimitadoresOFunciones.Count; i++)
             {
-                if (palabra.Equals(tokens[i]))
+                if (palabra.Equals(delimitadoresOFunciones[i]))
                 {
                     return true;
                 }

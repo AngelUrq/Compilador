@@ -18,6 +18,7 @@ namespace Compilador
         List<Token> listaPalabras = new List<Token>();
         ColoresInicio coloresInicio = new ColoresInicio();
         List<string> palabras;
+        private bool nonNumberEntered = false;
 
         public Form1()
         {
@@ -29,7 +30,9 @@ namespace Compilador
 
         private void btnCargarArchivo_Click(object sender, EventArgs e)
         {
+            txtTexto.Text = "";
             Color textoColor = Color.Black, tipoDeDatoColor = Color.Green, tokenColor = Color.Red, palabraRColor = Color.Blue;
+            string cadena = "";
 
             OpenFileDialog abrir = new OpenFileDialog();
             abrir.Filter = "Documento de texto|*.txt";
@@ -41,8 +44,8 @@ namespace Compilador
             if (resultado == DialogResult.OK)
             {
                 StreamReader leer = new StreamReader(abrir.FileName);
-                txtTexto.Text = leer.ReadToEnd();
-                /*string sLine = "";
+                //txtTexto.Text = leer.ReadToEnd();
+                string sLine = "";
                 List<string> textos = new List<string>();
 
                 while (sLine != null)
@@ -59,12 +62,9 @@ namespace Compilador
                 {
                     try
                     {
-
                         coloresInicio.SepararParabras(textos[i].ToString());
                         palabras = coloresInicio.palabrasSeparadas;
-
-                        Console.WriteLine(palabras[i].ToString());
-
+                        
                         List<string> colores = coloresInicio.AsignarValorPalabra();
 
                         for (int j = 0; j < colores.Count; j++)
@@ -72,24 +72,27 @@ namespace Compilador
                             if (colores[j].ToString().Equals("rojo"))
                             {
                                 txtTexto.SelectionColor = tokenColor;
-                                txtTexto.AppendText(palabras[j].ToString());
+                                cadena = palabras[j].ToString().Replace("+", " + ").Replace("=", " = ").Replace("-", " - ").Replace("- >", " -> ")
+                                .Replace("^", " ^ ").Replace("*", " * ").Replace("/", " / ").Replace("(", " ( ");
+                                txtTexto.AppendText(cadena);
 
                             }
                             else if (colores[j].ToString().Equals("azul"))
                             {
-
                                 txtTexto.SelectionColor = palabraRColor;
-                                txtTexto.AppendText(palabras[j].ToString());
-
+                                cadena = palabras[j].ToString().Replace(palabras[j], palabras[j] + " ");
+                                txtTexto.AppendText(cadena);
                             }
                             else if (colores[j].ToString().Equals("verde"))
                             {
                                 txtTexto.SelectionColor = tipoDeDatoColor;
-                                txtTexto.AppendText(palabras[j].ToString());
+                                cadena = palabras[j].ToString().Replace(palabras[j], palabras[j] + " ");
+                                txtTexto.AppendText(cadena);
                             }
                             else
                             {
                                 txtTexto.SelectionColor = textoColor;
+                                txtTexto.AppendText(palabras[j].ToString());
                             }
                         }
                         txtTexto.AppendText("\r\n");
@@ -98,7 +101,7 @@ namespace Compilador
                     {
                         Console.WriteLine(error.Message);
                     }
-                }*/
+                }
             }
         }
 
@@ -405,5 +408,100 @@ namespace Compilador
             txtBoxSemantico.Select();
             LineNumberSemantico.DeselectAll();
         }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            /*string texto = txtTexto.Text;
+            txtTexto.Text = "";
+            Color textoColor = Color.Black, tipoDeDatoColor = Color.Green, tokenColor = Color.Red, palabraRColor = Color.Blue;
+
+            try
+            {
+                coloresInicio.SepararParabras(texto);
+                palabras = coloresInicio.palabrasSeparadas;
+
+                List<string> colores = coloresInicio.AsignarValorPalabra();
+
+                for (int j = 0; j < colores.Count; j++)
+                {
+                    if (colores[j].ToString().Equals("rojo"))
+                    {
+                        txtTexto.SelectionColor = tokenColor;
+                        txtTexto.AppendText(palabras[j].ToString());
+
+                    }
+                    else if (colores[j].ToString().Equals("azul"))
+                    {
+                        txtTexto.SelectionColor = palabraRColor;
+                        txtTexto.AppendText(palabras[j].ToString());
+                    }
+                    else if (colores[j].ToString().Equals("verde"))
+                    {
+                        txtTexto.SelectionColor = tipoDeDatoColor;
+                        txtTexto.AppendText(palabras[j].ToString());
+                    }
+                    else
+                    {
+                        txtTexto.SelectionColor = textoColor;
+                        txtTexto.AppendText(palabras[j].ToString());
+                    }
+                }
+                //txtTexto.AppendText("\r\n");
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.Message);
+            }*/
+            
+        }
+
+        private void txtTexto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Space)
+            {
+                string texto = txtTexto.Text;
+                txtTexto.Text = "";
+                Color textoColor = Color.Black, tipoDeDatoColor = Color.Green, tokenColor = Color.Red, palabraRColor = Color.Blue;
+
+                try
+                {
+                    coloresInicio.SepararParabras(texto);
+                    palabras = coloresInicio.palabrasSeparadas;
+
+                    List<string> colores = coloresInicio.AsignarValorPalabra();
+
+                    for (int j = 0; j < colores.Count; j++)
+                    {
+                        if (colores[j].ToString().Equals("rojo"))
+                        {
+                            txtTexto.SelectionColor = tokenColor;
+                            txtTexto.AppendText(palabras[j].ToString());
+
+                        }
+                        else if (colores[j].ToString().Equals("azul"))
+                        {
+                            txtTexto.SelectionColor = palabraRColor;
+                            txtTexto.AppendText(palabras[j].ToString());
+                        }
+                        else if (colores[j].ToString().Equals("verde"))
+                        {
+                            txtTexto.SelectionColor = tipoDeDatoColor;
+                            txtTexto.AppendText(palabras[j].ToString());
+                        }
+                        else
+                        {
+                            txtTexto.SelectionColor = textoColor;
+                            txtTexto.AppendText(palabras[j].ToString());
+                        }
+                    }
+                    //txtTexto.AppendText("\r\n");
+                }
+                catch (Exception error)
+                {
+                    Console.WriteLine(error.Message);
+                }
+            }
+        }
     }
+
 }

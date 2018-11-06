@@ -1,8 +1,9 @@
 start xid:
-  juice xmain:void->tint
+  juice xmain:tint xa,tint xb->tint
   {
    tint xuno = 5!
    tbool xy = true!
+   tint xh = 5 + 6 * 8!
    tstring xa = hola!
     give 0!
   }
