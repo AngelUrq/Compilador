@@ -425,46 +425,6 @@ namespace Compilador
             if (e.KeyChar == (char)Keys.Space && !archivoCargado)
             {
                 ColorearTexto(txtTexto.Text);
-                /*string texto = txtTexto.Text;
-                txtTexto.Text = "";
-                Color textoColor = Color.Black, tipoDeDatoColor = Color.Green, tokenColor = Color.Red, palabraRColor = Color.Blue;
-
-                try
-                {
-                    coloresInicio.SepararParabras(texto);
-                    palabras = coloresInicio.palabrasSeparadas;
-
-                    List<string> colores = coloresInicio.AsignarValorPalabra();
-
-                    for (int j = 0; j < colores.Count; j++)
-                    {
-                        if (colores[j].ToString().Equals("rojo"))
-                        {
-                            txtTexto.SelectionColor = tokenColor;
-                            txtTexto.AppendText(palabras[j].ToString());
-
-                        }
-                        else if (colores[j].ToString().Equals("azul"))
-                        {
-                            txtTexto.SelectionColor = palabraRColor;
-                            txtTexto.AppendText(palabras[j].ToString());
-                        }
-                        else if (colores[j].ToString().Equals("verde"))
-                        {
-                            txtTexto.SelectionColor = tipoDeDatoColor;
-                            txtTexto.AppendText(palabras[j].ToString());
-                        }
-                        else
-                        {
-                            txtTexto.SelectionColor = textoColor;
-                            txtTexto.AppendText(palabras[j].ToString());
-                        }
-                    }
-                }
-                catch (Exception error)
-                {
-                    Console.WriteLine(error.Message);
-                }*/
             }
         }
 

@@ -18,10 +18,21 @@ namespace Compilador.Analizador_semantico
             this.listaPalabras = listaPalabras;
             variables = new List<Variable>();
             funciones = new List<string>();
+
+            List<Token> palabras = new List<Token>();
+
+            for (int i = listaPalabras.Count - 1; i > 0; i--)
+            {
+                palabras.Add(new Token(listaPalabras[i].GetPalabra(), listaPalabras[i].GetTipo(), listaPalabras[i].GetColumna(), listaPalabras[i].GetFila()));
+            }
+
+            this.listaPalabras = palabras;
         }
 
         public void AnalizarFunciones()
         {
+            
+
             List<Variable> variables = new List<Variable>();
             List<string> v = new List<string>();
 
@@ -36,7 +47,6 @@ namespace Compilador.Analizador_semantico
                 try
                 {
                     string cadenadevar = "";
-                    bool comprobado = false;
 
                     if (listaPalabras[i].GetPalabra().Equals("juice"))
                     {
@@ -229,70 +239,6 @@ namespace Compilador.Analizador_semantico
             }
             return false;
         }
-
-        /*private void Tbool()
-        {
-            List<Variable> variables = new List<Variable>();
-            string funcion = "";
-
-            for (int i = listaPalabras.Count - 1; i > 0; i--)
-            {
-                bool existe = false;
-                try
-                {
-                    if (listaPalabras[i].GetPalabra().Equals("{"))
-                    {
-                        funcion = listaPalabras[i + 5].GetPalabra();
-
-                    }
-                    
-                    if (listaPalabras[i].GetTipo().Equals("Identificador") && listaPalabras[i - 1].GetPalabra().Equals("tbool") && listaPalabras[i + 1].GetPalabra().Equals("=") && (listaPalabras[i + 2].GetPalabra().Equals("false") || listaPalabras[i + 2].GetPalabra().Equals("true")))
-                    {
-                        Variable variable = new Variable(listaPalabras[i].GetPalabra(), listaPalabras[i + 1].GetPalabra(), listaPalabras[i - 2].GetPalabra(), listaPalabras[i].GetFila(), listaPalabras[i].GetColumna(), funcion);
-
-                        if (variables.Count > 0)
-                        {
-                            for (int j = 0; j < variables.Count; j++)
-                            {
-                                if (variable.GetFuncion().Equals(variables[j].GetFuncion()) && variable.GetPalabra().Equals(variables[j].GetPalabra()))
-                                {
-                                    existe = true;
-                                    continue;
-                                }
-                            }
-                            if (!existe)
-                            {
-                                if (TipoYValorCorrecto(variable.GetTipoIdentificador(), variable.GetValor()))
-                                {
-                                    variables.Add(variable);
-                                }
-                                else
-                                {
-                                    Form1._Form1.AñadirConsola("El valor asignado al tipo de la variable " + variable.GetPalabra() + " no es correcto.");
-                                }
-                            }
-                            else
-                            {
-                                Form1._Form1.AñadirConsola("Error semántico, existen dos variables con el mismo nombre en la función " + funcion);
-                            }
-                        }
-                        else
-                        {
-                            variables.Add(variable);
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.Write(e.Message);
-                }
-            }
-
-            foreach (Variable variable in variables)
-            {
-                Form1._Form1.AñadirConsola(variable.ToString());
-            }
-        }*/
 
         public void VerificarCondiciones(String CodigoFuente, int NumeroLinea)
         {
@@ -830,7 +776,7 @@ namespace Compilador.Analizador_semantico
 						}
 					}
 
-					Inicializarvariablesmetodo(fun, funnombre);
+					//Inicializarvariablesmetodo(fun, funnombre);
 					for (int a = posfinal; a < lista2.Count; a++)
 					{
 						if (lista2[a].GetPalabra() != "}")
@@ -861,7 +807,7 @@ namespace Compilador.Analizador_semantico
 			}
 		}
 
-		public void Inicializarvariablesmetodo(List<Token> datos, String funcionnombre)
+		/*public void Inicializarvariablesmetodo(List<Token> datos, String funcionnombre)
 		{
 			List<Token> tokens = new List<Token>();
 			if (datos[0].GetPalabra() != "void")
@@ -893,7 +839,7 @@ namespace Compilador.Analizador_semantico
 				}
 			}
 
-		}
+		}*/
 
 	}
 }
